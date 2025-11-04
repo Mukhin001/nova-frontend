@@ -1,20 +1,17 @@
-// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// export const api = createApi({
-//   reducerPath: "api",
-//   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3500" }), // адрес твоего бэкенда
-//   endpoints: (builder) => ({
-//     getUsers: builder.query<any, void>({
-//       query: () => "/users",
-//     }),
-//     addUser: builder.mutation<any, { username: string; email: string }>({
-//       query: (user) => ({
-//         url: "/users",
-//         method: "POST",
-//         body: user,
-//       }),
-//     }),
-//   }),
-// });
+interface GreetingResponse {
+  message: string;
+}
 
-// export const { useGetUsersQuery, useAddUserMutation } = api;
+export const greetingServer = createApi({
+  reducerPath: "greetingServer",
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3500" }),
+  endpoints: (builder) => ({
+    getGreetingServer: builder.query<GreetingResponse, void>({
+      query: () => "",
+    }),
+  }),
+});
+
+export const { useGetGreetingServerQuery } = greetingServer;

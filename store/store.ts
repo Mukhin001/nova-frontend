@@ -1,23 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "@/components/counter/counterSlice";
+import { greetingServer } from "../api/api";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    [greetingServer.reducerPath]: greetingServer.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([greetingServer.middleware]),
 });
 
 export type AppRootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-// import { configureStore } from "@reduxjs/toolkit";
-
-// export const makeStore = () => {
-//   return configureStore({
-//     reducer: {},
-//   });
-// };
-
-// export type AppStore = ReturnType<typeof makeStore>;
-// export type AppRootState = ReturnType<AppStore["getState"]>;
-// export type AppDispatch = AppStore["dispatch"];
