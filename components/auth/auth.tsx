@@ -17,14 +17,34 @@ interface AddAuthFormElements extends HTMLFormElement {
 const Auth = () => {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
 
+  const validateEmail = (email: string) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  };
+
   const handleSubmitForm = async (e: React.FormEvent<AddAuthFormElements>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const { elements } = e.currentTarget;
-    const name = elements.name.value;
-    const email = elements.email.value;
+    const name = elements.name.value.trim();
+    const email = elements.email.value.trim();
     const password = elements.password.value;
+
+    if (!name || !email || !password) {
+      alert("Все поля должны быть заполнены!");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert("Введите корректный email!");
+      return;
+    }
+
+    if (password.length < 6) {
+      alert("Пароль должен быть минимум 6 символов!");
+      return;
+    }
 
     try {
       const data = await registerUser({
