@@ -11,7 +11,18 @@ export const greetingServer = createApi({
     getGreetingServer: builder.query<GreetingResponse, void>({
       query: () => "",
     }),
+    registerUser: builder.mutation<
+      void,
+      { name: string; email: string; password: string }
+    >({
+      query: (body) => ({
+        url: "/register",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetGreetingServerQuery } = greetingServer;
+export const { useGetGreetingServerQuery, useRegisterUserMutation } =
+  greetingServer;
