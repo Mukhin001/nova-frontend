@@ -2,6 +2,8 @@
 
 import { useGetGreetingServerQuery } from "@/api/api";
 import { ReactNode } from "react";
+import Drawer from "./drawer/Drawer";
+import Link from "next/link";
 
 const TheHeader = () => {
   const { data, isLoading, isError } = useGetGreetingServerQuery();
@@ -20,6 +22,22 @@ const TheHeader = () => {
       <div>
         <h2>Full-stack-app</h2>
         {greet()}
+      </div>
+      <div className="relative">
+        <button>Войти</button>
+        <Drawer bottom="50%">
+          <ul>
+            <li>
+              <Link href="/yourSaved">твои сохраненные</Link>
+            </li>
+            <li>
+              <Link href="/account">аккаунт</Link>
+            </li>
+            <li>
+              <Link href="/signIn">войти</Link>
+            </li>
+          </ul>
+        </Drawer>
       </div>
     </header>
   );

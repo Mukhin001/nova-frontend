@@ -4,6 +4,7 @@ import "./globals.css";
 import TheHeader from "@/components/the_header";
 import TheFooter from "@/components/the_footer";
 import ReduxProvider from "@/store/provider";
+import ScreenWatcher from "@/utils/screenWatcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
+          <ScreenWatcher />
           <TheHeader></TheHeader>
           {children}
           <TheFooter></TheFooter>
