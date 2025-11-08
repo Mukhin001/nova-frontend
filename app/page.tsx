@@ -1,5 +1,4 @@
 "use client";
-import Auth from "@/components/auth/auth";
 import Counter from "@/components/counter/counter";
 
 export default function Home() {
@@ -7,7 +6,6 @@ export default function Home() {
     <main>
       Main page
       <Counter></Counter>
-      <Auth></Auth>
     </main>
   );
 }

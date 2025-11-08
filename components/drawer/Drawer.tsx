@@ -7,15 +7,19 @@ import { selectIsDesktop } from "@/utils/screenSlice";
 
 interface DrawerProps {
   children: ReactNode;
+  onClose: () => void;
 }
 
-const Drawer = ({ children }: DrawerProps) => {
+const Drawer = ({ children, onClose }: DrawerProps) => {
   const width = useAppSelector(selectIsDesktop);
   const bottom: string = width ? "50%" : "0";
 
   return (
-    <div className={`${st.container}`} style={{ bottom: bottom }}>
-      {children}
+    <div className={`${st.container}`}>
+      <div className={st.wrapper} style={{ bottom: bottom }}>
+        <button onClick={onClose}>x</button>
+        {children}
+      </div>
     </div>
   );
 };

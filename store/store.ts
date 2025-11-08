@@ -3,6 +3,7 @@ import counterReducer from "@/components/counter/counterSlice";
 import { greetingServer } from "../api/api";
 import screenReducer from "../utils/screenSlice";
 import { getIsDesktop } from "@/utils/getIsDesktop ";
+import userReducer from "../store/userSlice";
 
 export const store = configureStore({
   preloadedState: {
@@ -13,6 +14,7 @@ export const store = configureStore({
   reducer: {
     screen: screenReducer,
     counter: counterReducer,
+    user: userReducer,
     [greetingServer.reducerPath]: greetingServer.reducer,
   },
 

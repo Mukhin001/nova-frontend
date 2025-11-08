@@ -1,12 +1,20 @@
 "use client";
 
 import { useGetGreetingServerQuery } from "@/api/api";
-import { ReactNode } from "react";
-import Drawer from "./drawer/Drawer";
+import { ReactNode, useState } from "react";
 import Link from "next/link";
+import Drawer from "./drawer/drawer";
+import { useAppSelector } from "@/store/hooks";
+import { selectIsLoggedIn, selectUser } from "@/store/userSlice";
 
 const TheHeader = () => {
   const { data, isLoading, isError } = useGetGreetingServerQuery();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const userIsLoggedIn = useAppSelector(selectIsLoggedIn);
+  const user = useAppSelector(selectUser);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const greet = (): ReactNode => {
     if (isLoading) return <p>Loading...</p>;
@@ -18,26 +26,34 @@ const TheHeader = () => {
 
   return (
     <header>
-      Header
-      <div>
-        <h2>Full-stack-app</h2>
-        {greet()}
-      </div>
+      <Link href="/">
+        <h1>Full-stack-app</h1>
+      </Link>
+      {userIsLoggedIn ? <h2>{user?.name}</h2> : <h2>Войдите...</h2>}
+      <div>{greet()}</div>
       <div className="relative">
-        <button>Войти</button>
-        <Drawer bottom="50%">
-          <ul>
-            <li>
-              <Link href="/yourSaved">твои сохраненные</Link>
-            </li>
-            <li>
-              <Link href="/account">аккаунт</Link>
-            </li>
-            <li>
-              <Link href="/signIn">войти</Link>
-            </li>
-          </ul>
-        </Drawer>
+        <button onClick={openModal}>Войти</button>
+        {isModalOpen && (
+          <Drawer onClose={closeModal}>
+            <ul>
+              <li>
+                <Link href="/yourSaved" onClick={closeModal}>
+                  твои сохраненные
+                </Link>
+              </li>
+              <li>
+                <Link href="/register" onClick={closeModal}>
+                  регистрация
+                </Link>
+              </li>
+              <li>
+                <Link href="/login" onClick={closeModal}>
+                  войти
+                </Link>
+              </li>
+            </ul>
+          </Drawer>
+        )}
       </div>
     </header>
   );

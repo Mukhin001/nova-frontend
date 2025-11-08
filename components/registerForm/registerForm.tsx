@@ -1,28 +1,32 @@
-//  "username": "john_doe",
-//   "email": "john@example.com",
-//   "passwordHash": "hashed_password_here",
+"use client";
 
 import { useRegisterUserMutation } from "@/api/api";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { setUser } from "@/store/userSlice";
+import { useDispatch } from "react-redux";
 
-interface AddAuthFormFields extends HTMLFormControlsCollection {
+interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
   email: HTMLInputElement;
   password: HTMLInputElement;
 }
 
-interface AddAuthFormElements extends HTMLFormElement {
-  readonly elements: AddAuthFormFields;
+interface AddRegisterFormElements extends HTMLFormElement {
+  readonly elements: AddRegisterFormFields;
 }
 
-const Auth = () => {
+const RegisterForm = () => {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const dispatch = useDispatch();
 
   const validateEmail = (email: string) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return regex.test(email);
   };
 
-  const handleSubmitForm = async (e: React.FormEvent<AddAuthFormElements>) => {
+  const handleSubmitForm = async (
+    e: React.FormEvent<AddRegisterFormElements>
+  ) => {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -53,10 +57,36 @@ const Auth = () => {
         password,
       }).unwrap();
       console.log("✅ Успешно:", data);
+      dispatch(
+        setUser({
+          name: data.name,
+          email: data.email,
+          token: data.token,
+        })
+      );
       alert("✅ Регистрация успешна");
     } catch (error) {
-      console.log("❌ Ошибка:", error);
-      alert("❌ Ошибка отправки данных");
+      let message = "Ошибка отправки данных";
+
+      if (typeof error === "object" && error) {
+        const fetchError = error as FetchBaseQueryError;
+        // Тип ошибки теперь безопасно определяется через FetchBaseQueryError.
+        if (
+          "data" in fetchError &&
+          fetchError.data &&
+          typeof fetchError.data === "object"
+        ) {
+          // @ts-expect-error: у RTK Query data может быть любым объектом
+          message = fetchError.data.error || message;
+        } else if (
+          "error" in fetchError &&
+          typeof fetchError.error === "string"
+        ) {
+          message = fetchError.error;
+        }
+      }
+
+      alert("❌ " + message);
     }
 
     form.reset();
@@ -86,4 +116,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default RegisterForm;

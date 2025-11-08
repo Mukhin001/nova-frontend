@@ -4,6 +4,18 @@ interface GreetingResponse {
   message: string;
 }
 
+interface LoginResponse {
+  name: string;
+  email: string;
+  token?: string; // если выдаёшь JWT
+}
+
+interface RegisterRequest {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export const greetingServer = createApi({
   reducerPath: "greetingServer",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3500" }),
@@ -11,10 +23,17 @@ export const greetingServer = createApi({
     getGreetingServer: builder.query<GreetingResponse, void>({
       query: () => "",
     }),
-    registerUser: builder.mutation<
-      void,
-      { name: string; email: string; password: string }
+    loginUser: builder.mutation<
+      LoginResponse,
+      { email: string; password: string }
     >({
+      query: (body) => ({
+        url: "/login",
+        method: "POST",
+        body,
+      }),
+    }),
+    registerUser: builder.mutation<LoginResponse, RegisterRequest>({
       query: (body) => ({
         url: "/register",
         method: "POST",
@@ -24,5 +43,8 @@ export const greetingServer = createApi({
   }),
 });
 
-export const { useGetGreetingServerQuery, useRegisterUserMutation } =
-  greetingServer;
+export const {
+  useGetGreetingServerQuery,
+  useLoginUserMutation,
+  useRegisterUserMutation,
+} = greetingServer;
