@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import TheHeader from "@/components/the_header";
-import TheFooter from "@/components/the_footer";
+import Header from "@/components/layout/header/header";
+import Footer from "@/components/layout/footer/footer";
 import ReduxProvider from "@/store/provider";
 import ScreenWatcher from "@/utils/screenWatcher";
 
@@ -33,9 +33,9 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <ScreenWatcher />
-          <TheHeader></TheHeader>
+          <Header></Header>
           {children}
-          <TheFooter></TheFooter>
+          <Footer></Footer>
         </ReduxProvider>
       </body>
     </html>

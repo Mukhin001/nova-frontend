@@ -3,11 +3,12 @@
 import { useGetGreetingServerQuery } from "@/api/api";
 import { ReactNode, useState } from "react";
 import Link from "next/link";
-import Drawer from "./drawer/drawer";
+import Drawer from "../../ui/drawer/drawer";
 import { useAppSelector } from "@/store/hooks";
 import { selectIsLoggedIn, selectUser } from "@/store/userSlice";
+import st from "./header.module.css";
 
-const TheHeader = () => {
+const Header = () => {
   const { data, isLoading, isError } = useGetGreetingServerQuery();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userIsLoggedIn = useAppSelector(selectIsLoggedIn);
@@ -25,14 +26,15 @@ const TheHeader = () => {
   };
 
   return (
-    <header>
+    <header className={st.header}>
       <Link href="/">
         <h1>Full-stack-app</h1>
       </Link>
       {userIsLoggedIn ? <h2>{user?.name}</h2> : <h2>Войдите...</h2>}
       <div>{greet()}</div>
       <div className="relative">
-        <button onClick={openModal}>Войти</button>
+        <button onClick={openModal}>меню профиля</button>
+
         {isModalOpen && (
           <Drawer onClose={closeModal}>
             <ul>
@@ -41,16 +43,27 @@ const TheHeader = () => {
                   твои сохраненные
                 </Link>
               </li>
-              <li>
-                <Link href="/register" onClick={closeModal}>
-                  регистрация
-                </Link>
-              </li>
-              <li>
-                <Link href="/login" onClick={closeModal}>
-                  войти
-                </Link>
-              </li>
+              {!userIsLoggedIn && (
+                <li>
+                  <Link href="/register" onClick={closeModal}>
+                    регистрация
+                  </Link>
+                </li>
+              )}
+              {!userIsLoggedIn && (
+                <li>
+                  <Link href="/login" onClick={closeModal}>
+                    войти
+                  </Link>
+                </li>
+              )}
+              {userIsLoggedIn && (
+                <li>
+                  <Link href="/account" onClick={closeModal}>
+                    аккаунт
+                  </Link>
+                </li>
+              )}
             </ul>
           </Drawer>
         )}
@@ -59,4 +72,4 @@ const TheHeader = () => {
   );
 };
 
-export default TheHeader;
+export default Header;

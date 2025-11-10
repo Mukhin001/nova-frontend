@@ -5,9 +5,14 @@ interface GreetingResponse {
 }
 
 interface LoginResponse {
-  name: string;
-  email: string;
-  token?: string; // если выдаёшь JWT
+  message: string;
+  token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    createdAt: string;
+  };
 }
 
 interface RegisterRequest {
@@ -40,6 +45,15 @@ export const greetingServer = createApi({
         body,
       }),
     }),
+    getProfile: builder.query<RegisterRequest, RegisterRequest>({
+      query: () => ({
+        url: "/me",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -47,4 +61,5 @@ export const {
   useGetGreetingServerQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
+  useLazyGetProfileQuery,
 } = greetingServer;

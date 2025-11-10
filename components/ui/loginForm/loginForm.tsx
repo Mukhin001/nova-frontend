@@ -52,12 +52,17 @@ const LoginForm = () => {
       console.log("✅ Вход успешен:", data);
       dispatch(
         setUser({
-          name: data.name,
-          email: data.email,
+          user: {
+            id: data.user.id,
+            name: data.user.name,
+            email: data.user.email,
+            createdAt: data.user.createdAt,
+          },
           token: data.token,
+          isLoggedIn: true,
         })
       );
-      alert(`✅ Добро пожаловать, ${data.name}`);
+      alert(`✅ Добро пожаловать, ${data.user.name}`);
     } catch (error) {
       console.log("❌ Ошибка:", error);
       let message: string = "Неверные данные!";

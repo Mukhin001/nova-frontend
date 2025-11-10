@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "@/components/counter/counterSlice";
+import counterReducer from "@/components/ui/counter/counterSlice";
 import { greetingServer } from "../api/api";
 import screenReducer from "../utils/screenSlice";
 import { getIsDesktop } from "@/utils/getIsDesktop ";

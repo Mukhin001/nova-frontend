@@ -1,4 +1,4 @@
-const TheFooter = () => {
+const Footer = () => {
   return (
     <footer>
       <h3>Footer</h3>
@@ -6,4 +6,4 @@ const TheFooter = () => {
   );
 };
 
-export default TheFooter;
+export default Footer;
