@@ -1,3 +1,4 @@
+import { AppRootState } from "@/store/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface GreetingResponse {
@@ -21,9 +22,26 @@ interface RegisterRequest {
   password: string;
 }
 
+interface UpdateProfileRequest {
+  name: string;
+  email: string;
+  password: string;
+  password_new: string;
+}
+
 export const greetingServer = createApi({
   reducerPath: "greetingServer",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3500" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:3500",
+    // ✅ Здесь добавляем токен автоматически
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as AppRootState).user.token;
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
     getGreetingServer: builder.query<GreetingResponse, void>({
       query: () => "",
@@ -45,13 +63,11 @@ export const greetingServer = createApi({
         body,
       }),
     }),
-    getProfile: builder.query<RegisterRequest, RegisterRequest>({
-      query: () => ({
-        url: "/me",
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+    updateProfile: builder.mutation<LoginResponse, UpdateProfileRequest>({
+      query: (body) => ({
+        url: "/update-profile",
+        method: "PUT",
+        body,
       }),
     }),
   }),
@@ -61,5 +77,5 @@ export const {
   useGetGreetingServerQuery,
   useLoginUserMutation,
   useRegisterUserMutation,
-  useLazyGetProfileQuery,
+  useUpdateProfileMutation,
 } = greetingServer;

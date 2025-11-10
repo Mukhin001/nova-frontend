@@ -59,9 +59,14 @@ const RegisterForm = () => {
       console.log("✅ Успешно:", data);
       dispatch(
         setUser({
-          name: data.name,
-          email: data.email,
+          user: {
+            id: data.user.id,
+            name: data.user.name,
+            email: data.user.email,
+            createdAt: data.user.createdAt,
+          },
           token: data.token,
+          isLoggedIn: true,
         })
       );
       alert("✅ Регистрация успешна");

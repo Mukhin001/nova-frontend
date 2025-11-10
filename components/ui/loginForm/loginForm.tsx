@@ -2,6 +2,7 @@
 import { useLoginUserMutation } from "@/api/api";
 import { setUser } from "@/store/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 interface AddLoginFormFields extends HTMLFormControlsCollection {
@@ -16,6 +17,7 @@ interface AddLoginFormElements extends HTMLFormElement {
 const LoginForm = () => {
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const validateEmail = (email: string) => {
     return email.includes("@") && email.includes(".");
@@ -63,6 +65,7 @@ const LoginForm = () => {
         })
       );
       alert(`✅ Добро пожаловать, ${data.user.name}`);
+      router.push("/");
     } catch (error) {
       console.log("❌ Ошибка:", error);
       let message: string = "Неверные данные!";
