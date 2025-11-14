@@ -1,9 +1,9 @@
 "use client";
 
-import { useRegisterUserMutation } from "@/api/api";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { setUser } from "@/store/userSlice";
 import { useDispatch } from "react-redux";
+import { useRegisterMutation } from "@/api/users/register/register";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -16,7 +16,7 @@ interface AddRegisterFormElements extends HTMLFormElement {
 }
 
 const RegisterForm = () => {
-  const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const [registerUser, { isLoading }] = useRegisterMutation();
   const dispatch = useDispatch();
 
   const validateEmail = (email: string) => {

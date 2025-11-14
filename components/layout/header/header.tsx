@@ -1,12 +1,12 @@
 "use client";
 
-import { useGetGreetingServerQuery } from "@/api/api";
 import { ReactNode, useState } from "react";
 import Link from "next/link";
 import Drawer from "../../ui/drawer/drawer";
 import { useAppSelector } from "@/store/hooks";
 import { selectIsLoggedIn, selectUser } from "@/store/userSlice";
 import st from "./header.module.css";
+import { useGetGreetingServerQuery } from "@/api/users/userApi";
 
 const Header = () => {
   const { data, isLoading, isError } = useGetGreetingServerQuery();
@@ -39,8 +39,13 @@ const Header = () => {
           <Drawer onClose={closeModal}>
             <ul>
               <li>
-                <Link href="/yourSaved" onClick={closeModal}>
+                <Link href="/your-saved" onClick={closeModal}>
                   твои сохраненные
+                </Link>
+              </li>
+              <li>
+                <Link href="/error-page" onClick={closeModal}>
+                  нет такой страницы
                 </Link>
               </li>
               {!userIsLoggedIn && (

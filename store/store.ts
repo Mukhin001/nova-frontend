@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "@/components/ui/counter/counterSlice";
-import { greetingServer } from "../api/api";
 import screenReducer from "../utils/screenSlice";
 import { getIsDesktop } from "@/utils/getIsDesktop ";
 import userReducer from "../store/userSlice";
+import { userApi } from "@/api/users/userApi";
 
 export const store = configureStore({
   preloadedState: {
@@ -15,11 +15,11 @@ export const store = configureStore({
     screen: screenReducer,
     counter: counterReducer,
     user: userReducer,
-    [greetingServer.reducerPath]: greetingServer.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([greetingServer.middleware]),
+    getDefaultMiddleware().concat([userApi.middleware]),
 });
 
 export type AppRootState = ReturnType<typeof store.getState>;

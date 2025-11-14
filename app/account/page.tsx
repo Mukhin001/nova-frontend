@@ -1,6 +1,6 @@
 "use client";
 
-import { useUpdateProfileMutation } from "@/api/api";
+import { useUpdateProfileMutation } from "@/api/users/update-profile/updateProfile";
 import { useAppDispatch } from "@/store/hooks";
 import { logout, selectUser, setUser } from "@/store/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";

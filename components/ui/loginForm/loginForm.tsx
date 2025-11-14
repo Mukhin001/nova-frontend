@@ -1,5 +1,6 @@
 "use client";
-import { useLoginUserMutation } from "@/api/api";
+
+import { useLoginMutation } from "@/api/users/login/login";
 import { setUser } from "@/store/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
@@ -15,7 +16,7 @@ interface AddLoginFormElements extends HTMLFormElement {
 }
 
 const LoginForm = () => {
-  const [loginUser, { isLoading }] = useLoginUserMutation();
+  const [loginUser, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
   const router = useRouter();
 
