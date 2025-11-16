@@ -1,8 +1,9 @@
 "use client";
 
+import { useLogoutMutation } from "@/api/users/logout/logout";
 import { useUpdateProfileMutation } from "@/api/users/update-profile/updateProfile";
 import { useAppDispatch } from "@/store/hooks";
-import { logout, selectUser, setUser } from "@/store/userSlice";
+import { logout, selectUser, setUser } from "@/utils/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
@@ -18,6 +19,7 @@ const Account = () => {
   const [email, setEmail] = useState(user?.email);
   const [password, setPassword] = useState("");
   const [passwordNew, setPasswordNew] = useState("");
+  const [logoutRequest] = useLogoutMutation();
   console.log(user);
 
   useEffect(() => {
@@ -26,9 +28,17 @@ const Account = () => {
     }
   }, [user, router]);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    router.push("/");
+  const handleLogout = async () => {
+    try {
+      const res = await logoutRequest().unwrap();
+      console.log(res.message);
+
+      dispatch(logout());
+      router.push("/");
+    } catch (err) {
+      console.error("Ошибка при выходе:", err);
+      alert("Не удалось выйти. Попробуйте снова.");
+    }
   };
 
   const validateEmail = (email: string) => {
@@ -75,7 +85,6 @@ const Account = () => {
             email: data.user.email,
             createdAt: data.user.createdAt,
           },
-          token: data.token,
           isLoggedIn: true,
         })
       );

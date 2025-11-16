@@ -10,13 +10,11 @@ export interface User {
 
 interface UserState {
   user: User | null;
-  token: string | null;
   isLoggedIn: boolean;
 }
 
 const initialState: UserState = {
   user: null,
-  token: null,
   isLoggedIn: false,
 };
 
@@ -26,7 +24,6 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<UserState>) => {
       state.user = action.payload.user;
-      state.token = action.payload.token;
       state.isLoggedIn = true;
     },
     logout: (state) => {

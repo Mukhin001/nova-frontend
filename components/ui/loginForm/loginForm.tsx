@@ -1,7 +1,7 @@
 "use client";
 
 import { useLoginMutation } from "@/api/users/login/login";
-import { setUser } from "@/store/userSlice";
+import { setUser } from "@/utils/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -61,7 +61,6 @@ const LoginForm = () => {
             email: data.user.email,
             createdAt: data.user.createdAt,
           },
-          token: data.token,
           isLoggedIn: true,
         })
       );

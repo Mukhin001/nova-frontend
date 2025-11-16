@@ -1,7 +1,7 @@
 "use client";
 
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { setUser } from "@/store/userSlice";
+import { setUser } from "@/utils/userSlice";
 import { useDispatch } from "react-redux";
 import { useRegisterMutation } from "@/api/users/register/register";
 
@@ -65,7 +65,6 @@ const RegisterForm = () => {
             email: data.user.email,
             createdAt: data.user.createdAt,
           },
-          token: data.token,
           isLoggedIn: true,
         })
       );

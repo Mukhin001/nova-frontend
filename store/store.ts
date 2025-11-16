@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "@/components/ui/counter/counterSlice";
 import screenReducer from "../utils/screenSlice";
 import { getIsDesktop } from "@/utils/getIsDesktop ";
-import userReducer from "../store/userSlice";
+import userReducer from "../utils/userSlice";
 import { userApi } from "@/api/users/userApi";
 
 export const store = configureStore({

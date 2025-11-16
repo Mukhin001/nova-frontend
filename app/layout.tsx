@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/header/header";
-import Footer from "@/components/layout/footer/footer";
-import ReduxProvider from "@/store/provider";
-import ScreenWatcher from "@/utils/screenWatcher";
+import Header from "@/components/layout/header/Header";
+import Footer from "@/components/layout/footer/Footer";
+import ReduxProvider from "@/store/ReduxProvider";
+import ScreenWatcher from "@/utils/ScreenWatcher";
+import AuthInitializer from "@/utils/AuthInitializer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
       >
         <ReduxProvider>
           <ScreenWatcher />
+          <AuthInitializer />
           <Header></Header>
           {children}
           <Footer></Footer>

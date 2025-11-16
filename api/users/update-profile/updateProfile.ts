@@ -2,7 +2,6 @@ import { userApi } from "@/api/users/userApi";
 
 interface LoginResponse {
   message: string;
-  token: string;
   user: {
     id: string;
     name: string;

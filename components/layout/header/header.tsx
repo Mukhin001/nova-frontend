@@ -2,17 +2,19 @@
 
 import { ReactNode, useState } from "react";
 import Link from "next/link";
-import Drawer from "../../ui/drawer/drawer";
+
 import { useAppSelector } from "@/store/hooks";
-import { selectIsLoggedIn, selectUser } from "@/store/userSlice";
+import { selectIsLoggedIn, selectUser } from "@/utils/userSlice";
 import st from "./header.module.css";
 import { useGetGreetingServerQuery } from "@/api/users/userApi";
+import Drawer from "@/components/ui/drawer/Drawer";
 
 const Header = () => {
   const { data, isLoading, isError } = useGetGreetingServerQuery();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userIsLoggedIn = useAppSelector(selectIsLoggedIn);
   const user = useAppSelector(selectUser);
+  console.log(user);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
