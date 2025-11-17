@@ -1,5 +1,6 @@
 "use client";
 
+import { useDeleteMutation } from "@/api/users/delete/deleteUser";
 import { useLogoutMutation } from "@/api/users/logout/logout";
 import { useUpdateProfileMutation } from "@/api/users/update-profile/updateProfile";
 import { useAppDispatch } from "@/store/hooks";
@@ -9,14 +10,27 @@ import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+interface AddLoginFormFields extends HTMLFormControlsCollection {
+  email: HTMLInputElement;
+  password: HTMLInputElement;
+}
+
+interface AddLoginFormElements extends HTMLFormElement {
+  readonly elements: AddLoginFormFields;
+}
+
 const Account = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const user = useSelector(selectUser);
   const [updateProfile] = useUpdateProfileMutation();
+  const [deleteUser] = useDeleteMutation();
   const [showEdit, setShowEdit] = useState<boolean>(false);
+  const [showFormDelete, setShowFormDelete] = useState<boolean>(false);
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
+  const [emailDeleteUser, setEmailDeleteUser] = useState(user?.email || "");
+  const [passwordDeleteUser, setPasswordDeleteUser] = useState("");
   const [password, setPassword] = useState("");
   const [passwordNew, setPasswordNew] = useState("");
   const [logoutRequest] = useLogoutMutation();
@@ -155,10 +169,87 @@ const Account = () => {
     );
   };
 
+  const handleDelete = async (e: React.FormEvent<AddLoginFormElements>) => {
+    e.preventDefault();
+
+    try {
+      if (!user) {
+        return alert("войтите в систему");
+      }
+      if (!emailDeleteUser || !passwordDeleteUser) {
+        return alert("Введите email и пароль");
+      }
+
+      const res = await deleteUser({
+        email: emailDeleteUser,
+        password: passwordDeleteUser,
+      }).unwrap();
+      console.log(res.message);
+
+      alert(res.message);
+      setEmailDeleteUser("");
+      setPasswordDeleteUser("");
+      dispatch(logout());
+      setShowFormDelete(false);
+      router.push("/");
+    } catch (error) {
+      console.error("Ошибка при удалении:", error);
+      const err = error as FetchBaseQueryError & {
+        data?: { error?: string };
+      };
+      // --- 🎯 Обработка ошибок ---
+      if (err.status === 404) {
+        alert("❌ Пользователь с таким email не найден");
+        return;
+      }
+      if (err.status === 401) {
+        alert("❌ Неверный пароль");
+        return;
+      }
+      alert("Не удалось удалить ваш аккаунт. Попробуйте снова.");
+    }
+  };
+
   return (
     <main>
       <h3>accaunt</h3>
       <button onClick={handleLogout}>Выйти</button>
+      <button onClick={() => setShowFormDelete((prev) => !prev)}>
+        {showFormDelete ? "отменить" : "удалить аккаунт"}
+      </button>
+      {showFormDelete && (
+        <form onSubmit={handleDelete}>
+          <label htmlFor="email"></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="email"
+            value={emailDeleteUser}
+            onChange={(e) => setEmailDeleteUser(e.target.value)}
+          />
+
+          <label htmlFor="password"></label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Введите текущий пароль"
+            value={passwordDeleteUser}
+            onChange={(e) => setPasswordDeleteUser(e.target.value)}
+          />
+          <button type="submit">Удалить</button>
+          <button
+            type="reset"
+            onClick={() => {
+              setEmailDeleteUser("");
+              setPasswordDeleteUser("");
+            }}
+          >
+            Сбросить
+          </button>
+        </form>
+      )}
       {!showEdit && (
         <ul>
           <li>
