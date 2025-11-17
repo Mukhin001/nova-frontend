@@ -4,6 +4,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { setUser } from "@/utils/userSlice";
 import { useDispatch } from "react-redux";
 import { useRegisterMutation } from "@/api/users/register/register";
+import { useRouter } from "next/navigation";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -18,6 +19,7 @@ interface AddRegisterFormElements extends HTMLFormElement {
 const RegisterForm = () => {
   const [registerUser, { isLoading }] = useRegisterMutation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const validateEmail = (email: string) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -69,6 +71,7 @@ const RegisterForm = () => {
         })
       );
       alert("✅ Регистрация успешна");
+      router.push("/");
     } catch (error) {
       let message = "Ошибка отправки данных";
 
