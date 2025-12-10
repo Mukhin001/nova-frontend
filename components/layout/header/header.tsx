@@ -33,7 +33,9 @@ const Header = () => {
         <h1>Full-stack-app</h1>
       </Link>
       {userIsLoggedIn ? <h2>{user?.name}</h2> : <h2>Войдите...</h2>}
-      <div>{greet()}</div>
+      <div style={{ fontWeight: "900", color: "#660cbb", fontSize: "large" }}>
+        {greet()}
+      </div>
       <div className="relative">
         <button onClick={openModal}>меню профиля</button>
 
