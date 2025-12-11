@@ -5,11 +5,13 @@ import { setUser } from "@/utils/userSlice";
 import { useDispatch } from "react-redux";
 import { useRegisterMutation } from "@/api/users/register/register";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
   email: HTMLInputElement;
   password: HTMLInputElement;
+  password_repeat: HTMLInputElement;
 }
 
 interface AddRegisterFormElements extends HTMLFormElement {
@@ -20,6 +22,7 @@ const RegisterForm = () => {
   const [registerUser, { isLoading }] = useRegisterMutation();
   const dispatch = useDispatch();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const validateEmail = (email: string) => {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -36,8 +39,9 @@ const RegisterForm = () => {
     const name = elements.name.value.trim();
     const email = elements.email.value.trim();
     const password = elements.password.value;
+    const passwordRepeat = elements.password_repeat.value;
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !passwordRepeat) {
       alert("Все поля должны быть заполнены!");
       return;
     }
@@ -47,8 +51,21 @@ const RegisterForm = () => {
       return;
     }
 
-    if (password.length < 6) {
-      alert("Пароль должен быть минимум 6 символов!");
+    if (password.length < 8) {
+      alert("Пароль должен быть минимум 8 символов!");
+      return;
+    }
+
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/;
+    if (!passRegex.test(password)) {
+      alert(
+        "Пароль должен содержать одну заглавную букву, одну строчную, одну цифру и один спецсимвол."
+      );
+      return;
+    }
+
+    if (password !== passwordRepeat) {
+      alert("Пароли должны быть равны!");
       return;
     }
 
@@ -109,11 +126,21 @@ const RegisterForm = () => {
 
       <label htmlFor="password"></label>
       <input
-        type="password"
+        type={showPassword ? "text" : "password"}
         id="password"
         name="password"
         placeholder="password"
       />
+      <input
+        type={showPassword ? "text" : "password"}
+        id="password_repeat"
+        name="password_repeat"
+        placeholder="password_repeat"
+      />
+
+      <button type="button" onClick={() => setShowPassword(!showPassword)}>
+        {showPassword ? "Скрыть" : "Показать"}
+      </button>
 
       <button type="submit" disabled={isLoading}>
         {isLoading ? "Sending..." : "Enter"}
