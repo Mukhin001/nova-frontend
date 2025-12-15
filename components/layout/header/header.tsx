@@ -8,6 +8,7 @@ import { selectIsLoggedIn, selectUser } from "@/utils/userSlice";
 import st from "./header.module.css";
 import { useGetGreetingServerQuery } from "@/api/users/userApi";
 import Drawer from "@/components/ui/drawer/Drawer";
+import Loader from "@/components/ui/loader/Loader";
 
 const Header = () => {
   const { data, isLoading, isError } = useGetGreetingServerQuery();
@@ -20,7 +21,7 @@ const Header = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const greet = (): ReactNode => {
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) return <Loader />;
     if (isError) return <p>Error...</p>;
     if (data) return <p>{data.message}</p>;
 
