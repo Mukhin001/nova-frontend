@@ -4,8 +4,9 @@ import "./globals.css";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
 import ReduxProvider from "@/store/ReduxProvider";
-import ScreenWatcher from "@/utils/ScreenWatcher";
+
 import AuthInitializer from "@/utils/AuthInitializer";
+import ScreenWatcher from "@/utils/ScreenWatcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

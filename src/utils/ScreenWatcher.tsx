@@ -1,8 +1,8 @@
 "use client";
 
-import { useAppDispatch } from "@/store/hooks";
 import { useEffect } from "react";
 import { setIsDesktop } from "./screenSlice";
+import { useAppDispatch } from "@/store/hooks";
 
 const ScreenWatcher = () => {
   const dispatch = useAppDispatch();
