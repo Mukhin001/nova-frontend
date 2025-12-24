@@ -4,6 +4,7 @@ import screenReducer from "../utils/screenSlice";
 import { getIsDesktop } from "@/utils/getIsDesktop ";
 import userReducer from "../utils/userSlice";
 import { userApi } from "@/api/users/userApi";
+import toastReduser from "@/components/ui/toast/toastSlice";
 
 export const store = configureStore({
   preloadedState: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     screen: screenReducer,
     counter: counterReducer,
     user: userReducer,
+    toast: toastReduser,
     [userApi.reducerPath]: userApi.reducer,
   },
 

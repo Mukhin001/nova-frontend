@@ -4,7 +4,8 @@ import { useLoginMutation } from "@/api/users/login/login";
 import { setUser } from "@/utils/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/store/hooks";
+import { showToast } from "../toast/toastSlice";
 
 interface AddLoginFormFields extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -17,7 +18,7 @@ interface AddLoginFormElements extends HTMLFormElement {
 
 const LoginForm = () => {
   const [loginUser, { isLoading }] = useLoginMutation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const validateEmail = (email: string) => {
@@ -33,17 +34,21 @@ const LoginForm = () => {
     const password = elements.password.value;
 
     if (!email || !password) {
-      alert("Все поля должны быть заполнены!");
+      dispatch(showToast({ message: "Все поля должны быть заполнены!" }));
       return;
     }
 
     if (!validateEmail(email)) {
-      alert("Введите корректный email!");
+      dispatch(showToast({ message: "Введите корректный email!" }));
+
       return;
     }
 
     if (password.length < 6) {
-      alert("Пароль должен быть минимум 6 символов!");
+      dispatch(
+        showToast({ message: "Пароль должен быть минимум 6 символов!" })
+      );
+
       return;
     }
 
@@ -64,7 +69,13 @@ const LoginForm = () => {
           isLoggedIn: true,
         })
       );
-      alert(`✅ Добро пожаловать, ${data.user.name}`);
+      dispatch(
+        showToast({
+          message: `✅ Добро пожаловать, ${data.user.name}`,
+          type: "success",
+        })
+      );
+
       router.push("/");
     } catch (error) {
       console.log("❌ Ошибка:", error);
@@ -87,8 +98,7 @@ const LoginForm = () => {
           message = fetchError.error;
         }
       }
-
-      alert("❌ " + message);
+      dispatch(showToast({ message: "❌ " + message }));
     }
 
     form.reset();

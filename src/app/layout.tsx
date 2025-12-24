@@ -7,6 +7,7 @@ import ReduxProvider from "@/store/ReduxProvider";
 
 import AuthInitializer from "@/utils/AuthInitializer";
 import ScreenWatcher from "@/utils/ScreenWatcher";
+import Toast from "@/components/ui/toast/Toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,8 +38,10 @@ export default function RootLayout({
           <ScreenWatcher />
           <AuthInitializer />
           <Header></Header>
+
           {children}
           <Footer></Footer>
+          <Toast />
         </ReduxProvider>
       </body>
     </html>
