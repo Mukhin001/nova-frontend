@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useRegisterMutation } from "@/api/users/register/register";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { showToast } from "../toast/toastSlice";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -42,30 +43,39 @@ const RegisterForm = () => {
     const passwordRepeat = elements.password_repeat.value;
 
     if (!name || !email || !password || !passwordRepeat) {
-      alert("Все поля должны быть заполнены!");
+      dispatch(showToast({ message: "Все поля должны быть заполнены!" }));
       return;
     }
 
     if (!validateEmail(email)) {
-      alert("Введите корректный email!");
+      dispatch(showToast({ message: "Введите корректный email!" }));
+
       return;
     }
 
     if (password.length < 8) {
-      alert("Пароль должен быть минимум 8 символов!");
+      dispatch(
+        showToast({ message: "Пароль должен быть минимум 8 символов!" })
+      );
+
       return;
     }
 
     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/;
     if (!passRegex.test(password)) {
-      alert(
-        "Пароль должен содержать одну заглавную букву, одну строчную, одну цифру и один спецсимвол."
+      dispatch(
+        showToast({
+          message:
+            "Пароль должен содержать одну заглавную букву, одну строчную, одну цифру и один спецсимвол.",
+        })
       );
+
       return;
     }
 
     if (password !== passwordRepeat) {
-      alert("Пароли должны быть равны!");
+      dispatch(showToast({ message: "Пароли должны быть равны!" }));
+
       return;
     }
 
@@ -78,16 +88,14 @@ const RegisterForm = () => {
       console.log("✅ Успешно:", data);
       dispatch(
         setUser({
-          user: {
-            id: data.user.id,
-            name: data.user.name,
-            email: data.user.email,
-            createdAt: data.user.createdAt,
-          },
-          isLoggedIn: true,
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          createdAt: data.user.createdAt,
         })
       );
-      alert("✅ Регистрация успешна");
+      dispatch(showToast({ message: "✅ Регистрация успешна" }));
+
       router.push("/");
     } catch (error) {
       let message = "Ошибка отправки данных";
@@ -110,7 +118,7 @@ const RegisterForm = () => {
         }
       }
 
-      alert("❌ " + message);
+      dispatch(showToast({ message: "❌ " + message }));
     }
 
     form.reset();

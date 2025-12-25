@@ -60,13 +60,10 @@ const LoginForm = () => {
       console.log("✅ Вход успешен:", data);
       dispatch(
         setUser({
-          user: {
-            id: data.user.id,
-            name: data.user.name,
-            email: data.user.email,
-            createdAt: data.user.createdAt,
-          },
-          isLoggedIn: true,
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          createdAt: data.user.createdAt,
         })
       );
       dispatch(
@@ -78,7 +75,8 @@ const LoginForm = () => {
 
       router.push("/");
     } catch (error) {
-      console.log("❌ Ошибка:", error);
+      //console.log("❌ Ошибка:", error);
+      console.log("❌ Ошибка:");
       let message: string = "Неверные данные!";
 
       if (typeof error === "object" && error) {

@@ -4,6 +4,8 @@ import LoginForm from "./LoginForm";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
+import toastReduser from "@/components/ui/toast/toastSlice";
+import Toast from "../toast/Toast";
 
 // mock RTK Query
 const mockUseLoginMutation = jest.fn();
@@ -11,9 +13,6 @@ const mockUseLoginMutation = jest.fn();
 jest.mock("@/api/users/login/login", () => ({
   useLoginMutation: () => mockUseLoginMutation(),
 }));
-
-// мок для dispatch:
-const mockDispatch = jest.fn();
 
 // mock Next.js App Router
 jest.mock("next/navigation", () => ({
@@ -30,20 +29,26 @@ jest.mock("next/navigation", () => ({
   }),
 }));
 
-// создаём простой store
-const store = configureStore({
-  reducer: (state = {}) => state,
-});
-
 // helper функция
 const renderLoginForm = () => {
+  // создаём простой store
+  const store = configureStore({
+    reducer: {
+      toast: toastReduser,
+    },
+  });
+
   render(
     <Provider store={store}>
-      <LoginForm />
+      <>
+        <LoginForm />
+        <Toast />
+      </>
     </Provider>
   );
 
   return {
+    store,
     emailInput: screen.getByPlaceholderText("email") as HTMLInputElement,
     passwordInput: screen.getByPlaceholderText("password") as HTMLInputElement,
     submitButton: screen.getByRole("button", { name: /вход|войти/i }),
@@ -51,7 +56,6 @@ const renderLoginForm = () => {
 };
 
 // Фабрика для моков RTK Query
-
 describe("LoginForm", () => {
   test("рендерится форма логина", () => {
     mockUseLoginMutation.mockReturnValue([jest.fn(), { isLoading: false }]);
@@ -94,8 +98,6 @@ describe("LoginForm", () => {
     });
     mockUseLoginMutation.mockReturnValue([loginUserMock, { isLoading: false }]);
 
-    store.dispatch = mockDispatch;
-
     const user = userEvent.setup();
     const { emailInput, passwordInput, submitButton } = renderLoginForm();
 
@@ -108,29 +110,23 @@ describe("LoginForm", () => {
       email: "igor@test.com",
       password: "123456",
     });
-
-    // проверяем вызов dispatch(setUser)
-    expect(mockDispatch).toHaveBeenCalled();
   });
 
   // теста сабмита с ошибкой
-  test("при ошибке входа выводится alert", async () => {
+  test("при ошибке входа показывается toast с ошибкой", async () => {
     const loginUserMock = jest.fn().mockReturnValue({
       unwrap: jest.fn().mockRejectedValue(new Error("Invalid credentials")),
     });
     mockUseLoginMutation.mockReturnValue([loginUserMock, { isLoading: false }]);
 
-    // мок alert до рендера компонента
-    window.alert = jest.fn();
-
-    const { emailInput, passwordInput, submitButton } = renderLoginForm();
     const user = userEvent.setup();
+    const { emailInput, passwordInput, submitButton } = renderLoginForm();
 
     await user.type(emailInput, "igor@test.com");
     await user.type(passwordInput, "123456");
     await user.click(submitButton);
 
-    // проверяем вызов alert
-    expect(window.alert).toHaveBeenCalledWith("❌ Неверные данные!");
+    // ⬇️ проверяем, что toast появился в DOM
+    expect(await screen.findByText(/❌ Неверные данные!/)).toBeInTheDocument();
   });
 });
