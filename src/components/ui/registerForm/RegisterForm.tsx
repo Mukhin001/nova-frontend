@@ -151,9 +151,9 @@ const RegisterForm = () => {
       </button>
 
       <button type="submit" disabled={isLoading}>
-        {isLoading ? "Sending..." : "Enter"}
+        {isLoading ? "Вход..." : "Войти"}
       </button>
-      <button type="reset">reset</button>
+      <button type="reset">Очистить</button>
     </form>
   );
 };

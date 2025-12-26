@@ -57,7 +57,7 @@ const LoginForm = () => {
         email,
         password,
       }).unwrap();
-      console.log("✅ Вход успешен:", data);
+      //console.log("✅ Вход успешен:", data);
       dispatch(
         setUser({
           id: data.user.id,
@@ -76,7 +76,7 @@ const LoginForm = () => {
       router.push("/");
     } catch (error) {
       //console.log("❌ Ошибка:", error);
-      console.log("❌ Ошибка:");
+      //console.log("❌ Ошибка:");
       let message: string = "Неверные данные!";
 
       if (typeof error === "object" && error) {

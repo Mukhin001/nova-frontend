@@ -12,8 +12,10 @@ const AuthInitializer = () => {
     if (isSuccess && data?.user) {
       dispatch(
         setUser({
-          user: data.user,
-          isLoggedIn: true,
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          createdAt: data.user.createdAt,
         })
       );
     }
