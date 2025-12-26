@@ -6,12 +6,12 @@ import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
 import toastReduser from "@/components/ui/toast/toastSlice";
 import Toast from "../toast/Toast";
+import { useLoginMutation } from "@/api/users/login/login";
 
 // mock RTK Query
-const mockUseLoginMutation = jest.fn();
-
+// заглушка реального RTK query на фейковый
 jest.mock("@/api/users/login/login", () => ({
-  useLoginMutation: () => mockUseLoginMutation(),
+  useLoginMutation: jest.fn(),
 }));
 
 // mock Next.js App Router
@@ -58,7 +58,10 @@ const renderLoginForm = () => {
 // Фабрика для моков RTK Query
 describe("LoginForm", () => {
   test("рендерится форма логина", () => {
-    mockUseLoginMutation.mockReturnValue([jest.fn(), { isLoading: false }]);
+    (useLoginMutation as jest.Mock).mockReturnValue([
+      jest.fn(),
+      { isLoading: false },
+    ]);
     const { emailInput, passwordInput, submitButton } = renderLoginForm();
 
     expect(emailInput).toBeInTheDocument();
@@ -67,7 +70,10 @@ describe("LoginForm", () => {
   });
 
   test("кнопка enabled, когда isLoading = false", () => {
-    mockUseLoginMutation.mockReturnValue([jest.fn(), { isLoading: false }]);
+    (useLoginMutation as jest.Mock).mockReturnValue([
+      jest.fn(),
+      { isLoading: false },
+    ]);
 
     const { submitButton } = renderLoginForm();
     expect(submitButton).toBeEnabled();
@@ -75,7 +81,10 @@ describe("LoginForm", () => {
   });
 
   test("кнопка disabled и показывает загрузку, когда isLoading = true", () => {
-    mockUseLoginMutation.mockReturnValue([jest.fn(), { isLoading: true }]);
+    (useLoginMutation as jest.Mock).mockReturnValue([
+      jest.fn(),
+      { isLoading: true },
+    ]);
 
     const { submitButton } = renderLoginForm();
     expect(submitButton).toBeDisabled();
@@ -96,7 +105,11 @@ describe("LoginForm", () => {
     const loginUserMock = jest.fn().mockReturnValue({
       unwrap: jest.fn().mockResolvedValue(mockLoginResponse),
     });
-    mockUseLoginMutation.mockReturnValue([loginUserMock, { isLoading: false }]);
+
+    (useLoginMutation as jest.Mock).mockReturnValue([
+      loginUserMock,
+      { isLoading: false },
+    ]);
 
     const user = userEvent.setup();
     const { emailInput, passwordInput, submitButton } = renderLoginForm();
@@ -117,7 +130,11 @@ describe("LoginForm", () => {
     const loginUserMock = jest.fn().mockReturnValue({
       unwrap: jest.fn().mockRejectedValue(new Error("Invalid credentials")),
     });
-    mockUseLoginMutation.mockReturnValue([loginUserMock, { isLoading: false }]);
+
+    (useLoginMutation as jest.Mock).mockReturnValue([
+      loginUserMock,
+      { isLoading: false },
+    ]);
 
     const user = userEvent.setup();
     const { emailInput, passwordInput, submitButton } = renderLoginForm();
