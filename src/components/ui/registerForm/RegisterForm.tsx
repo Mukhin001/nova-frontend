@@ -85,7 +85,7 @@ const RegisterForm = () => {
         email,
         password,
       }).unwrap();
-      console.log("✅ Успешно:", data);
+      //console.log("✅ Успешно:", data);
       dispatch(
         setUser({
           id: data.user.id,

@@ -93,13 +93,10 @@ const Account = () => {
       setPasswordNew("");
       dispatch(
         setUser({
-          user: {
-            id: data.user.id,
-            name: data.user.name,
-            email: data.user.email,
-            createdAt: data.user.createdAt,
-          },
-          isLoggedIn: true,
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          createdAt: data.user.createdAt,
         })
       );
     } catch (err) {

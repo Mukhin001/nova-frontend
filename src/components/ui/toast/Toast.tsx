@@ -9,13 +9,18 @@ const Toast = () => {
   const queue = useAppSelector((state) => state.toast.queue);
 
   useEffect(() => {
-    queue.forEach((toast) => {
-      const timer = setTimeout(() => {
-        dispatch(hideToast(toast.id));
-      }, 5000);
+    if (queue.length === 0) return;
 
-      return () => clearInterval(timer);
-    });
+    const timers = queue.map((toast) =>
+      setTimeout(() => {
+        dispatch(hideToast(toast.id));
+      }, 700)
+    );
+
+    return () =>
+      timers.forEach((timer) => {
+        clearTimeout(timer);
+      });
   }, [queue, dispatch]);
 
   if (queue.length === 0) return null;
