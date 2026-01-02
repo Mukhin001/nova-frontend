@@ -1,4 +1,4 @@
-import { weatherApi } from "./weatherApi";
+import { baseApi } from "../baseApi";
 
 export interface WeatherResponse {
   name: string;
@@ -17,7 +17,7 @@ export interface WeatherResponse {
   };
 }
 
-export const getWeather = weatherApi.injectEndpoints({
+export const weathetApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getWeatherByCity: builder.query<WeatherResponse, string>({
       query: (city) => `/weather?city=${encodeURIComponent(city)}`,
@@ -25,4 +25,4 @@ export const getWeather = weatherApi.injectEndpoints({
   }),
 });
 
-export const { useGetWeatherByCityQuery } = getWeather;
+export const { useGetWeatherByCityQuery } = weathetApi;

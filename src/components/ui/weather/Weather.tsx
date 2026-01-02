@@ -1,4 +1,4 @@
-import { useGetWeatherByCityQuery } from "@/api/weather/getWeathet";
+import { useGetWeatherByCityQuery } from "@/api/weather/weathetApi";
 import { useState } from "react";
 
 const Weather = () => {

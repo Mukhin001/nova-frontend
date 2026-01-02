@@ -1,4 +1,4 @@
-import { userApi } from "@/api/users/userApi";
+import { baseApi } from "@/api/baseApi";
 
 interface LoginResponse {
   message: string;
@@ -16,7 +16,7 @@ interface RegisterRequest {
   password: string;
 }
 
-export const register = userApi.injectEndpoints({
+export const register = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<LoginResponse, RegisterRequest>({
       query: (body) => ({

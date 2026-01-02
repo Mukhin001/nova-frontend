@@ -1,6 +1,6 @@
-import { userApi } from "../userApi";
+import { baseApi } from "@/api/baseApi";
 
-export const deleteUser = userApi.injectEndpoints({
+export const deleteUser = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     delete: builder.mutation<
       { message: string },

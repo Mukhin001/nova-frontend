@@ -1,4 +1,4 @@
-import { userApi } from "../userApi";
+import { baseApi } from "@/api/baseApi";
 
 interface LoginResponse {
   message: string;
@@ -10,7 +10,7 @@ interface LoginResponse {
   };
 }
 
-export const login = userApi.injectEndpoints({
+export const login = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, { email: string; password: string }>(
       {

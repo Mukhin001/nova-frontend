@@ -1,6 +1,6 @@
-import { userApi } from "../userApi";
+import { baseApi } from "@/api/baseApi";
 
-export const logout = userApi.injectEndpoints({
+export const logout = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     logout: builder.mutation<{ message: string }, void>({
       query: () => ({

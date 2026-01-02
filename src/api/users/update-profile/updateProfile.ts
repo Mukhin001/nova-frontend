@@ -1,4 +1,4 @@
-import { userApi } from "@/api/users/userApi";
+import { baseApi } from "@/api/baseApi";
 
 interface LoginResponse {
   message: string;
@@ -17,7 +17,7 @@ interface UpdateProfileRequest {
   password_new: string;
 }
 
-export const updateProfile = userApi.injectEndpoints({
+export const updateProfile = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     updateProfile: builder.mutation<LoginResponse, UpdateProfileRequest>({
       query: (body) => ({

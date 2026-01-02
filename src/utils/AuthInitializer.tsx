@@ -1,8 +1,8 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { useGetMeQuery } from "@/api/users/userApi";
 import { setUser } from "@/utils/userSlice";
 import { useEffect } from "react";
+import { useGetMeQuery } from "@/api/baseApi";
 
 const AuthInitializer = () => {
   const { data, isSuccess } = useGetMeQuery();

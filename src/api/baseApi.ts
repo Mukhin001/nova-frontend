@@ -13,12 +13,13 @@ interface LoginResponse {
   };
 }
 
-export const userApi = createApi({
-  reducerPath: "userApi",
+export const baseApi = createApi({
+  reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3500",
     credentials: "include", // <-- ДЛЯ COOKIE
   }),
+  tagTypes: ["User", "Weather", "News"],
   endpoints: (builder) => ({
     getGreetingServer: builder.query<GreetingResponse, void>({
       query: () => "",
@@ -29,4 +30,4 @@ export const userApi = createApi({
   }),
 });
 
-export const { useGetGreetingServerQuery, useGetMeQuery } = userApi;
+export const { useGetGreetingServerQuery, useGetMeQuery } = baseApi;
