@@ -1,8 +1,18 @@
+import { useGetLocationQuery } from "@/api/location/locationApi";
 import { useGetWeatherByCityQuery } from "@/api/weather/weathetApi";
 import { useState } from "react";
+import LocationInfo from "../locationInfo/LocationInfo";
+import News from "../news/News";
 
 const Weather = () => {
-  const [city, setCity] = useState<string>("Moscow");
+  const {
+    data: location,
+    isLoading: cityIsLoading,
+    isError: cityIsError,
+  } = useGetLocationQuery();
+  const [manualCity, setManualCity] = useState<string | null>(null);
+
+  const city = manualCity ?? location?.city ?? "Berlin";
 
   const citiesArr = [
     { label: "Москва", value: "Moscow" },
@@ -47,7 +57,7 @@ const Weather = () => {
             value={city}
             name="cities"
             id="city-select"
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => setManualCity(e.target.value)}
           >
             {citiesArr.map((city) => (
               <option value={city.value} key={city.value}>
@@ -57,6 +67,13 @@ const Weather = () => {
           </select>
         }
       </label>
+      <LocationInfo
+        city={city}
+        country={location?.country}
+        isLoading={cityIsLoading}
+        isError={cityIsError}
+      />
+      <News city={city} />
     </section>
   );
 };

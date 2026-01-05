@@ -1,7 +1,6 @@
 "use client";
 
 import Counter from "@/components/ui/counter/Counter";
-import News from "@/components/ui/news/News";
 import Weather from "@/components/ui/weather/Weather";
 
 export default function Home() {
@@ -10,7 +9,6 @@ export default function Home() {
       Main page
       <Counter></Counter>
       <Weather />
-      <News />
     </main>
   );
 }

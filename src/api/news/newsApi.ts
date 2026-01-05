@@ -8,11 +8,19 @@ export interface NewsResponse {
 
 export const newsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getNews: builder.query<NewsResponse[], { category?: string }>({
-      query: ({ category }) =>
-        `/news${category ? `?category=${category}` : ""}`,
-      providesTags: ["News"],
-    }),
+    getNews: builder.query<NewsResponse[], { category?: string; city: string }>(
+      {
+        query: ({ category, city }) => {
+          const params = new URLSearchParams();
+
+          if (category) params.set("category", category);
+          if (city) params.set("city", city);
+
+          return `/news?${params.toString()}`;
+        },
+        providesTags: ["News"],
+      }
+    ),
   }),
 });
 
