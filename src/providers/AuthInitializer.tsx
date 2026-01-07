@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/utils/userSlice";
+import { setUser } from "@/store/slices/userSlice";
 import { useEffect } from "react";
 import { useGetMeQuery } from "@/api/baseApi";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { setUser } from "@/utils/userSlice";
+import { setUser } from "@/store/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useRegisterMutation } from "@/api/users/register/register";
 import { useRouter } from "next/navigation";

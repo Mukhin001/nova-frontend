@@ -16,8 +16,8 @@ const LocationInfo = ({
 
   return (
     <div>
-      <p>Country: {country?.toLocaleUpperCase()}</p>
-      <p>City: {city}</p>
+      <h3>Country: {country?.toLocaleUpperCase()}</h3>
+      <h3>City: {city}</h3>
     </div>
   );
 };

@@ -1,26 +1,45 @@
 import { useGetNewsQuery } from "@/api/news/newsApi";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setNewsCategory } from "@/store/slices/uiSlice";
 
-interface NewsProps {
-  city: string;
-}
+const News = () => {
+  const dispatch = useAppDispatch();
+  const city = useAppSelector((state) => state.ui.city);
+  const category = useAppSelector((state) => state.ui.newsCategory);
+  const {
+    data: newsList,
+    isLoading,
+    isError,
+  } = useGetNewsQuery({ city, category });
 
-const News = ({ city }: NewsProps) => {
-  const [category, setCategory] = useState<string>("technology");
-  const { data, isLoading, isError } = useGetNewsQuery({ city, category });
-  console.log(data);
+  const renderNews = () => {
+    if (isLoading) return <p>Loading news...</p>;
+    if (isError) return <p>Failed to load news</p>;
 
-  if (isLoading) return <p>Loading news...</p>;
-  if (isError) return <p>Failed to load news</p>;
+    if (!newsList || newsList.length === 0) {
+      return <li>No news available for {city}</li>;
+    }
+
+    return newsList.map((news) => (
+      <li key={news.link}>
+        <a href={news.link} target="_blank" rel="noreferrer">
+          {news.title}
+        </a>
+      </li>
+    ));
+  };
 
   return (
     <section>
       <h3>
-        ключевое слово для поиска в тексте новости: <i>{city}</i>
+        Ключевое слово для поиска в тексте новости: <i>{city}</i>
       </h3>
-      <p>Выбранны: {category}</p>
+      <p>Выбрано: {category}</p>
 
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <select
+        value={category}
+        onChange={(e) => dispatch(setNewsCategory(e.target.value))}
+      >
         <option value="">All</option>
         <option value="technology">Technology</option>
         <option value="business">Business</option>
@@ -28,19 +47,7 @@ const News = ({ city }: NewsProps) => {
       </select>
 
       <h3>News for city: {city}</h3>
-      <ul>
-        {data && data.length > 0 ? (
-          data.map((news) => (
-            <li key={news.link}>
-              <a href={news.link} target="_blank" rel="noreferrer">
-                {news.title}
-              </a>
-            </li>
-          ))
-        ) : (
-          <li>No news available for {city}</li>
-        )}
-      </ul>
+      <ul>{renderNews()}</ul>
     </section>
   );
 };

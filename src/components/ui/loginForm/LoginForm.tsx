@@ -1,7 +1,7 @@
 "use client";
 
 import { useLoginMutation } from "@/api/users/login/login";
-import { setUser } from "@/utils/userSlice";
+import { setUser } from "@/store/slices/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks";

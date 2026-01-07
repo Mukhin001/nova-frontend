@@ -4,7 +4,7 @@ import { useDeleteMutation } from "@/api/users/delete/deleteUser";
 import { useLogoutMutation } from "@/api/users/logout/logout";
 import { useUpdateProfileMutation } from "@/api/users/update-profile/updateProfile";
 import { useAppDispatch } from "@/store/hooks";
-import { logout, selectUser, setUser } from "@/utils/userSlice";
+import { logout, selectUser, setUser } from "@/store/slices/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";

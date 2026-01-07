@@ -1,8 +1,10 @@
 import { useGetLocationQuery } from "@/api/location/locationApi";
-import { useGetWeatherByCityQuery } from "@/api/weather/weathetApi";
-import { useState } from "react";
+import { useGetWeatherByCityQuery } from "@/api/weather/weatherApi";
 import LocationInfo from "../locationInfo/LocationInfo";
 import News from "../news/News";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setCity } from "@/store/slices/uiSlice";
+import { useEffect } from "react";
 
 const Weather = () => {
   const {
@@ -10,9 +12,15 @@ const Weather = () => {
     isLoading: cityIsLoading,
     isError: cityIsError,
   } = useGetLocationQuery();
-  const [manualCity, setManualCity] = useState<string | null>(null);
 
-  const city = manualCity ?? location?.city ?? "Berlin";
+  const dispatch = useAppDispatch();
+  const city = useAppSelector((state) => state.ui.city);
+
+  useEffect(() => {
+    if (!city && location?.city) {
+      dispatch(setCity(location.city));
+    }
+  }, [location?.city, city, dispatch]);
 
   const citiesArr = [
     { label: "Москва", value: "Moscow" },
@@ -26,19 +34,7 @@ const Weather = () => {
     { label: "Сочи", value: "Sochi" },
   ];
 
-  const { data, isLoading, isError } = useGetWeatherByCityQuery(city);
-  //   <select
-  //     name="cities"
-  //     id="city-select"
-  //     onChange={(e) => setCity(e.target.value)}
-  //   >
-  //     {citiesArr.map((city) => (
-  //       <option value={city} key={city}>
-  //         {city}
-  //       </option>
-  //     ))}
-  //   </select>;
-  // );
+  const { data, isLoading, isError } = useGetWeatherByCityQuery({ city });
 
   if (isLoading) return <p>Loading weather...</p>;
   if (isError) return <p>Failed to load weather</p>;
@@ -57,7 +53,7 @@ const Weather = () => {
             value={city}
             name="cities"
             id="city-select"
-            onChange={(e) => setManualCity(e.target.value)}
+            onChange={(e) => dispatch(setCity(e.target.value))}
           >
             {citiesArr.map((city) => (
               <option value={city.value} key={city.value}>
@@ -73,7 +69,7 @@ const Weather = () => {
         isLoading={cityIsLoading}
         isError={cityIsError}
       />
-      <News city={city} />
+      <News />
     </section>
   );
 };

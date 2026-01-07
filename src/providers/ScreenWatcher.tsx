@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { setIsDesktop } from "./screenSlice";
+import { setIsDesktop } from "../store/slices/screenSlice";
 import { useAppDispatch } from "@/store/hooks";
+import { getIsDesktop } from "@/utils/getIsDesktop";
 
 const ScreenWatcher = () => {
   const dispatch = useAppDispatch();
@@ -11,7 +12,7 @@ const ScreenWatcher = () => {
     if (typeof window === "undefined") return;
 
     const handleResize = () => {
-      dispatch(setIsDesktop(window.innerWidth > 1100));
+      dispatch(setIsDesktop(getIsDesktop()));
     };
 
     window.addEventListener("resize", handleResize);

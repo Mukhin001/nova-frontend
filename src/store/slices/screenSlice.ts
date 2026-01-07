@@ -1,4 +1,4 @@
-import { AppRootState } from "@/store/store";
+import { RootState } from "@/store/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ScreenState {
@@ -21,6 +21,6 @@ export const screenSlice = createSlice({
 
 export const { setIsDesktop } = screenSlice.actions;
 
-export const selectIsDesktop = (state: AppRootState) => state.screen.isDesktop;
+export const selectIsDesktop = (state: RootState) => state.screen.isDesktop;
 
 export default screenSlice.reducer;

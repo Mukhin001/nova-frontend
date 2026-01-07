@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import st from "./drawer.module.css";
 import { useAppSelector } from "@/store/hooks";
-import { selectIsDesktop } from "@/utils/screenSlice";
+import { selectIsDesktop } from "@/store/slices/screenSlice";
 
 interface DrawerProps {
   children: ReactNode;

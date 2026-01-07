@@ -4,7 +4,7 @@ import { ReactNode, useState } from "react";
 import Link from "next/link";
 
 import { useAppSelector } from "@/store/hooks";
-import { selectIsLoggedIn, selectUser } from "@/utils/userSlice";
+import { selectIsLoggedIn, selectUser } from "@/store/slices/userSlice";
 import st from "./header.module.css";
 import Drawer from "@/components/ui/drawer/Drawer";
 import Loader from "@/components/ui/loader/Loader";
@@ -50,7 +50,7 @@ const Header = () => {
               </li>
               <li>
                 <Link href="/error-page" onClick={closeModal}>
-                  нет такой страницы
+                  страница ошибки
                 </Link>
               </li>
               {!userIsLoggedIn && (
