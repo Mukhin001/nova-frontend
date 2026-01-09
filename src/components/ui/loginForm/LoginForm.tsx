@@ -6,6 +6,8 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks";
 import { showToast } from "../toast/toastSlice";
+import { LIMITS } from "@/constants/validation";
+import { validateEmail } from "@/utils/validateEmail";
 
 interface AddLoginFormFields extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -20,10 +22,6 @@ const LoginForm = () => {
   const [loginUser, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
-
-  const validateEmail = (email: string) => {
-    return email.includes("@") && email.includes(".");
-  };
 
   const handleSubmitForm = async (e: React.FormEvent<AddLoginFormElements>) => {
     e.preventDefault();
@@ -40,15 +38,13 @@ const LoginForm = () => {
 
     if (!validateEmail(email)) {
       dispatch(showToast({ message: "Введите корректный email!" }));
-
       return;
     }
 
-    if (password.length < 6) {
+    if (password.length < LIMITS.PASSWORD_MIN) {
       dispatch(
-        showToast({ message: "Пароль должен быть минимум 6 символов!" })
+        showToast({ message: "Пароль должен быть минимум 8 символов!" })
       );
-
       return;
     }
 
@@ -104,7 +100,13 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmitForm}>
       <label htmlFor="email"></label>
-      <input type="email" id="email" name="email" placeholder="email" />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="email"
+        maxLength={LIMITS.EMAIL_MAX}
+      />
 
       <label htmlFor="password"></label>
       <input
@@ -112,6 +114,8 @@ const LoginForm = () => {
         id="password"
         name="password"
         placeholder="password"
+        maxLength={LIMITS.PASSWORD_MAX}
+        minLength={LIMITS.PASSWORD_MIN}
       />
 
       <button type="submit" disabled={isLoading}>

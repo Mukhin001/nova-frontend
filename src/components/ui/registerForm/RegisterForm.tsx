@@ -7,6 +7,8 @@ import { useRegisterMutation } from "@/api/users/register/register";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { showToast } from "../toast/toastSlice";
+import { LIMITS } from "@/constants/validation";
+import { validateEmail } from "@/utils/validateEmail";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -25,11 +27,6 @@ const RegisterForm = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const validateEmail = (email: string) => {
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return regex.test(email);
-  };
-
   const handleSubmitForm = async (
     e: React.FormEvent<AddRegisterFormElements>
   ) => {
@@ -47,17 +44,37 @@ const RegisterForm = () => {
       return;
     }
 
-    if (!validateEmail(email)) {
-      dispatch(showToast({ message: "Введите корректный email!" }));
-
+    if (name.length > LIMITS.NAME_MAX) {
+      dispatch(showToast({ message: "Имя не должно превышать 50 символов" }));
       return;
     }
 
-    if (password.length < 8) {
+    if (email.length > LIMITS.EMAIL_MAX) {
+      dispatch(
+        showToast({ message: "Email не должен превышать 255 символов" })
+      );
+      return;
+    }
+
+    if (
+      password.length > LIMITS.PASSWORD_MAX ||
+      passwordRepeat.length > LIMITS.PASSWORD_MAX
+    ) {
+      dispatch(
+        showToast({ message: "Пароль не должен превышать 128 символов" })
+      );
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      dispatch(showToast({ message: "Введите корректный email!" }));
+      return;
+    }
+
+    if (password.length < LIMITS.PASSWORD_MIN) {
       dispatch(
         showToast({ message: "Пароль должен быть минимум 8 символов!" })
       );
-
       return;
     }
 
@@ -69,13 +86,11 @@ const RegisterForm = () => {
             "Пароль должен содержать одну заглавную букву, одну строчную, одну цифру и один спецсимвол.",
         })
       );
-
       return;
     }
 
     if (password !== passwordRepeat) {
       dispatch(showToast({ message: "Пароли должны быть равны!" }));
-
       return;
     }
 
@@ -94,7 +109,9 @@ const RegisterForm = () => {
           createdAt: data.user.createdAt,
         })
       );
-      dispatch(showToast({ message: "✅ Регистрация успешна" }));
+      dispatch(
+        showToast({ message: "✅ Регистрация успешна", type: "success" })
+      );
 
       router.push("/");
     } catch (error) {
@@ -127,10 +144,22 @@ const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmitForm}>
       <label htmlFor="name"></label>
-      <input type="text" id="name" name="name" placeholder="name" />
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="name"
+        maxLength={LIMITS.NAME_MAX}
+      />
 
       <label htmlFor="email"></label>
-      <input type="email" id="email" name="email" placeholder="email" />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="email"
+        maxLength={LIMITS.EMAIL_MAX}
+      />
 
       <label htmlFor="password"></label>
       <input
@@ -138,12 +167,16 @@ const RegisterForm = () => {
         id="password"
         name="password"
         placeholder="password"
+        maxLength={LIMITS.PASSWORD_MAX}
+        minLength={LIMITS.PASSWORD_MIN}
       />
       <input
         type={showPassword ? "text" : "password"}
         id="password_repeat"
         name="password_repeat"
         placeholder="password_repeat"
+        maxLength={LIMITS.PASSWORD_MAX}
+        minLength={LIMITS.PASSWORD_MIN}
       />
 
       <button type="button" onClick={() => setShowPassword(!showPassword)}>
@@ -151,7 +184,7 @@ const RegisterForm = () => {
       </button>
 
       <button type="submit" disabled={isLoading}>
-        {isLoading ? "Вход..." : "Войти"}
+        {isLoading ? "Регистриция..." : "Зарегистрироваться"}
       </button>
       <button type="reset">Очистить</button>
     </form>
