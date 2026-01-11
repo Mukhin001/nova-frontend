@@ -9,6 +9,7 @@ import { useState } from "react";
 import { showToast } from "../toast/toastSlice";
 import { LIMITS } from "@/constants/validation";
 import { validateEmail } from "@/utils/validateEmail";
+import st from "./registerForm.module.css";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -142,7 +143,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmitForm}>
+    <form onSubmit={handleSubmitForm} className={st.registerForm}>
       <label htmlFor="name"></label>
       <input
         type="text"

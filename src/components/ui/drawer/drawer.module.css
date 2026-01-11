@@ -11,6 +11,7 @@
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.714);
   z-index: 4;
   animation: drop-down 0.4s cubic-bezier(0.15, 0.75, 0.35, 1);
@@ -26,5 +27,11 @@
   }
   100% {
     transform: translateY(0); /* конечное положение */
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    bottom: 50%;
   }
 }

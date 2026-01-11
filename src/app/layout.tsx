@@ -5,7 +5,6 @@ import StoreProvider from "@/store/StoreProvider";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
 import AuthInitializer from "@/providers/AuthInitializer";
-import ScreenWatcher from "@/providers/ScreenWatcher";
 import Toast from "@/components/ui/toast/Toast";
 
 const geistSans = Geist({
@@ -34,10 +33,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <StoreProvider>
-          <ScreenWatcher />
           <AuthInitializer />
           <Header></Header>
-
           {children}
           <Footer></Footer>
           <Toast />

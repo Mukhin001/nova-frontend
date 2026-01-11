@@ -2,7 +2,6 @@
 
 import { ReactNode, useState } from "react";
 import Link from "next/link";
-
 import { useAppSelector } from "@/store/hooks";
 import { selectIsLoggedIn, selectUser } from "@/store/slices/userSlice";
 import st from "./header.module.css";
@@ -37,6 +36,7 @@ const Header = () => {
       <div style={{ fontWeight: "900", color: "#660cbb", fontSize: "large" }}>
         {greet()}
       </div>
+      <div className={st.isDesktop}></div>
       <div className="relative">
         <button onClick={openModal}>меню профиля</button>
 
