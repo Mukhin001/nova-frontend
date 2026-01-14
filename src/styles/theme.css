@@ -1,0 +1,50 @@
+:root {
+  --color-bg: #ffffff;
+  --color-text: #111827;
+  --color-primary: #2563eb;
+  /* --desktop: 1024px; */
+}
+
+[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-text: #e5e7eb;
+  --color-primary: #3b82f6;
+}
+
+.theme-toggle {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  padding: 6px 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* контейнер для измерения ширины */
+.theme-toggle::before,
+.theme-toggle::after {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Light */
+.theme-toggle::before {
+  content: "🌙 Light";
+  transform: translateX(-120%);
+}
+
+/* Dark */
+.theme-toggle::after {
+  content: "☀️ Dark";
+  transform: translateX(120%);
+}
+
+:root[data-theme="light"] .theme-toggle::before {
+  transform: translateX(0);
+}
+
+:root[data-theme="dark"] .theme-toggle::after {
+  transform: translateX(0);
+}

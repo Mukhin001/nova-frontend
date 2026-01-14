@@ -6,7 +6,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks";
 import { showToast } from "../toast/toastSlice";
-import { LIMITS } from "@/constants/validation";
+import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
 
 interface AddLoginFormFields extends HTMLFormControlsCollection {
@@ -41,7 +41,7 @@ const LoginForm = () => {
       return;
     }
 
-    if (password.length < LIMITS.PASSWORD_MIN) {
+    if (password.length < INPUT_LIMITS.PASSWORD_MIN) {
       dispatch(
         showToast({ message: "Пароль должен быть минимум 8 символов!" })
       );
@@ -105,7 +105,7 @@ const LoginForm = () => {
         id="email"
         name="email"
         placeholder="email"
-        maxLength={LIMITS.EMAIL_MAX}
+        maxLength={INPUT_LIMITS.EMAIL_MAX}
       />
 
       <label htmlFor="password"></label>
@@ -114,8 +114,8 @@ const LoginForm = () => {
         id="password"
         name="password"
         placeholder="password"
-        maxLength={LIMITS.PASSWORD_MAX}
-        minLength={LIMITS.PASSWORD_MIN}
+        maxLength={INPUT_LIMITS.PASSWORD_MAX}
+        minLength={INPUT_LIMITS.PASSWORD_MIN}
       />
 
       <button type="submit" disabled={isLoading}>

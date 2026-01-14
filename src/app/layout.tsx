@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/styles/global.css";
+import "@/styles/theme.css";
 import StoreProvider from "@/store/StoreProvider";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
@@ -28,7 +29,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                try {
+                  const theme = localStorage.getItem('theme');
+                  document.documentElement.setAttribute('data-theme',
+                    theme === 'dark' ? 'dark' : 'light'
+                  );
+                } catch (e) {}
+              })();
+            `,
+          }}
+        ></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

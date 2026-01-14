@@ -7,7 +7,7 @@ import { useRegisterMutation } from "@/api/users/register/register";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { showToast } from "../toast/toastSlice";
-import { LIMITS } from "@/constants/validation";
+import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
 import st from "./registerForm.module.css";
 
@@ -45,12 +45,12 @@ const RegisterForm = () => {
       return;
     }
 
-    if (name.length > LIMITS.NAME_MAX) {
+    if (name.length > INPUT_LIMITS.NAME_MAX) {
       dispatch(showToast({ message: "Имя не должно превышать 50 символов" }));
       return;
     }
 
-    if (email.length > LIMITS.EMAIL_MAX) {
+    if (email.length > INPUT_LIMITS.EMAIL_MAX) {
       dispatch(
         showToast({ message: "Email не должен превышать 255 символов" })
       );
@@ -58,8 +58,8 @@ const RegisterForm = () => {
     }
 
     if (
-      password.length > LIMITS.PASSWORD_MAX ||
-      passwordRepeat.length > LIMITS.PASSWORD_MAX
+      password.length > INPUT_LIMITS.PASSWORD_MAX ||
+      passwordRepeat.length > INPUT_LIMITS.PASSWORD_MAX
     ) {
       dispatch(
         showToast({ message: "Пароль не должен превышать 128 символов" })
@@ -72,7 +72,7 @@ const RegisterForm = () => {
       return;
     }
 
-    if (password.length < LIMITS.PASSWORD_MIN) {
+    if (password.length < INPUT_LIMITS.PASSWORD_MIN) {
       dispatch(
         showToast({ message: "Пароль должен быть минимум 8 символов!" })
       );
@@ -150,7 +150,7 @@ const RegisterForm = () => {
         id="name"
         name="name"
         placeholder="name"
-        maxLength={LIMITS.NAME_MAX}
+        maxLength={INPUT_LIMITS.NAME_MAX}
       />
 
       <label htmlFor="email"></label>
@@ -159,7 +159,7 @@ const RegisterForm = () => {
         id="email"
         name="email"
         placeholder="email"
-        maxLength={LIMITS.EMAIL_MAX}
+        maxLength={INPUT_LIMITS.EMAIL_MAX}
       />
 
       <label htmlFor="password"></label>
@@ -168,16 +168,16 @@ const RegisterForm = () => {
         id="password"
         name="password"
         placeholder="password"
-        maxLength={LIMITS.PASSWORD_MAX}
-        minLength={LIMITS.PASSWORD_MIN}
+        maxLength={INPUT_LIMITS.PASSWORD_MAX}
+        minLength={INPUT_LIMITS.PASSWORD_MIN}
       />
       <input
         type={showPassword ? "text" : "password"}
         id="password_repeat"
         name="password_repeat"
         placeholder="password_repeat"
-        maxLength={LIMITS.PASSWORD_MAX}
-        minLength={LIMITS.PASSWORD_MIN}
+        maxLength={INPUT_LIMITS.PASSWORD_MAX}
+        minLength={INPUT_LIMITS.PASSWORD_MIN}
       />
 
       <button type="button" onClick={() => setShowPassword(!showPassword)}>

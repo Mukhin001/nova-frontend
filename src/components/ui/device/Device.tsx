@@ -4,7 +4,7 @@ import { useGetDeviceQuery } from "@/api/device/deviceApi";
 
 const Device = () => {
   const { data, isLoading, isError } = useGetDeviceQuery();
-  console.log(data);
+  //console.log(data);
   if (isLoading) return <p>Loading device...</p>;
   if (isError) return <p>Failed to load device</p>;
 
@@ -16,7 +16,7 @@ const Device = () => {
       <p>platform: {data?.client.platform}</p>
       <h3>Device!</h3>
       <p>type: {data?.device.type}</p>
-      <p>isTouch: {data?.device.isTouch}</p>
+      <p>isTouch: {data?.device.isTouch.toString()}</p>
       <h3>Source! {data?.source}</h3>
     </section>
   );
