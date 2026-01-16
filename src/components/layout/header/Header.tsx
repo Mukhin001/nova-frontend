@@ -14,7 +14,7 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userIsLoggedIn = useAppSelector(selectIsLoggedIn);
   const user = useAppSelector(selectUser);
-  console.log(user);
+  //console.log(user);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);

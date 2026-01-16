@@ -1,11 +1,12 @@
 "use client";
 
 import { useGetDeviceQuery } from "@/api/device/deviceApi";
+import Loader from "../loader/Loader";
 
 const Device = () => {
   const { data, isLoading, isError } = useGetDeviceQuery();
   //console.log(data);
-  if (isLoading) return <p>Loading device...</p>;
+  if (isLoading) return <Loader />;
   if (isError) return <p>Failed to load device</p>;
 
   return (

@@ -5,6 +5,7 @@ import News from "../news/News";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setCity } from "@/store/slices/uiSlice";
 import { useEffect } from "react";
+import Loader from "../loader/Loader";
 
 const Weather = () => {
   const {
@@ -36,7 +37,7 @@ const Weather = () => {
 
   const { data, isLoading, isError } = useGetWeatherByCityQuery({ city });
 
-  if (isLoading) return <p>Loading weather...</p>;
+  if (isLoading) return <Loader />;
   if (isError) return <p>Failed to load weather</p>;
 
   const currentCityLabel =

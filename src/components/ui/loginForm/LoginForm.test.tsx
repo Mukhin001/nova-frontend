@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import LoginForm from "./LoginForm";
 import { configureStore } from "@reduxjs/toolkit";
@@ -115,13 +115,15 @@ describe("LoginForm", () => {
     const { emailInput, passwordInput, submitButton } = renderLoginForm();
 
     await user.type(emailInput, "igor@test.com");
-    await user.type(passwordInput, "123456");
+    await user.type(passwordInput, "12345678");
     await user.click(submitButton);
 
     // проверяем вызов loginUser с правильными данными
-    expect(loginUserMock).toHaveBeenCalledWith({
-      email: "igor@test.com",
-      password: "123456",
+    await waitFor(() => {
+      expect(loginUserMock).toHaveBeenCalledWith({
+        email: "igor@test.com",
+        password: "12345678",
+      });
     });
   });
 
@@ -140,10 +142,10 @@ describe("LoginForm", () => {
     const { emailInput, passwordInput, submitButton } = renderLoginForm();
 
     await user.type(emailInput, "igor@test.com");
-    await user.type(passwordInput, "123456");
+    await user.type(passwordInput, "12345678");
     await user.click(submitButton);
 
     // ⬇️ проверяем, что toast появился в DOM
-    expect(await screen.findByText(/❌ Неверные данные!/)).toBeInTheDocument();
+    expect(await screen.findByText(/Неверные данные!/i)).toBeInTheDocument();
   });
 });

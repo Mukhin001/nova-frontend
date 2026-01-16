@@ -73,7 +73,7 @@ const LoginForm = () => {
     } catch (error) {
       //console.log("❌ Ошибка:", error);
       //console.log("❌ Ошибка:");
-      let message: string = "Неверные данные!";
+      let message: string = "❌ Неверные данные!";
 
       if (typeof error === "object" && error) {
         const fetchError = error as FetchBaseQueryError;

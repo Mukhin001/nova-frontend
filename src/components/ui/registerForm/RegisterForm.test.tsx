@@ -56,7 +56,9 @@ const renderRegisterForm = () => {
     passwordInputRepeat: screen.getByPlaceholderText(
       "password_repeat"
     ) as HTMLInputElement,
-    submitButton: screen.getByRole("button", { name: /вход|войти/i }),
+    submitButton: screen.getByRole("button", {
+      name: /Регистриция...|Зарегистрироваться/i,
+    }),
   };
 };
 
@@ -90,7 +92,7 @@ describe("RegisterForm", () => {
 
     const { submitButton } = renderRegisterForm();
     expect(submitButton).toBeDisabled();
-    expect(submitButton).toHaveTextContent("Вход...");
+    expect(submitButton).toHaveTextContent("Регистриция...");
   });
 
   test("показывает ошибку, если поля пустые", async () => {

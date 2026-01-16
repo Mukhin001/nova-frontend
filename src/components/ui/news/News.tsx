@@ -1,6 +1,7 @@
 import { useGetNewsQuery } from "@/api/news/newsApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setNewsCategory } from "@/store/slices/uiSlice";
+import Loader from "../loader/Loader";
 
 const News = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ const News = () => {
   } = useGetNewsQuery({ city, category });
 
   const renderNews = () => {
-    if (isLoading) return <p>Loading news...</p>;
+    if (isLoading) return <Loader />;
     if (isError) return <p>Failed to load news</p>;
 
     if (!newsList || newsList.length === 0) {

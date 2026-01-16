@@ -1,5 +1,5 @@
 import st from "./loader.module.css";
-import Spinner from "../spinner/Spinner";
+import Spinner from "./Spinner";
 
 type LoaderVariant = "local" | "fullScreen";
 

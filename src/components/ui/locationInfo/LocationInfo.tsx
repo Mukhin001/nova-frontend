@@ -1,3 +1,5 @@
+import Loader from "../loader/Loader";
+
 interface LocationInfoProps {
   city: string;
   country: string | undefined;
@@ -11,7 +13,7 @@ const LocationInfo = ({
   isLoading,
   isError,
 }: LocationInfoProps) => {
-  if (isLoading) return <p>Detecting location...</p>;
+  if (isLoading) return <Loader />;
   if (isError) return <p>Error location...</p>;
 
   return (

@@ -110,21 +110,21 @@ const Account = () => {
   const showForm = (): ReactNode => {
     return (
       <form onSubmit={handleSubmitForm}>
-        <label htmlFor="name"></label>
+        <label htmlFor="name_account"></label>
         <input
           type="text"
-          id="name"
-          name="name"
+          id="name_account"
+          name="name_account"
           placeholder="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
-        <label htmlFor="email"></label>
+        <label htmlFor="email_account"></label>
         <input
           type="email"
-          id="email"
-          name="email"
+          id="email_account"
+          name="email_account"
           placeholder="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
