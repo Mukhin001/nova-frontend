@@ -29,7 +29,7 @@ const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleSubmitForm = async (
-    e: React.FormEvent<AddRegisterFormElements>
+    e: React.FormEvent<AddRegisterFormElements>,
   ) => {
     e.preventDefault();
 
@@ -52,7 +52,7 @@ const RegisterForm = () => {
 
     if (email.length > INPUT_LIMITS.EMAIL_MAX) {
       dispatch(
-        showToast({ message: "Email не должен превышать 255 символов" })
+        showToast({ message: "Email не должен превышать 255 символов" }),
       );
       return;
     }
@@ -62,7 +62,7 @@ const RegisterForm = () => {
       passwordRepeat.length > INPUT_LIMITS.PASSWORD_MAX
     ) {
       dispatch(
-        showToast({ message: "Пароль не должен превышать 128 символов" })
+        showToast({ message: "Пароль не должен превышать 128 символов" }),
       );
       return;
     }
@@ -74,7 +74,7 @@ const RegisterForm = () => {
 
     if (password.length < INPUT_LIMITS.PASSWORD_MIN) {
       dispatch(
-        showToast({ message: "Пароль должен быть минимум 8 символов!" })
+        showToast({ message: "Пароль должен быть минимум 8 символов!" }),
       );
       return;
     }
@@ -85,7 +85,7 @@ const RegisterForm = () => {
         showToast({
           message:
             "Пароль должен содержать одну заглавную букву, одну строчную, одну цифру и один спецсимвол.",
-        })
+        }),
       );
       return;
     }
@@ -108,10 +108,10 @@ const RegisterForm = () => {
           name: data.user.name,
           email: data.user.email,
           createdAt: data.user.createdAt,
-        })
+        }),
       );
       dispatch(
-        showToast({ message: "✅ Регистрация успешна", type: "success" })
+        showToast({ message: "✅ Регистрация успешна", type: "success" }),
       );
 
       router.push("/");
@@ -143,7 +143,11 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmitForm} className={st.registerForm}>
+    <form
+      onSubmit={handleSubmitForm}
+      className={st.registerForm}
+      autoComplete="on"
+    >
       <label htmlFor="name"></label>
       <input
         type="text"
@@ -151,6 +155,7 @@ const RegisterForm = () => {
         name="name"
         placeholder="name"
         maxLength={INPUT_LIMITS.NAME_MAX}
+        autoComplete="name"
       />
 
       <label htmlFor="email"></label>
@@ -160,6 +165,7 @@ const RegisterForm = () => {
         name="email"
         placeholder="email"
         maxLength={INPUT_LIMITS.EMAIL_MAX}
+        autoComplete="email"
       />
 
       <label htmlFor="password"></label>
@@ -170,6 +176,7 @@ const RegisterForm = () => {
         placeholder="password"
         maxLength={INPUT_LIMITS.PASSWORD_MAX}
         minLength={INPUT_LIMITS.PASSWORD_MIN}
+        autoComplete="new-password"
       />
       <input
         type={showPassword ? "text" : "password"}
@@ -178,6 +185,7 @@ const RegisterForm = () => {
         placeholder="password_repeat"
         maxLength={INPUT_LIMITS.PASSWORD_MAX}
         minLength={INPUT_LIMITS.PASSWORD_MIN}
+        autoComplete="new-password"
       />
 
       <button type="button" onClick={() => setShowPassword(!showPassword)}>

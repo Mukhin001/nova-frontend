@@ -43,7 +43,7 @@ const LoginForm = () => {
 
     if (password.length < INPUT_LIMITS.PASSWORD_MIN) {
       dispatch(
-        showToast({ message: "Пароль должен быть минимум 8 символов!" })
+        showToast({ message: "Пароль должен быть минимум 8 символов!" }),
       );
       return;
     }
@@ -60,13 +60,13 @@ const LoginForm = () => {
           name: data.user.name,
           email: data.user.email,
           createdAt: data.user.createdAt,
-        })
+        }),
       );
       dispatch(
         showToast({
           message: `✅ Добро пожаловать, ${data.user.name}`,
           type: "success",
-        })
+        }),
       );
 
       router.push("/");
@@ -98,13 +98,14 @@ const LoginForm = () => {
     form.reset();
   };
   return (
-    <form onSubmit={handleSubmitForm}>
+    <form onSubmit={handleSubmitForm} autoComplete="on">
       <label htmlFor="email"></label>
       <input
         type="email"
         id="email"
         name="email"
         placeholder="email"
+        autoComplete="username"
         maxLength={INPUT_LIMITS.EMAIL_MAX}
       />
 
@@ -114,6 +115,7 @@ const LoginForm = () => {
         id="password"
         name="password"
         placeholder="password"
+        autoComplete="current-password"
         maxLength={INPUT_LIMITS.PASSWORD_MAX}
         minLength={INPUT_LIMITS.PASSWORD_MIN}
       />
@@ -121,7 +123,9 @@ const LoginForm = () => {
       <button type="submit" disabled={isLoading}>
         {isLoading ? "Вход..." : "Войти"}
       </button>
-      <button type="reset">Очистить</button>
+      <button type="reset" disabled={isLoading}>
+        Очистить
+      </button>
     </form>
   );
 };
