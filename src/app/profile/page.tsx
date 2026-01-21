@@ -1,12 +1,12 @@
 import ProfileClient from "@/components/ui/updateProfile/ProfileClient";
 
-const Account = () => {
+const ProfilePage = () => {
   return (
     <main>
-      <h2>Редактировать профиль.</h2>
+      <h1>Редактировать профиль.</h1>
       <ProfileClient />
     </main>
   );
 };
 
-export default Account;
+export default ProfilePage;

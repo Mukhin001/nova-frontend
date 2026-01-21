@@ -1,8 +1,8 @@
 const NotFoundPage = () => {
   return (
     <main>
-      <h3>404 - Route not found...</h3>
-      <div>Такой страницы не существует</div>
+      <h1>404 - Route not found...</h1>
+      <p>Такой страницы не существует</p>
     </main>
   );
 };

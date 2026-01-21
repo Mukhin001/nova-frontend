@@ -1,9 +1,9 @@
-const YourSaved = () => {
+const YourSavedPage = () => {
   return (
     <main>
-      <h3>Your saved</h3>
+      <h1>Your saved</h1>
     </main>
   );
 };
 
-export default YourSaved;
+export default YourSavedPage;

@@ -5,10 +5,10 @@ import Device from "@/components/ui/device/Device";
 import ToggleTheme from "@/components/ui/toggleTheme/ToggleTheme";
 import Weather from "@/components/ui/weather/Weather";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main>
-      Main page
+      <h1>Добро пожаловать в Full-stack App</h1>
       <ToggleTheme />
       <Counter></Counter>
       <Device />

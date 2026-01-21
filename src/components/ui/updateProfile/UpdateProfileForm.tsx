@@ -2,41 +2,46 @@
 import { useUpdateProfileMutation } from "@/api/users/update-profile/updateProfile";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { useAppDispatch } from "@/store/hooks";
-import { setUser } from "@/store/slices/userSlice";
+import { setUser, User } from "@/store/slices/userSlice";
 import { validateEmail } from "@/utils/validateEmail";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Dispatch, SetStateAction } from "react";
 import { showToast } from "../toast/toastSlice";
 import { Mode } from "./ProfileClient";
+import { useRouter } from "next/navigation";
 
 interface UpdateProfileFormProps {
-  name: string;
-  email: string;
-  setName: Dispatch<SetStateAction<string>>;
-  setEmail: Dispatch<SetStateAction<string>>;
+  user: User | null;
   setMode: Dispatch<SetStateAction<Mode>>;
   showPassword: boolean;
   setShowPassword: Dispatch<SetStateAction<boolean>>;
 }
 
 const UpdateProfileForm = ({
-  name,
-  email,
-  setName,
-  setEmail,
+  user,
   setMode,
   showPassword,
   setShowPassword,
 }: UpdateProfileFormProps) => {
   const dispatch = useAppDispatch();
   const [updateProfile] = useUpdateProfileMutation();
+  const router = useRouter();
+
+  if (!user) {
+    dispatch(showToast({ message: "Войдите в систему" }));
+    router.push("/login");
+    return null;
+  }
 
   const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.currentTarget;
-    // const email = (form.elements.namedItem("delete_email") as HTMLInputElement)
-    //   .value;
+
+    const name = (form.elements.namedItem("profile_name") as HTMLInputElement)
+      .value;
+    const email = (form.elements.namedItem("profile_email") as HTMLInputElement)
+      .value;
     const password = (
       form.elements.namedItem("profile_current_password") as HTMLInputElement
     ).value;
@@ -100,8 +105,8 @@ const UpdateProfileForm = ({
           name="profile_name"
           placeholder="name"
           autoComplete="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          defaultValue={user?.name}
+          maxLength={INPUT_LIMITS.NAME_MAX}
         />
 
         <label htmlFor="profile_email"></label>
@@ -111,9 +116,8 @@ const UpdateProfileForm = ({
           name="profile_email"
           placeholder="email"
           autoComplete="email"
-          value={email}
+          defaultValue={user?.email}
           maxLength={INPUT_LIMITS.EMAIL_MAX}
-          onChange={(e) => setEmail(e.target.value)}
         />
 
         <label htmlFor="profile_current_password"></label>
@@ -139,15 +143,7 @@ const UpdateProfileForm = ({
         />
 
         <button type="submit">Сохранить</button>
-        <button
-          type="reset"
-          onClick={() => {
-            setName("");
-            setEmail("");
-          }}
-        >
-          Сбросить
-        </button>
+        <button type="reset">Сбросить</button>
       </form>
       <button onClick={() => setShowPassword(!showPassword)}>
         {showPassword ? "Скрыть" : "Показать"}

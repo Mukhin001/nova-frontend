@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import DeleteAccountForm from "./DeleteAccountForm";
 import UpdateProfileForm from "./UpdateProfileForm";
 import { showToast } from "../toast/toastSlice";
+import ProfileView from "./ProfileView";
 
 export type Mode = "view" | "edit" | "delete";
 
@@ -20,16 +21,13 @@ const ProfileClient = () => {
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const [name, setName] = useState<string>(user?.name ?? "");
-  const [email, setEmail] = useState<string>(user?.email ?? "");
-
   const [logoutRequest] = useLogoutMutation();
 
   useEffect(() => {
-    if (!user) {
-      router.push("/"); // редирект, если не авторизован
-    }
     setShowPassword(false);
+    if (!user) {
+      router.push("/login"); // редирект, если не авторизован
+    }
   }, [user, router, mode]);
 
   const handleLogout = async () => {
@@ -46,8 +44,8 @@ const ProfileClient = () => {
   };
 
   return (
-    <div>
-      <h3>accaunt</h3>
+    <section>
+      <h3>Аккаунт</h3>
       <button onClick={handleLogout}>Выйти</button>
       {mode !== "edit" && (
         <button
@@ -61,45 +59,24 @@ const ProfileClient = () => {
       {mode !== "delete" && (
         <button onClick={() => setMode("delete")}>удалить аккаунт</button>
       )}
-      {mode === "view" && (
-        <ul>
-          <li>
-            <h3>id:</h3> {user?.id}
-          </li>
-          <li>
-            <h3>name:</h3> {user?.name}
-          </li>
-          <li>
-            <h3>email: </h3>
-            {user?.email}
-          </li>
-          <li>
-            <h3>createdAt:</h3> {user?.createdAt}
-          </li>
-        </ul>
-      )}
+      {mode === "view" && <ProfileView user={user} />}
       {mode === "edit" && (
         <UpdateProfileForm
-          name={name}
-          setName={setName}
-          email={email}
-          setEmail={setEmail}
+          user={user}
           setMode={setMode}
           showPassword={showPassword}
           setShowPassword={setShowPassword}
         />
       )}
       {mode === "delete" && (
-        <>
-          <DeleteAccountForm
-            user={user}
-            setMode={setMode}
-            showPassword={showPassword}
-            setShowPassword={setShowPassword}
-          />
-        </>
+        <DeleteAccountForm
+          user={user}
+          setMode={setMode}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
       )}
-    </div>
+    </section>
   );
 };
 

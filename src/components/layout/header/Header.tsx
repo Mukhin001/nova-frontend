@@ -14,7 +14,6 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userIsLoggedIn = useAppSelector(selectIsLoggedIn);
   const user = useAppSelector(selectUser);
-  //console.log(user);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -29,55 +28,61 @@ const Header = () => {
 
   return (
     <header className={st.header}>
-      <Link href="/">
-        <h1>Full-stack-app</h1>
-      </Link>
-      {userIsLoggedIn ? <h2>{user?.name}</h2> : <h2>Войдите...</h2>}
-      <div style={{ fontWeight: "900", color: "#660cbb", fontSize: "large" }}>
-        {greet()}
-      </div>
-      <div className={st.isDesktop}></div>
-      <div className="relative">
-        <button onClick={openModal}>меню профиля</button>
+      <nav>
+        <h2>Основная навигация</h2>
+        <Link href="/" aria-label="На главную">
+          Full-stack-app
+        </Link>
+        <span>
+          {userIsLoggedIn ? user?.name : <Link href="/login">войти</Link>}
+        </span>
 
-        {isModalOpen && (
-          <Drawer onClose={closeModal}>
-            <ul>
-              <li>
-                <Link href="/your-saved" onClick={closeModal}>
-                  твои сохраненные
-                </Link>
-              </li>
-              <li>
-                <Link href="/error-page" onClick={closeModal}>
-                  страница ошибки
-                </Link>
-              </li>
-              {!userIsLoggedIn && (
+        <div style={{ fontWeight: "900", color: "#660cbb", fontSize: "large" }}>
+          {greet()}
+        </div>
+        <div className={st.isDesktop}></div>
+        <div className="relative">
+          <button onClick={openModal}>меню профиля</button>
+
+          {isModalOpen && (
+            <Drawer onClose={closeModal}>
+              <ul>
                 <li>
-                  <Link href="/register" onClick={closeModal}>
-                    регистрация
+                  <Link href="/your-saved" onClick={closeModal}>
+                    твои сохраненные
                   </Link>
                 </li>
-              )}
-              {!userIsLoggedIn && (
                 <li>
-                  <Link href="/login" onClick={closeModal}>
-                    войти
+                  <Link href="/error" onClick={closeModal}>
+                    страница ошибки
                   </Link>
                 </li>
-              )}
-              {userIsLoggedIn && (
-                <li>
-                  <Link href="/account" onClick={closeModal}>
-                    аккаунт
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </Drawer>
-        )}
-      </div>
+                {!userIsLoggedIn && (
+                  <li>
+                    <Link href="/register" onClick={closeModal}>
+                      регистрация
+                    </Link>
+                  </li>
+                )}
+                {!userIsLoggedIn && (
+                  <li>
+                    <Link href="/login" onClick={closeModal}>
+                      войти
+                    </Link>
+                  </li>
+                )}
+                {userIsLoggedIn && (
+                  <li>
+                    <Link href="/profile" onClick={closeModal}>
+                      аккаунт
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </Drawer>
+          )}
+        </div>
+      </nav>
     </header>
   );
 };

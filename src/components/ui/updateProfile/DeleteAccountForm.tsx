@@ -27,6 +27,12 @@ const DeleteAccountForm = ({
   const router = useRouter();
   const [deleteUser] = useDeleteMutation();
 
+  if (!user) {
+    dispatch(showToast({ message: "Войдите в систему" }));
+    router.push("/login");
+    return null;
+  }
+
   const handleDelete = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -43,11 +49,6 @@ const DeleteAccountForm = ({
     }
 
     try {
-      if (!user) {
-        dispatch(showToast({ message: "Войдите в систему" }));
-        return;
-      }
-
       const res = await deleteUser({
         email,
         password,
