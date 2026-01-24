@@ -25,7 +25,7 @@ export const baseApi = createApi({
       query: () => "",
     }),
     getMe: builder.query<LoginResponse, void>({
-      query: () => "/me",
+      query: () => "/user/me",
     }),
   }),
 });

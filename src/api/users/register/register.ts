@@ -20,7 +20,7 @@ export const register = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation<LoginResponse, RegisterRequest>({
       query: (body) => ({
-        url: "/register",
+        url: "/user/register",
         method: "POST",
         body,
       }),

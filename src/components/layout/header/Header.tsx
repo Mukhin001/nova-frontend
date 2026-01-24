@@ -36,14 +36,12 @@ const Header = () => {
         <span>
           {userIsLoggedIn ? user?.name : <Link href="/login">войти</Link>}
         </span>
-
+        <button onClick={openModal}>меню профиля</button>
         <div style={{ fontWeight: "900", color: "#660cbb", fontSize: "large" }}>
           {greet()}
         </div>
         <div className={st.isDesktop}></div>
         <div className="relative">
-          <button onClick={openModal}>меню профиля</button>
-
           {isModalOpen && (
             <Drawer onClose={closeModal}>
               <ul>
@@ -75,6 +73,20 @@ const Header = () => {
                   <li>
                     <Link href="/profile" onClick={closeModal}>
                       аккаунт
+                    </Link>
+                  </li>
+                )}
+                {userIsLoggedIn && (
+                  <li>
+                    <Link href="/subscriptions" onClick={closeModal}>
+                      подписка
+                    </Link>
+                  </li>
+                )}
+                {userIsLoggedIn && (
+                  <li>
+                    <Link href="/feed" onClick={closeModal}>
+                      лента
                     </Link>
                   </li>
                 )}

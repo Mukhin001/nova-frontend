@@ -2,7 +2,6 @@
 
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { setUser } from "@/store/slices/userSlice";
-import { useDispatch } from "react-redux";
 import { useRegisterMutation } from "@/api/users/register/register";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -10,6 +9,7 @@ import { showToast } from "../toast/toastSlice";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
 import st from "./registerForm.module.css";
+import { useAppDispatch } from "@/store/hooks";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -24,7 +24,7 @@ interface AddRegisterFormElements extends HTMLFormElement {
 
 const RegisterForm = () => {
   const [registerUser, { isLoading }] = useRegisterMutation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -114,7 +114,7 @@ const RegisterForm = () => {
         showToast({ message: "✅ Регистрация успешна", type: "success" }),
       );
 
-      router.push("/");
+      router.push("/feed");
     } catch (error) {
       let message = "Ошибка отправки данных";
 
