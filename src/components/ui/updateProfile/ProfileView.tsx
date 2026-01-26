@@ -1,6 +1,6 @@
-import { User } from "@/store/slices/userSlice";
 import { showToast } from "../toast/toastSlice";
 import { useAppDispatch } from "@/store/hooks";
+import { User } from "@/types/apiUser";
 import { useRouter } from "next/navigation";
 
 interface ProfileViewProps {

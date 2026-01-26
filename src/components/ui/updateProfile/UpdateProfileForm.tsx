@@ -2,13 +2,14 @@
 import { useUpdateProfileMutation } from "@/api/users/update-profile/updateProfile";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { useAppDispatch } from "@/store/hooks";
-import { setUser, User } from "@/store/slices/userSlice";
+import { setUser } from "@/store/slices/userSlice";
 import { validateEmail } from "@/utils/validateEmail";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Dispatch, SetStateAction } from "react";
 import { showToast } from "../toast/toastSlice";
 import { Mode } from "./ProfileClient";
 import { useRouter } from "next/navigation";
+import { User } from "@/types/apiUser";
 
 interface UpdateProfileFormProps {
   user: User | null;
@@ -75,14 +76,7 @@ const UpdateProfileForm = ({
       }).unwrap();
 
       setMode("view");
-      dispatch(
-        setUser({
-          id: data.user.id,
-          name: data.user.name,
-          email: data.user.email,
-          createdAt: data.user.createdAt,
-        }),
-      );
+      dispatch(setUser(data.user));
     } catch (err) {
       const error = err as FetchBaseQueryError & {
         data?: { error?: string };

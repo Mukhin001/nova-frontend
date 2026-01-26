@@ -1,30 +1,30 @@
 import { baseApi } from "@/api/baseApi";
 
-interface LoginResponse {
-  subscriptions: {
-    cities: string[];
-    newsCategories: string[];
-  };
+export type Subscription = {
+  city: string;
+  category: string;
+};
+
+interface UpdateSubscriptionsResponse {
+  subscriptions: Subscription[];
 }
 
 interface UpdateSubscriptionsRequest {
-  subscriptions: {
-    cities: string[];
-    newsCategories: string[];
-  };
+  subscriptions: Subscription[];
 }
 
 export const subscriptions = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     updateSubscriptions: builder.mutation<
-      LoginResponse,
+      UpdateSubscriptionsResponse,
       UpdateSubscriptionsRequest
     >({
       query: (body) => ({
-        url: "/user/subscriptions",
+        url: "/user/subscription-settings",
         method: "PUT",
         body,
       }),
+      invalidatesTags: ["Feed"],
     }),
   }),
 });

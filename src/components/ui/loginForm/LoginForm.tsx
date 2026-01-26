@@ -54,14 +54,7 @@ const LoginForm = () => {
         password,
       }).unwrap();
       //console.log("✅ Вход успешен:", data);
-      dispatch(
-        setUser({
-          id: data.user.id,
-          name: data.user.name,
-          email: data.user.email,
-          createdAt: data.user.createdAt,
-        }),
-      );
+      dispatch(setUser(data.user));
       dispatch(
         showToast({
           message: `✅ Добро пожаловать, ${data.user.name}`,

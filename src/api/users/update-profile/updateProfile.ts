@@ -1,14 +1,5 @@
 import { baseApi } from "@/api/baseApi";
-
-interface LoginResponse {
-  message: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    createdAt: string;
-  };
-}
+import { LoginResponse } from "@/types/apiUser";
 
 interface UpdateProfileRequest {
   name: string;

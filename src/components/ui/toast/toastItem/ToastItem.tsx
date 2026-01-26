@@ -29,6 +29,7 @@ const ToastItem = ({ toast }: ToastItemProps) => {
         padding: "0.75rem 1rem",
         borderRadius: "6px",
         minWidth: "240px",
+        listStyle: "none",
       }}
     >
       {toast.message}

@@ -1,26 +1,18 @@
 "use client";
-import { useDispatch } from "react-redux";
 import { setUser } from "@/store/slices/userSlice";
 import { useEffect } from "react";
 import { useGetMeQuery } from "@/api/baseApi";
+import { useAppDispatch } from "@/store/hooks";
 
 const AuthInitializer = () => {
   const { data, isSuccess } = useGetMeQuery();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isSuccess && data?.user) {
-      dispatch(
-        setUser({
-          id: data.user.id,
-          name: data.user.name,
-          email: data.user.email,
-          createdAt: data.user.createdAt,
-        })
-      );
+      dispatch(setUser(data.user));
+      console.log("Updated user in Redux:", data.user);
     }
-    console.log(data);
-    console.log(isSuccess);
   }, [isSuccess, data, dispatch]);
 
   return null;

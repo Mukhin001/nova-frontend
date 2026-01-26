@@ -78,7 +78,7 @@ const Header = () => {
                 )}
                 {userIsLoggedIn && (
                   <li>
-                    <Link href="/subscriptions" onClick={closeModal}>
+                    <Link href="/subscription-settings" onClick={closeModal}>
                       подписка
                     </Link>
                   </li>

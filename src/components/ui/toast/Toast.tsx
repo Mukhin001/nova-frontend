@@ -7,7 +7,7 @@ const Toast = () => {
   const queue = useAppSelector((state) => state.toast.queue);
 
   return (
-    <ul style={{ backgroundColor: "red", color: "white" }}>
+    <ul>
       {queue.map((toast) => (
         <ToastItem key={toast.id} toast={toast} />
       ))}

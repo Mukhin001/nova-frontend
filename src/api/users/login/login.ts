@@ -1,14 +1,5 @@
 import { baseApi } from "@/api/baseApi";
-
-interface LoginResponse {
-  message: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    createdAt: string;
-  };
-}
+import { LoginResponse } from "@/types/apiUser";
 
 export const login = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,7 +10,7 @@ export const login = baseApi.injectEndpoints({
           method: "POST",
           body,
         }),
-      }
+      },
     ),
   }),
   overrideExisting: true,

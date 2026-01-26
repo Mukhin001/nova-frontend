@@ -1,16 +1,8 @@
+import { LoginResponse } from "@/types/apiUser";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface GreetingResponse {
   message: string;
-}
-
-interface LoginResponse {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    createdAt: string;
-  };
 }
 
 export const baseApi = createApi({
@@ -19,7 +11,7 @@ export const baseApi = createApi({
     baseUrl: "http://localhost:3500",
     credentials: "include", // <-- ДЛЯ COOKIE
   }),
-  tagTypes: ["User", "Weather", "News"],
+  tagTypes: ["User", "Weather", "News", "Feed"],
   endpoints: (builder) => ({
     getGreetingServer: builder.query<GreetingResponse, void>({
       query: () => "",
