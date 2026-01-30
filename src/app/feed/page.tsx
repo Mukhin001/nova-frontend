@@ -10,11 +10,11 @@ const FeedPage = () => {
   );
 
   const { data: feed, isLoading, error } = useGetFeedQuery();
-  console.log(feed);
+  //console.log(feed);
 
   if (!subscriptions || subscriptions?.length === 0) {
     return (
-      <main>
+      <main className="container">
         <h1>Лента</h1>
         <p>Вы ещё не выбрали подписки</p>
         <Link href="/subscriptions">Выбрать подписки</Link>
@@ -42,7 +42,7 @@ const FeedPage = () => {
     });
 
   return (
-    <main>
+    <main className="container">
       <h1>Лента</h1>
 
       {feed.map((item) => (

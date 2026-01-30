@@ -8,7 +8,6 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Dispatch, SetStateAction } from "react";
 import { showToast } from "../toast/toastSlice";
 import { Mode } from "./ProfileClient";
-import { useRouter } from "next/navigation";
 import { User } from "@/types/apiUser";
 
 interface UpdateProfileFormProps {
@@ -26,12 +25,9 @@ const UpdateProfileForm = ({
 }: UpdateProfileFormProps) => {
   const dispatch = useAppDispatch();
   const [updateProfile] = useUpdateProfileMutation();
-  const router = useRouter();
 
   if (!user) {
-    dispatch(showToast({ message: "Войдите в систему" }));
-    router.push("/login");
-    return null;
+    return <p>Войдите в систему</p>;
   }
 
   const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {

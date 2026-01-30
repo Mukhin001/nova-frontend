@@ -1,0 +1,47 @@
+header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+}
+
+footer {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-soft);
+}
+
+/* контейнер */
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* main */
+main {
+  flex: 1;
+}
+
+/* grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* card */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--color-border);
+}
+
+/* responsive */
+@media (min-width: 768px) {
+  .container {
+    padding: 24px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

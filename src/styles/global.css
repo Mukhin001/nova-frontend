@@ -1,23 +1,52 @@
 /* @import "tailwindcss"; */
 
-/* *,
-::after,
-::before,
-::backdrop,
-::file-selector-button {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
-
 body {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-main);
   background: var(--color-bg);
   color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--color-text);
+  font-size: large;
+}
+
+h3 {
+  font-size: 1.1rem;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--color-muted);
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

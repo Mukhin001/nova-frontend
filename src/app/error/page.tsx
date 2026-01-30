@@ -6,7 +6,7 @@ interface ErrorPageProps {
 
 const ErrorPage = ({ title = "Страница ошибки" }: ErrorPageProps) => {
   return (
-    <main>
+    <main className="container">
       <h1>404 - Страница не найдена...</h1>
       <p>{title}</p>
       <Link href="/">На главную</Link>

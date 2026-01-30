@@ -9,19 +9,15 @@ import { showToast } from "@/components/ui/toast/toastSlice";
 import { CITIES, MAX_CITIES, NEWS } from "@/constants/subscription";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setUser } from "@/store/slices/userSlice";
-import { useRouter } from "next/navigation";
 
 const SubscriptionSettingsPage = () => {
   const user = useAppSelector((state) => state.user.user);
   const userSubscriptions: Subscription[] = user?.subscriptions ?? [];
   const [updateSubscriptions, { isLoading }] = useUpdateSubscriptionsMutation();
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   if (!user) {
-    dispatch(showToast({ message: "Войдите в систему" }));
-    router.push("/login");
-    return null;
+    return <p>Войдите в систему</p>;
   }
 
   const toggleCity = (city: string) => {
@@ -106,7 +102,7 @@ const SubscriptionSettingsPage = () => {
   };
 
   return (
-    <main>
+    <main className="container">
       <h1>Настройки подписок</h1>
       {isLoading && <Loader variant="fullScreen" />}
 
@@ -115,7 +111,7 @@ const SubscriptionSettingsPage = () => {
         const disabled =
           !subscription && userSubscriptions.length >= MAX_CITIES;
         return (
-          <div key={city} style={{ marginBottom: 12 }}>
+          <div key={city}>
             <label
               style={{
                 opacity: disabled ? 0.5 : 1,
@@ -135,7 +131,6 @@ const SubscriptionSettingsPage = () => {
                 name={city}
                 value={subscription.category}
                 onChange={(e) => changeCategory(city, e.target.value)}
-                style={{ marginLeft: 12 }}
               >
                 {NEWS.map((news) => (
                   <option key={news} value={news}>
@@ -147,7 +142,7 @@ const SubscriptionSettingsPage = () => {
           </div>
         );
       })}
-      <button onClick={handleSave} disabled={isLoading}>
+      <button onClick={handleSave} disabled={isLoading} className="button">
         {isLoading ? "Сохраняем..." : "Сохранить"}
       </button>
       <ul>

@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetLocationQuery } from "@/api/location/locationApi";
 import { useGetWeatherByCityQuery } from "@/api/weather/weatherApi";
 import LocationInfo from "../locationInfo/LocationInfo";

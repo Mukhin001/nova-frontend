@@ -102,14 +102,7 @@ const RegisterForm = () => {
         password,
       }).unwrap();
       //console.log("✅ Успешно:", data);
-      dispatch(
-        setUser({
-          id: data.user.id,
-          name: data.user.name,
-          email: data.user.email,
-          createdAt: data.user.createdAt,
-        }),
-      );
+      dispatch(setUser(data.user));
       dispatch(
         showToast({ message: "✅ Регистрация успешна", type: "success" }),
       );

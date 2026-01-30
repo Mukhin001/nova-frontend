@@ -3,12 +3,13 @@
 import { useDeleteMutation } from "@/api/users/delete/deleteUser";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { useAppDispatch } from "@/store/hooks";
-import { logout, User } from "@/store/slices/userSlice";
+import { logout } from "@/store/slices/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 import { showToast } from "../toast/toastSlice";
 import { Mode } from "./ProfileClient";
+import { User } from "@/types/apiUser";
 
 interface DeleteAccountFormProps {
   user: User | null;
@@ -28,9 +29,7 @@ const DeleteAccountForm = ({
   const [deleteUser] = useDeleteMutation();
 
   if (!user) {
-    dispatch(showToast({ message: "Войдите в систему" }));
-    router.push("/login");
-    return null;
+    return <p>Войдите в профиль</p>;
   }
 
   const handleDelete = async (e: React.FormEvent<HTMLFormElement>) => {

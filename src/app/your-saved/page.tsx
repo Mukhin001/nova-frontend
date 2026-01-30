@@ -1,6 +1,6 @@
 const YourSavedPage = () => {
   return (
-    <main>
+    <main className="container">
       <h1>Your saved</h1>
     </main>
   );

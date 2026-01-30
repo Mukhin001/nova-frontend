@@ -4,7 +4,7 @@ import { useLoginMutation } from "@/api/users/login/login";
 import { setUser } from "@/store/slices/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { showToast } from "../toast/toastSlice";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
@@ -19,9 +19,14 @@ interface AddLoginFormElements extends HTMLFormElement {
 }
 
 const LoginForm = () => {
+  const user = useAppSelector((state) => state.user.user);
   const [loginUser, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  if (user) {
+    return <p>Вы уже авторизованы</p>;
+  }
 
   const handleSubmitForm = async (e: React.FormEvent<AddLoginFormElements>) => {
     e.preventDefault();

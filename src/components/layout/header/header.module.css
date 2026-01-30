@@ -1,10 +1,4 @@
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.isDesktop {
+/* .isDesktop {
   height: 30px;
   width: 100%;
   background-color: blueviolet;
@@ -14,4 +8,4 @@
   .isDesktop {
     background-color: rgb(100, 237, 235);
   }
-}
+} */
