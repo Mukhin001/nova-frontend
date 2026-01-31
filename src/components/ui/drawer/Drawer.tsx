@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import st from "./drawer.module.css";
+import Button from "../button/Button";
 
 interface DrawerProps {
   children: ReactNode;
@@ -12,7 +13,7 @@ const Drawer = ({ children, onClose }: DrawerProps) => {
   return (
     <div className={`${st.container}`}>
       <div className={st.wrapper}>
-        <button onClick={onClose}>x</button>
+        <Button onClick={onClose}>x</Button>
         {children}
       </div>
     </div>

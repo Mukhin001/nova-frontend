@@ -13,16 +13,21 @@ input,
 select {
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid var(--border);
+  border: 2px solid var(--color-border);
   font-size: 14px;
-  background: white;
+  background: var(--color-bg);
+  color: var(--color-text);
   margin: 3px;
+  transition:
+    border 0.2s,
+    box-shadow 0.2s;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: var(--primary);
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
 }
 
 .checkbox {

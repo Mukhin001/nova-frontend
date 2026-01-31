@@ -8,13 +8,14 @@ import Drawer from "@/components/ui/drawer/Drawer";
 import Loader from "@/components/ui/loader/Loader";
 import { useGetGreetingServerQuery } from "@/api/baseApi";
 import Logout from "@/components/ui/logout/Logout";
+import Button from "@/components/ui/button/Button";
 
 const Header = () => {
   const { data, isLoading, isError } = useGetGreetingServerQuery();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const userIsLoggedIn = useAppSelector(selectIsLoggedIn);
   const user = useAppSelector(selectUser);
-  const [openLogout, setopenLogout] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -41,7 +42,7 @@ const Header = () => {
                 {user?.name}{" "}
                 <span
                   style={{ cursor: "pointer" }}
-                  onClick={() => setopenLogout(true)}
+                  onClick={() => setIsOpen(true)}
                 >
                   Выйти
                 </span>
@@ -50,8 +51,8 @@ const Header = () => {
               <Link href="/login">войти</Link>
             )}
           </div>
-          {openLogout && <Logout setopenLogout={setopenLogout} />}
-          <button onClick={openModal}>меню профиля</button>
+          {isOpen && <Logout isOpen={isOpen} setIsOpen={setIsOpen} />}
+          <Button onClick={openModal}>меню профиля</Button>
           <div>{greet()}</div>
           <div className="relative">
             {isModalOpen && (

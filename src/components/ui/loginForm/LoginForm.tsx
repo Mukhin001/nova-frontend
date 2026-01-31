@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { showToast } from "../toast/toastSlice";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
+import Button from "../button/Button";
 
 interface AddLoginFormFields extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -117,13 +118,12 @@ const LoginForm = () => {
         maxLength={INPUT_LIMITS.PASSWORD_MAX}
         minLength={INPUT_LIMITS.PASSWORD_MIN}
       />
-
-      <button type="submit" disabled={isLoading}>
+      <Button type="submit" disabled={isLoading}>
         {isLoading ? "Вход..." : "Войти"}
-      </button>
-      <button type="reset" disabled={isLoading}>
+      </Button>
+      <Button type="reset" disabled={isLoading}>
         Очистить
-      </button>
+      </Button>
     </form>
   );
 };

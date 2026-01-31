@@ -10,6 +10,7 @@ import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
 import st from "./registerForm.module.css";
 import { useAppDispatch } from "@/store/hooks";
+import Button from "../button/Button";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;
@@ -101,7 +102,6 @@ const RegisterForm = () => {
         email,
         password,
       }).unwrap();
-      //console.log("✅ Успешно:", data);
       dispatch(setUser(data.user));
       dispatch(
         showToast({ message: "✅ Регистрация успешна", type: "success" }),
@@ -180,15 +180,13 @@ const RegisterForm = () => {
         minLength={INPUT_LIMITS.PASSWORD_MIN}
         autoComplete="new-password"
       />
-
-      <button type="button" onClick={() => setShowPassword(!showPassword)}>
+      <Button type="button" onClick={() => setShowPassword(!showPassword)}>
         {showPassword ? "Скрыть" : "Показать"}
-      </button>
-
-      <button type="submit" disabled={isLoading}>
+      </Button>
+      <Button type="submit" disabled={isLoading}>
         {isLoading ? "Регистриция..." : "Зарегистрироваться"}
-      </button>
-      <button type="reset">Очистить</button>
+      </Button>
+      <Button type="reset">Очистить</Button>
     </form>
   );
 };

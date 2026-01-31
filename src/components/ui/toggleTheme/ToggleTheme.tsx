@@ -1,6 +1,7 @@
 "use client";
 
 import { THEME_KEY } from "@/constants/theme";
+import Button from "../button/Button";
 
 const ToggleTheme = () => {
   const toggleTheme = () => {
@@ -16,12 +17,12 @@ const ToggleTheme = () => {
   };
 
   return (
-    <button
+    <Button
       onClick={toggleTheme}
       className="theme-toggle"
       aria-label="Toggle theme"
       title="Toggle theme"
-    ></button>
+    ></Button>
   );
 };
 

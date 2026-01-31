@@ -10,6 +10,7 @@ import { Dispatch, SetStateAction } from "react";
 import { showToast } from "../toast/toastSlice";
 import { Mode } from "./ProfileClient";
 import { User } from "@/types/apiUser";
+import Button from "../button/Button";
 
 interface DeleteAccountFormProps {
   user: User | null;
@@ -106,19 +107,21 @@ const DeleteAccountForm = ({
           maxLength={INPUT_LIMITS.PASSWORD_MAX}
           minLength={INPUT_LIMITS.PASSWORD_MIN}
         />
-        <button type="submit">Удалить</button>
-        <button type="reset">Сбросить</button>
+
+        <Button type="submit">Удалить</Button>
+        <Button type="reset">Сбросить</Button>
       </form>
-      <button onClick={() => setShowPassword(!showPassword)}>
+      <Button onClick={() => setShowPassword(!showPassword)}>
         {showPassword ? "Скрыть" : "Показать"}
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() => {
           setMode("view");
         }}
       >
+        {" "}
         отменить
-      </button>
+      </Button>
     </>
   );
 };

@@ -52,13 +52,13 @@
 /* Light */
 .theme-toggle::before {
   content: "🌙 Light";
-  transform: translateX(-120%);
+  transform: translateX(-130%);
 }
 
 /* Dark */
 .theme-toggle::after {
   content: "☀️ Dark";
-  transform: translateX(120%);
+  transform: translateX(130%);
 }
 
 :root[data-theme="light"] .theme-toggle::before {

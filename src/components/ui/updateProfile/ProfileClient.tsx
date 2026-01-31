@@ -8,13 +8,14 @@ import UpdateProfileForm from "./UpdateProfileForm";
 
 import ProfileView from "./ProfileView";
 import Logout from "../logout/Logout";
+import Button from "../button/Button";
 
 export type Mode = "view" | "edit" | "delete";
 
 const ProfileClient = () => {
   const [mode, setMode] = useState<Mode>("view");
   const user = useSelector(selectUser);
-  const [openLogout, setopenLogout] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   if (!user) {
@@ -24,19 +25,20 @@ const ProfileClient = () => {
   return (
     <section>
       <h3>Аккаунт</h3>
-      <button onClick={() => setopenLogout(true)}>Выйти</button>
-      {openLogout && <Logout setopenLogout={setopenLogout} />}
+      <Button onClick={() => setIsOpen(true)}>Выйти</Button>
+
+      {isOpen && <Logout isOpen={isOpen} setIsOpen={setIsOpen} />}
       {mode !== "edit" && (
-        <button
+        <Button
           onClick={() => {
             setMode("edit");
           }}
         >
           редактировать
-        </button>
+        </Button>
       )}
       {mode !== "delete" && (
-        <button onClick={() => setMode("delete")}>удалить аккаунт</button>
+        <Button onClick={() => setMode("delete")}>удалить аккаунт</Button>
       )}
       {mode === "view" && <ProfileView user={user} />}
       {mode === "edit" && (

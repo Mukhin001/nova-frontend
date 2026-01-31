@@ -1,15 +1,21 @@
+"use client";
+
 import { useLogoutMutation } from "@/api/users/logout/logout";
 import { useAppDispatch } from "@/store/hooks";
 import { showToast } from "../toast/toastSlice";
 import { logout } from "@/store/slices/userSlice";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
+import Button from "../button/Button";
+import Modal from "../modal/Modal";
+import st from "./logout.module.css";
 
 interface LogoutProps {
-  setopenLogout: Dispatch<SetStateAction<boolean>>;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const Logout = ({ setopenLogout }: LogoutProps) => {
+const Logout = ({ isOpen, setIsOpen }: LogoutProps) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [logoutRequest] = useLogoutMutation();
@@ -23,30 +29,22 @@ const Logout = ({ setopenLogout }: LogoutProps) => {
     } finally {
       dispatch(logout());
       dispatch(showToast({ message: "До свидания!", type: "success" }));
-      setopenLogout(false);
+      setIsOpen(false);
       router.push("/");
     }
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        right: 0,
-        left: 0,
-        top: "30%",
-        display: "grid",
-        justifyContent: "center",
-        background: "#020617",
-        padding: "40px ",
-      }}
-    >
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <h3>Выйти</h3>
+      <Button variant="close" onClick={() => setIsOpen(false)}>
+        x
+      </Button>
       <div>
-        <button onClick={() => setopenLogout(false)}>Нет</button>
-        <button onClick={handleLogout}>Да</button>
+        <Button onClick={() => setIsOpen(false)}>Нет</Button>
+        <Button onClick={handleLogout}>Да</Button>
       </div>
-    </div>
+    </Modal>
   );
 };
 

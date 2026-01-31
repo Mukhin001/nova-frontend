@@ -9,6 +9,7 @@ import { Dispatch, SetStateAction } from "react";
 import { showToast } from "../toast/toastSlice";
 import { Mode } from "./ProfileClient";
 import { User } from "@/types/apiUser";
+import Button from "../button/Button";
 
 interface UpdateProfileFormProps {
   user: User | null;
@@ -131,20 +132,19 @@ const UpdateProfileForm = ({
           maxLength={INPUT_LIMITS.PASSWORD_MAX}
           minLength={INPUT_LIMITS.PASSWORD_MIN}
         />
-
-        <button type="submit">Сохранить</button>
-        <button type="reset">Сбросить</button>
+        <Button type="submit">Сохранить</Button>
+        <Button type="reset">Сбросить</Button>
       </form>
-      <button onClick={() => setShowPassword(!showPassword)}>
+      <Button onClick={() => setShowPassword(!showPassword)}>
         {showPassword ? "Скрыть" : "Показать"}
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() => {
           setMode("view");
         }}
       >
         отменить
-      </button>
+      </Button>
     </>
   );
 };
