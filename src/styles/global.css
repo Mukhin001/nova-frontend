@@ -42,11 +42,22 @@ p {
   color: var(--color-muted);
 }
 
+li {
+  list-style: none;
+}
+
 a {
-  color: var(--color-accent);
   text-decoration: none;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text);
+  transition:
+    border-bottom-color 0.2s ease,
+    transform 0.3s ease,
+    color 0.2s ease;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  transform: translateY(-1px);
 }

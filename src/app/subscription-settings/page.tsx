@@ -4,6 +4,7 @@ import {
   Subscription,
   useUpdateSubscriptionsMutation,
 } from "@/api/users/subscriptions/subscriptions";
+import Button from "@/components/ui/button/Button";
 import Loader from "@/components/ui/loader/Loader";
 import { showToast } from "@/components/ui/toast/toastSlice";
 import { CITIES, MAX_CITIES, NEWS } from "@/constants/subscription";
@@ -142,9 +143,10 @@ const SubscriptionSettingsPage = () => {
           </div>
         );
       })}
-      <button onClick={handleSave} disabled={isLoading} className="button">
+
+      <Button onClick={handleSave} disabled={isLoading} className="button">
         {isLoading ? "Сохраняем..." : "Сохранить"}
-      </button>
+      </Button>
       <ul>
         {userSubscriptions.map((sub) => (
           <li key={sub.city}>

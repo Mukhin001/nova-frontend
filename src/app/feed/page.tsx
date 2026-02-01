@@ -3,6 +3,7 @@
 import { useGetFeedQuery } from "@/api/users/feed/feed";
 import { useAppSelector } from "@/store/hooks";
 import Link from "next/link";
+import st from "./feed.module.css";
 
 const FeedPage = () => {
   const subscriptions = useAppSelector(
@@ -47,28 +48,28 @@ const FeedPage = () => {
 
       {feed.map((item) => (
         <section key={item.city}>
-          <h2>{item.city}</h2>
+          <h2 className={st.fadeUp}>{item.city}</h2>
 
           {/* 🌤 Погода */}
           {item.weather ? (
-            <p>
+            <p className={st.fadeUp}>
               🌡 {item.weather.temp}°C (ощущается как {item.weather.feelsLike}
               °C) <br />
               {item.weather.description}
             </p>
           ) : (
-            <p>Нет данных о погоде</p>
+            <p className={st.fadeUp}>Нет данных о погоде</p>
           )}
 
           {/* 📰 Новости */}
-          <h3>Новости</h3>
+          <h3 className={st.fadeUp}>Новости</h3>
 
           {item.news.length === 0 ? (
-            <p>Новостей нет</p>
+            <p className={st.fadeUp}>Новостей нет</p>
           ) : (
             <ul>
               {item.news.map((news) => (
-                <li key={news.link}>
+                <li key={news.link} className={st.fadeUp}>
                   <a href={news.link} target="_blank" rel="noreferrer">
                     {news.title}
                   </a>

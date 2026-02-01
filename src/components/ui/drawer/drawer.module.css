@@ -12,13 +12,25 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.714);
+  padding: 20px;
+  background-color: rgba(0, 1, 6, 0.856);
   z-index: 4;
   animation: drop-down 0.4s cubic-bezier(0.15, 0.75, 0.35, 1);
 }
 
 .container a {
-  color: aliceblue;
+  border-bottom: 2px solid transparent;
+  color: antiquewhite;
+  transition:
+    border-bottom-color 0.2s ease,
+    transform 0.3s ease,
+    color 0.2s ease;
+}
+
+.container a:hover {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  transform: translateY(-1px);
 }
 
 @keyframes drop-down {
