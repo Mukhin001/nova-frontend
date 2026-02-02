@@ -1,6 +1,15 @@
+.feedEnd {
+  margin-bottom: 350px;
+}
+
+.end {
+  text-align: center;
+}
+
 .fadeUp {
   animation: fadeUp both;
-  animation-timeline: view(70% 20%);
+  animation-timeline: view();
+  animation-range: entry 20% cover 40%;
 }
 
 @keyframes fadeUp {

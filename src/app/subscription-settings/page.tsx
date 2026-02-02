@@ -123,6 +123,7 @@ const SubscriptionSettingsPage = () => {
                 type="checkbox"
                 checked={subscription !== undefined}
                 onChange={() => toggleCity(city)}
+                className="checkbox"
               />
               {city}
             </label>
@@ -147,13 +148,6 @@ const SubscriptionSettingsPage = () => {
       <Button onClick={handleSave} disabled={isLoading} className="button">
         {isLoading ? "Сохраняем..." : "Сохранить"}
       </Button>
-      <ul>
-        {userSubscriptions.map((sub) => (
-          <li key={sub.city}>
-            city: {sub.city}; category: {sub.category}
-          </li>
-        ))}
-      </ul>
     </main>
   );
 };

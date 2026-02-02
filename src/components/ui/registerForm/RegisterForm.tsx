@@ -138,7 +138,7 @@ const RegisterForm = () => {
   return (
     <form
       onSubmit={handleSubmitForm}
-      className={st.registerForm}
+      className={`field ${st.registerForm}`}
       autoComplete="on"
     >
       <label htmlFor="name"></label>

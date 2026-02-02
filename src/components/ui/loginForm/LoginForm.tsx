@@ -97,7 +97,7 @@ const LoginForm = () => {
     form.reset();
   };
   return (
-    <form onSubmit={handleSubmitForm} autoComplete="on">
+    <form onSubmit={handleSubmitForm} autoComplete="on" className="field">
       <label htmlFor="email"></label>
       <input
         type="email"

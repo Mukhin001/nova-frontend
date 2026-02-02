@@ -11,7 +11,6 @@ const FeedPage = () => {
   );
 
   const { data: feed, isLoading, error } = useGetFeedQuery();
-  //console.log(feed);
 
   if (!subscriptions || subscriptions?.length === 0) {
     return (
@@ -50,7 +49,6 @@ const FeedPage = () => {
         <section key={item.city}>
           <h2 className={st.fadeUp}>{item.city}</h2>
 
-          {/* 🌤 Погода */}
           {item.weather ? (
             <p className={st.fadeUp}>
               🌡 {item.weather.temp}°C (ощущается как {item.weather.feelsLike}
@@ -61,7 +59,6 @@ const FeedPage = () => {
             <p className={st.fadeUp}>Нет данных о погоде</p>
           )}
 
-          {/* 📰 Новости */}
           <h3 className={st.fadeUp}>Новости</h3>
 
           {item.news.length === 0 ? (
@@ -85,6 +82,8 @@ const FeedPage = () => {
           )}
         </section>
       ))}
+      <p className={`${st.fadeUp} ${st.end}`}>Конец</p>
+      <div className={st.feedEnd}></div>
     </main>
   );
 };

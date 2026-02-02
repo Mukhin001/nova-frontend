@@ -20,13 +20,6 @@ main {
   flex: 1;
 }
 
-/* grid */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
 /* card */
 .card {
   background: var(--color-surface);
