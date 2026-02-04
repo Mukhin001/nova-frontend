@@ -1,0 +1,49 @@
+.container {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+}
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  background-color: rgba(0, 1, 6, 0.856);
+  z-index: 4;
+  animation: drop-down 0.4s cubic-bezier(0.15, 0.75, 0.35, 1);
+}
+
+.container a {
+  border-bottom: 2px solid transparent;
+  color: antiquewhite;
+  transition:
+    border-bottom-color 0.2s ease,
+    transform 0.3s ease,
+    color 0.2s ease;
+}
+
+.container a:hover {
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  transform: translateY(-1px);
+}
+
+@keyframes drop-down {
+  0% {
+    transform: translateY(-100vh); /* старт сверху */
+  }
+  100% {
+    transform: translateY(0); /* конечное положение */
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    bottom: 50%;
+  }
+}

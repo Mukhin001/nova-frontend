@@ -1,0 +1,13 @@
+.spinner {
+  border-style: solid;
+  border-radius: 50%;
+  border: 4px solid #e5e7eb; /* светлая часть */
+  border-top-color: #3b82f6; /* активная часть */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

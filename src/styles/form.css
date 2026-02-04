@@ -1,0 +1,57 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-right: 10px;
+}
+
+input,
+select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 2px solid var(--color-border);
+  font-size: 14px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  margin: 3px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow:
+    0 0 0 2px rgba(0, 112, 243, 0.25),
+    inset 0 0 0 1000px var(--color-bg);
+
+  -webkit-text-fill-color: var(--color-text);
+  caret-color: var(--color-text);
+}
+
+input:hover,
+input:focus,
+select:hover,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 4px 8px rgba(37, 99, 235, 0.3),
+    0 8px 16px rgba(37, 99, 235, 0.25),
+    0 12px 30px rgba(37, 99, 235, 0.2);
+}
+
+.checkbox {
+  margin-right: 7px;
+}

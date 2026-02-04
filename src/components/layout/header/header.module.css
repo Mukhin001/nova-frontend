@@ -1,0 +1,11 @@
+/* .isDesktop {
+  height: 30px;
+  width: 100%;
+  background-color: blueviolet;
+}
+
+@media (min-width: 1024px) {
+  .isDesktop {
+    background-color: rgb(100, 237, 235);
+  }
+} */
