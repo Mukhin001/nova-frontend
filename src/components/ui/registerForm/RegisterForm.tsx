@@ -106,6 +106,7 @@ const RegisterForm = () => {
       dispatch(
         showToast({ message: "✅ Регистрация успешна", type: "success" }),
       );
+      console.log(data.user);
 
       router.push("/feed");
     } catch (error) {
@@ -180,13 +181,19 @@ const RegisterForm = () => {
         minLength={INPUT_LIMITS.PASSWORD_MIN}
         autoComplete="new-password"
       />
-      <Button type="button" onClick={() => setShowPassword(!showPassword)}>
+      <Button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        disabled={isLoading}
+      >
         {showPassword ? "Скрыть" : "Показать"}
       </Button>
       <Button type="submit" disabled={isLoading}>
         {isLoading ? "Регистриция..." : "Зарегистрироваться"}
       </Button>
-      <Button type="reset">Очистить</Button>
+      <Button type="reset" disabled={isLoading}>
+        Очистить
+      </Button>
     </form>
   );
 };

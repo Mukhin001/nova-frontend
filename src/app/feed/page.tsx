@@ -17,7 +17,7 @@ const FeedPage = () => {
       <main className="container">
         <h1>Лента</h1>
         <p>Вы ещё не выбрали подписки</p>
-        <Link href="/subscriptions">Выбрать подписки</Link>
+        <Link href="/subscription-settings">Выбрать подписки</Link>
       </main>
     );
   }

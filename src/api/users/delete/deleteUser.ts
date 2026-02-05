@@ -7,7 +7,7 @@ export const deleteUser = baseApi.injectEndpoints({
       { email: string; password: string }
     >({
       query: (body) => ({
-        url: "delete-user",
+        url: "/user/delete-user",
         method: "POST",
         body,
       }),
