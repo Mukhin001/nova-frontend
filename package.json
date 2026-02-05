@@ -12,7 +12,8 @@
   "dependencies": {
     "next": "^16.0.8",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "y": "^0.3.2"
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^2.11.2",
