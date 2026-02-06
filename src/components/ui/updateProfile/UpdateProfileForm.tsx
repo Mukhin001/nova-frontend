@@ -25,7 +25,7 @@ const UpdateProfileForm = ({
   setShowPassword,
 }: UpdateProfileFormProps) => {
   const dispatch = useAppDispatch();
-  const [updateProfile] = useUpdateProfileMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   if (!user) {
     return <p>Войдите в систему</p>;
@@ -64,6 +64,11 @@ const UpdateProfileForm = ({
       return;
     }
 
+    if (passwordNew && passwordNew.length < INPUT_LIMITS.PASSWORD_MIN) {
+      dispatch(showToast({ message: "Новый пароль слишком короткий" }));
+      return;
+    }
+
     try {
       const data = await updateProfile({
         name,
@@ -80,7 +85,7 @@ const UpdateProfileForm = ({
       };
       dispatch(
         showToast({
-          message: "❌ " + error.data?.error || "Ошибка обновления",
+          message: "❌ " + (error.data?.error ?? "Ошибка обновления"),
         }),
       );
     }
@@ -88,60 +93,73 @@ const UpdateProfileForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmitForm} autoComplete="on">
-        <label htmlFor="profile_name"></label>
-        <input
-          type="text"
-          id="profile_name"
-          name="profile_name"
-          placeholder="name"
-          autoComplete="name"
-          defaultValue={user?.name}
-          maxLength={INPUT_LIMITS.NAME_MAX}
-        />
+      <form onSubmit={handleSubmitForm}>
+        <fieldset
+          disabled={isLoading}
+          className={isLoading ? "form-loading" : ""}
+        >
+          <label htmlFor="profile_name">имя</label>
+          <input
+            type="text"
+            id="profile_name"
+            name="profile_name"
+            placeholder="name"
+            defaultValue={user?.name}
+            maxLength={INPUT_LIMITS.NAME_MAX}
+            autoComplete="name"
+          />
 
-        <label htmlFor="profile_email"></label>
-        <input
-          type="email"
-          id="profile_email"
-          name="profile_email"
-          placeholder="email"
-          autoComplete="email"
-          defaultValue={user?.email}
-          maxLength={INPUT_LIMITS.EMAIL_MAX}
-        />
+          <label htmlFor="profile_email">email</label>
+          <input
+            type="email"
+            id="profile_email"
+            name="profile_email"
+            placeholder="email"
+            defaultValue={user?.email}
+            maxLength={INPUT_LIMITS.EMAIL_MAX}
+            autoComplete="email"
+          />
 
-        <label htmlFor="profile_current_password"></label>
-        <input
-          type={showPassword ? "text" : "password"}
-          id="profile_current_password"
-          name="profile_current_password"
-          placeholder="Введите текущий пароль"
-          autoComplete="off"
-          maxLength={INPUT_LIMITS.PASSWORD_MAX}
-          minLength={INPUT_LIMITS.PASSWORD_MIN}
-        />
+          <label htmlFor="profile_current_password">
+            Введите текущий пароль
+          </label>
+          <input
+            type={showPassword ? "text" : "password"}
+            id="profile_current_password"
+            name="profile_current_password"
+            placeholder="Введите текущий пароль"
+            maxLength={INPUT_LIMITS.PASSWORD_MAX}
+            minLength={INPUT_LIMITS.PASSWORD_MIN}
+            autoComplete="off"
+          />
 
-        <label htmlFor="profile_new_password"></label>
-        <input
-          type={showPassword ? "text" : "password"}
-          id="profile_new_password"
-          name="profile_new_password"
-          placeholder="Введите новый пароль"
-          autoComplete="new-password"
-          maxLength={INPUT_LIMITS.PASSWORD_MAX}
-          minLength={INPUT_LIMITS.PASSWORD_MIN}
-        />
-        <Button type="submit">Сохранить</Button>
-        <Button type="reset">Сбросить</Button>
+          <label htmlFor="profile_new_password">Введите новый пароль</label>
+          <input
+            type={showPassword ? "text" : "password"}
+            id="profile_new_password"
+            name="profile_new_password"
+            placeholder="Введите новый пароль"
+            maxLength={INPUT_LIMITS.PASSWORD_MAX}
+            minLength={INPUT_LIMITS.PASSWORD_MIN}
+            autoComplete="new-password"
+          />
+          <Button type="submit">
+            {isLoading ? "Сохраняем..." : "Сохранить"}
+          </Button>
+          <Button type="reset">Сбросить</Button>
+        </fieldset>
       </form>
-      <Button onClick={() => setShowPassword(!showPassword)}>
+      <Button
+        onClick={() => setShowPassword(!showPassword)}
+        disabled={isLoading}
+      >
         {showPassword ? "Скрыть" : "Показать"}
       </Button>
       <Button
         onClick={() => {
           setMode("view");
         }}
+        disabled={isLoading}
       >
         отменить
       </Button>

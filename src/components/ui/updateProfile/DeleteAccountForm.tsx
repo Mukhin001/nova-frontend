@@ -27,7 +27,7 @@ const DeleteAccountForm = ({
 }: DeleteAccountFormProps) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [deleteUser] = useDeleteMutation();
+  const [deleteUser, { isLoading }] = useDeleteMutation();
 
   if (!user) {
     return <p>Войдите в профиль</p>;
@@ -87,39 +87,47 @@ const DeleteAccountForm = ({
   return (
     <>
       <form onSubmit={handleDelete} autoComplete="off">
-        <label htmlFor="delete_email"></label>
-        <input
-          type="email"
-          id="delete_email"
-          name="delete_email"
-          placeholder="Введите текущий email"
-          autoComplete="new-email"
-          maxLength={INPUT_LIMITS.EMAIL_MAX}
-        />
+        <fieldset
+          disabled={isLoading}
+          className={isLoading ? "form-loading" : ""}
+        >
+          <label htmlFor="delete_email">Введите текущий email</label>
+          <input
+            type="email"
+            id="delete_email"
+            name="delete_email"
+            placeholder="Введите текущий email"
+            maxLength={INPUT_LIMITS.EMAIL_MAX}
+            autoComplete="email"
+          />
 
-        <label htmlFor="delete_password"></label>
-        <input
-          type={showPassword ? "text" : "password"}
-          id="delete_password"
-          name="delete_password"
-          placeholder="Введите текущий пароль"
-          autoComplete="new-password"
-          maxLength={INPUT_LIMITS.PASSWORD_MAX}
-          minLength={INPUT_LIMITS.PASSWORD_MIN}
-        />
+          <label htmlFor="delete_password">Введите текущий пароль</label>
+          <input
+            type={showPassword ? "text" : "password"}
+            id="delete_password"
+            name="delete_password"
+            placeholder="Введите текущий пароль"
+            maxLength={INPUT_LIMITS.PASSWORD_MAX}
+            minLength={INPUT_LIMITS.PASSWORD_MIN}
+            autoComplete="current-password"
+          />
 
-        <Button type="submit">Удалить</Button>
-        <Button type="reset">Сбросить</Button>
+          <Button type="submit">{isLoading ? "Удаление..." : "Удалить"}</Button>
+          <Button type="reset">Сбросить</Button>
+        </fieldset>
       </form>
-      <Button onClick={() => setShowPassword(!showPassword)}>
+      <Button
+        onClick={() => setShowPassword(!showPassword)}
+        disabled={isLoading}
+      >
         {showPassword ? "Скрыть" : "Показать"}
       </Button>
       <Button
+        disabled={isLoading}
         onClick={() => {
           setMode("view");
         }}
       >
-        {" "}
         отменить
       </Button>
     </>

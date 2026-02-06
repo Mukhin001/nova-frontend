@@ -59,7 +59,6 @@ const LoginForm = () => {
         email,
         password,
       }).unwrap();
-      //console.log("✅ Вход успешен:", data);
       dispatch(setUser(data.user));
       dispatch(
         showToast({
@@ -67,12 +66,10 @@ const LoginForm = () => {
           type: "success",
         }),
       );
-
+      form.reset();
       router.push("/");
     } catch (error) {
-      //console.log("❌ Ошибка:", error);
-      //console.log("❌ Ошибка:");
-      let message: string = "❌ Неверные данные!";
+      let message: string = "Неверные данные!";
 
       if (typeof error === "object" && error) {
         const fetchError = error as FetchBaseQueryError;
@@ -93,37 +90,37 @@ const LoginForm = () => {
       }
       dispatch(showToast({ message: "❌ " + message }));
     }
-
-    form.reset();
   };
-  return (
-    <form onSubmit={handleSubmitForm} autoComplete="on" className="field">
-      <label htmlFor="email"></label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="email"
-        autoComplete="username"
-        maxLength={INPUT_LIMITS.EMAIL_MAX}
-      />
 
-      <label htmlFor="password"></label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="password"
-        autoComplete="current-password"
-        maxLength={INPUT_LIMITS.PASSWORD_MAX}
-        minLength={INPUT_LIMITS.PASSWORD_MIN}
-      />
-      <Button type="submit" disabled={isLoading}>
-        {isLoading ? "Вход..." : "Войти"}
-      </Button>
-      <Button type="reset" disabled={isLoading}>
-        Очистить
-      </Button>
+  return (
+    <form onSubmit={handleSubmitForm}>
+      <fieldset
+        disabled={isLoading}
+        className={isLoading ? "form-loading" : ""}
+      >
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="email"
+          maxLength={INPUT_LIMITS.EMAIL_MAX}
+          autoComplete="email"
+        />
+
+        <label htmlFor="password">Пароль</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="current-password"
+          maxLength={INPUT_LIMITS.PASSWORD_MAX}
+          minLength={INPUT_LIMITS.PASSWORD_MIN}
+          autoComplete="current-password"
+        />
+        <Button type="submit">{isLoading ? "Вход..." : "Войти"}</Button>
+        <Button type="reset">Очистить</Button>
+      </fieldset>
     </form>
   );
 };
