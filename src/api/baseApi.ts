@@ -8,7 +8,7 @@ interface GreetingResponse {
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000",
+    baseUrl: "nova-backend-production-bf25.up.railway.app",
     credentials: "include", // <-- ДЛЯ COOKIE
   }),
   tagTypes: ["User", "Weather", "News", "Feed"],
