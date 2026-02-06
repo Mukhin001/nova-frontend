@@ -8,7 +8,6 @@ import { useState } from "react";
 import { showToast } from "../toast/toastSlice";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
-import st from "./registerForm.module.css";
 import { useAppDispatch } from "@/store/hooks";
 import Button from "../button/Button";
 
@@ -106,8 +105,7 @@ const RegisterForm = () => {
       dispatch(
         showToast({ message: "✅ Регистрация успешна", type: "success" }),
       );
-      console.log(data.user);
-
+      form.reset();
       router.push("/feed");
     } catch (error) {
       let message = "Ошибка отправки данных";
@@ -132,68 +130,63 @@ const RegisterForm = () => {
 
       dispatch(showToast({ message: "❌ " + message }));
     }
-
-    form.reset();
   };
 
   return (
-    <form
-      onSubmit={handleSubmitForm}
-      className={`field ${st.registerForm}`}
-      autoComplete="on"
-    >
-      <label htmlFor="name"></label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        placeholder="name"
-        maxLength={INPUT_LIMITS.NAME_MAX}
-        autoComplete="name"
-      />
-
-      <label htmlFor="email"></label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="email"
-        maxLength={INPUT_LIMITS.EMAIL_MAX}
-        autoComplete="email"
-      />
-
-      <label htmlFor="password"></label>
-      <input
-        type={showPassword ? "text" : "password"}
-        id="password"
-        name="password"
-        placeholder="password"
-        maxLength={INPUT_LIMITS.PASSWORD_MAX}
-        minLength={INPUT_LIMITS.PASSWORD_MIN}
-        autoComplete="new-password"
-      />
-      <input
-        type={showPassword ? "text" : "password"}
-        id="password_repeat"
-        name="password_repeat"
-        placeholder="password_repeat"
-        maxLength={INPUT_LIMITS.PASSWORD_MAX}
-        minLength={INPUT_LIMITS.PASSWORD_MIN}
-        autoComplete="new-password"
-      />
-      <Button
-        type="button"
-        onClick={() => setShowPassword(!showPassword)}
+    <form onSubmit={handleSubmitForm}>
+      <fieldset
         disabled={isLoading}
+        className={isLoading ? "form-loading" : ""}
       >
-        {showPassword ? "Скрыть" : "Показать"}
-      </Button>
-      <Button type="submit" disabled={isLoading}>
-        {isLoading ? "Регистриция..." : "Зарегистрироваться"}
-      </Button>
-      <Button type="reset" disabled={isLoading}>
-        Очистить
-      </Button>
+        <label htmlFor="name">Имя</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="name"
+          maxLength={INPUT_LIMITS.NAME_MAX}
+          autoComplete="name"
+        />
+
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="email"
+          maxLength={INPUT_LIMITS.EMAIL_MAX}
+          autoComplete="email"
+        />
+
+        <label htmlFor="password">Пароль</label>
+        <input
+          type={showPassword ? "text" : "password"}
+          id="password"
+          name="password"
+          placeholder="password"
+          maxLength={INPUT_LIMITS.PASSWORD_MAX}
+          minLength={INPUT_LIMITS.PASSWORD_MIN}
+          autoComplete="new-password"
+        />
+
+        <label htmlFor="password_repeat">Повторите пароль</label>
+        <input
+          type={showPassword ? "text" : "password"}
+          id="password_repeat"
+          name="password_repeat"
+          placeholder="password_repeat"
+          maxLength={INPUT_LIMITS.PASSWORD_MAX}
+          minLength={INPUT_LIMITS.PASSWORD_MIN}
+          autoComplete="new-password"
+        />
+        <Button type="button" onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? "Скрыть" : "Показать"}
+        </Button>
+        <Button type="submit">
+          {isLoading ? "Регистрируем..." : "Зарегистрироваться"}
+        </Button>
+        <Button type="reset">Очистить</Button>
+      </fieldset>
     </form>
   );
 };
