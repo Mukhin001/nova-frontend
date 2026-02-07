@@ -15,7 +15,7 @@ export const baseApi = createApi({
   tagTypes: ["User", "Weather", "News", "Feed"],
   endpoints: (builder) => ({
     getGreetingServer: builder.query<GreetingResponse, void>({
-      query: () => "",
+      query: () => "/greet",
     }),
     getMe: builder.query<LoginResponse, void>({
       query: () => "/user/me",
