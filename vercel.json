@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://nova-backend-production-bf25.up.railway.app/$1"
+    }
+  ]
+}
