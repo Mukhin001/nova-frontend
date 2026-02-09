@@ -103,10 +103,14 @@ const RegisterForm = () => {
       }).unwrap();
       dispatch(setUser(data.user));
       dispatch(
-        showToast({ message: "✅ Регистрация успешна", type: "success" }),
+        showToast({
+          message:
+            "🎉 Регистрация успешна! 👋 Выберите города и категории, чтобы мы сформировали вашу ленту",
+          type: "success",
+        }),
       );
       form.reset();
-      router.push("/feed");
+      router.push("/subscription-settings");
     } catch (error) {
       let message = "Ошибка отправки данных";
 

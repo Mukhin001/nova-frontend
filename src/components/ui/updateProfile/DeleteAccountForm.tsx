@@ -109,10 +109,12 @@ const DeleteAccountForm = ({
             placeholder="Введите текущий пароль"
             maxLength={INPUT_LIMITS.PASSWORD_MAX}
             minLength={INPUT_LIMITS.PASSWORD_MIN}
-            autoComplete="current-password"
+            autoComplete="new-password"
           />
 
-          <Button type="submit">{isLoading ? "Удаление..." : "Удалить"}</Button>
+          <Button type="submit">
+            {isLoading ? "Удаление..." : "Удалить аккаунт"}
+          </Button>
           <Button type="reset">Сбросить</Button>
         </fieldset>
       </form>

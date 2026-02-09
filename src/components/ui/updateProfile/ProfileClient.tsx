@@ -9,8 +9,9 @@ import UpdateProfileForm from "./UpdateProfileForm";
 import ProfileView from "./ProfileView";
 import Logout from "../logout/Logout";
 import Button from "../button/Button";
+import Device from "../device/Device";
 
-export type Mode = "view" | "edit" | "delete";
+export type Mode = "view" | "edit" | "delete" | "device";
 
 const ProfileClient = () => {
   const [mode, setMode] = useState<Mode>("view");
@@ -25,22 +26,13 @@ const ProfileClient = () => {
   return (
     <section>
       <h3>Аккаунт</h3>
-      <Button onClick={() => setIsOpen(true)}>Выйти</Button>
-
       {isOpen && <Logout isOpen={isOpen} setIsOpen={setIsOpen} />}
-      {mode !== "edit" && (
-        <Button
-          onClick={() => {
-            setMode("edit");
-          }}
-        >
-          редактировать
-        </Button>
-      )}
-      {mode !== "delete" && (
-        <Button onClick={() => setMode("delete")}>удалить аккаунт</Button>
-      )}
-      {mode === "view" && <ProfileView user={user} />}
+
+      <Button onClick={() => setIsOpen(true)}>Выйти</Button>
+      {/* {mode !== "device" && (
+        <Button onClick={() => setMode("device")}>User Agent</Button>
+      )} */}
+      {mode === "view" && <ProfileView user={user} setMode={setMode} />}
       {mode === "edit" && (
         <UpdateProfileForm
           user={user}
@@ -57,6 +49,7 @@ const ProfileClient = () => {
           setShowPassword={setShowPassword}
         />
       )}
+      {mode === "device" && <Device setMode={setMode} />}
     </section>
   );
 };

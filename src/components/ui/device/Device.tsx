@@ -2,15 +2,23 @@
 
 import { useGetDeviceQuery } from "@/api/device/deviceApi";
 import Loader from "../loader/Loader";
+import { Dispatch, SetStateAction } from "react";
+import { Mode } from "../updateProfile/ProfileClient";
+import Button from "../button/Button";
 
-const Device = () => {
+interface DeviceProps {
+  setMode: Dispatch<SetStateAction<Mode>>;
+}
+
+const Device = ({ setMode }: DeviceProps) => {
   const { data, isLoading, isError } = useGetDeviceQuery();
-  //console.log(data);
+
   if (isLoading) return <Loader />;
   if (isError) return <p>Failed to load device</p>;
 
   return (
     <section>
+      <Button onClick={() => setMode("view")}>Вернуться к профилю</Button>
       <h3>Client!</h3>
       <p>browser: {data?.client.browser}</p>
       <p>os: {data?.client.os}</p>

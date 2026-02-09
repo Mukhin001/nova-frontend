@@ -34,7 +34,7 @@ const Header = () => {
         <nav>
           <h2>Основная навигация</h2>
           <Link href="/" aria-label="На главную">
-            Full-stack-app
+            Nova-app
           </Link>
           <div>
             {userIsLoggedIn ? (
@@ -58,6 +58,11 @@ const Header = () => {
             {isModalOpen && (
               <Drawer onClose={closeModal}>
                 <ul>
+                  <li>
+                    <Link href="/" aria-label="На главную" onClick={closeModal}>
+                      На главную
+                    </Link>
+                  </li>
                   <li>
                     <Link href="/your-saved" onClick={closeModal}>
                       твои сохраненные

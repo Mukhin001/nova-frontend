@@ -163,6 +163,7 @@ const UpdateProfileForm = ({
       >
         отменить
       </Button>
+      <Button onClick={() => setMode("delete")}>удалить аккаунт</Button>
     </>
   );
 };
