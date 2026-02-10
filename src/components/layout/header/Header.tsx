@@ -9,6 +9,8 @@ import Loader from "@/components/ui/loader/Loader";
 import { useGetGreetingServerQuery } from "@/api/baseApi";
 import Logout from "@/components/ui/logout/Logout";
 import Button from "@/components/ui/button/Button";
+import ToggleTheme from "@/components/ui/toggleTheme/ToggleTheme";
+import st from "./header.module.css";
 
 const Header = () => {
   const { data, isLoading, isError } = useGetGreetingServerQuery();
@@ -21,97 +23,97 @@ const Header = () => {
   const closeModal = () => setIsModalOpen(false);
 
   const greet = (): ReactNode => {
-    if (isLoading) return <Loader />;
-    if (isError) return <h2>Error...</h2>;
+    if (isLoading) return <Loader variant="local" />;
+    if (isError) return <h2>Ошибка загрузки</h2>;
     if (data) return <h2>{data.message}</h2>;
 
     return null;
   };
 
   return (
-    <header>
+    <header className={st.header}>
       <div className="container">
-        <nav>
-          <h2>Основная навигация</h2>
-          <Link href="/" aria-label="На главную">
+        <nav className={st.nav}>
+          {/* Логотип */}
+          <Link href="/" aria-label="На главную" className={st.logo}>
             Nova-app
           </Link>
-          <div>
+
+          {/* Грейтинг */}
+          <div className={st.greeting}>{greet()}</div>
+
+          {/* Действия справа */}
+          <div className={st.actions}>
+            <ToggleTheme />
+
             {userIsLoggedIn ? (
-              <span>
-                {user?.name}{" "}
-                <span
-                  style={{ cursor: "pointer" }}
+              <div className={st.userInfo}>
+                <span className={st.userName}>{user?.name}</span>
+                <Button
+                  // variant="closeButton"
                   onClick={() => setIsOpen(true)}
+                  aria-label="Выйти из аккаунта"
                 >
                   Выйти
-                </span>
-              </span>
+                </Button>
+                {isOpen && <Logout isOpen={isOpen} setIsOpen={setIsOpen} />}
+              </div>
             ) : (
-              <Link href="/login">войти</Link>
+              <Link href="/login" className={st.loginLink}>
+                Войти
+              </Link>
             )}
+
+            <Button onClick={openModal} aria-label="Открыть меню">
+              Меню
+            </Button>
           </div>
-          {isOpen && <Logout isOpen={isOpen} setIsOpen={setIsOpen} />}
-          <Button onClick={openModal}>меню профиля</Button>
-          <div>{greet()}</div>
-          <div className="relative">
-            {isModalOpen && (
-              <Drawer onClose={closeModal}>
-                <ul>
-                  <li>
-                    <Link href="/" aria-label="На главную" onClick={closeModal}>
-                      На главную
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/your-saved" onClick={closeModal}>
-                      твои сохраненные
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/error" onClick={closeModal}>
-                      страница ошибки
-                    </Link>
-                  </li>
-                  {!userIsLoggedIn && (
+
+          {/* Drawer меню */}
+          {isModalOpen && (
+            <Drawer onClose={closeModal}>
+              <ul className={st.drawerList}>
+                <li>
+                  <Link href="/" onClick={closeModal}>
+                    🏠 На главную
+                  </Link>
+                </li>
+                {!userIsLoggedIn && (
+                  <>
                     <li>
                       <Link href="/register" onClick={closeModal}>
-                        регистрация
+                        📝 Регистрация
                       </Link>
                     </li>
-                  )}
-                  {!userIsLoggedIn && (
                     <li>
                       <Link href="/login" onClick={closeModal}>
-                        войти
+                        🔑 Войти
                       </Link>
                     </li>
-                  )}
-                  {userIsLoggedIn && (
+                  </>
+                )}
+                {userIsLoggedIn && (
+                  <>
                     <li>
                       <Link href="/profile" onClick={closeModal}>
-                        аккаунт
+                        🧑 Аккаунт
                       </Link>
                     </li>
-                  )}
-                  {userIsLoggedIn && (
                     <li>
                       <Link href="/subscription-settings" onClick={closeModal}>
-                        подписка
+                        ⭐ Подписка
                       </Link>
                     </li>
-                  )}
-                  {userIsLoggedIn && (
                     <li>
                       <Link href="/feed" onClick={closeModal}>
-                        лента
+                        📰 Лента
                       </Link>
                     </li>
-                  )}
-                </ul>
-              </Drawer>
-            )}
-          </div>
+                  </>
+                )}
+              </ul>
+            </Drawer>
+          )}
         </nav>
       </div>
     </header>

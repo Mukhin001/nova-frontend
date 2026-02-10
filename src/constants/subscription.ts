@@ -4,9 +4,9 @@ export const CITIES = [
   "Moscow",
   "Tomsk",
   "Vladivostok",
-  "Saint-Petersburg",
+  "Saint Petersburg",
   "Sochi",
-  "Nizhniy-Novgorod",
+  "Nizhniy Novgorod",
 ];
 
 export const NEWS = ["All", "Technology", "Business", "Sports"];

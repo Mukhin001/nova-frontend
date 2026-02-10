@@ -1,19 +1,14 @@
 import st from "./button.module.css";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "default" | "close";
+  variant?: "toggleTheme" | "closeButton";
 };
 
-const Button = ({
-  children,
-  variant = "default",
-  className,
-  ...props
-}: ButtonProps) => {
+const Button = ({ children, variant, className, ...props }: ButtonProps) => {
   return (
     <button
       {...props}
-      className={`${st.button} ${variant === "close" ? st.closeButton : ""} ${className ?? ""}`}
+      className={`${st.button} ${variant && st[variant]} ${className ?? ""}`}
     >
       {children}
     </button>

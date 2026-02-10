@@ -119,10 +119,7 @@ const SubscriptionSettings = () => {
   };
 
   return (
-    <main className="container">
-      <h1>Настройки подписок</h1>
-      <p>Выберите города и категории — это определит вашу новостную ленту</p>
-
+    <>
       {isLoading && <Loader variant="fullScreen" />}
 
       {CITIES.map((city) => {
@@ -144,7 +141,7 @@ const SubscriptionSettings = () => {
       <Button onClick={handleSave} disabled={isLoading} className="button">
         {isLoading ? "Сохраняем..." : "Сохранить"}
       </Button>
-    </main>
+    </>
   );
 };
 

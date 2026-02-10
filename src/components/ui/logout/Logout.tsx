@@ -37,7 +37,7 @@ const Logout = ({ isOpen, setIsOpen }: LogoutProps) => {
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <h3>Выйти</h3>
-      <Button variant="close" onClick={() => setIsOpen(false)}>
+      <Button variant="closeButton" onClick={() => setIsOpen(false)}>
         x
       </Button>
       <div>

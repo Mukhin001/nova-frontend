@@ -13,6 +13,7 @@ export type FeedWeather = {
   humidity: number;
   description: string;
   icon: string;
+  condition: string;
 };
 
 export type FeedItem = {

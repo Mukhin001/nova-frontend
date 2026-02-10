@@ -22,6 +22,7 @@ const ToggleTheme = () => {
       className="theme-toggle"
       aria-label="Toggle theme"
       title="Toggle theme"
+      variant="toggleTheme"
     ></Button>
   );
 };

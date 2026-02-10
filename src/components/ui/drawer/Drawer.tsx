@@ -13,7 +13,9 @@ const Drawer = ({ children, onClose }: DrawerProps) => {
   return (
     <div className={`${st.container}`}>
       <div className={st.wrapper}>
-        <Button onClick={onClose}>x</Button>
+        <Button onClick={onClose} variant="closeButton">
+          x
+        </Button>
         {children}
       </div>
     </div>
