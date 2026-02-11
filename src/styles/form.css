@@ -27,6 +27,10 @@ select {
     border-color 0.2s ease,
     box-shadow 0.25s ease,
     transform 0.25s ease;
+
+  /* Убираем стандартную моб. подсветку */
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 input:-webkit-autofill,
@@ -53,6 +57,9 @@ select:focus {
     0 4px 8px rgba(37, 99, 235, 0.3),
     0 8px 16px rgba(37, 99, 235, 0.25),
     0 12px 30px rgba(37, 99, 235, 0.2);
+
+  /* Принудительный фон при фокусе, чтобы не было желтого на моб. */
+  background-color: var(--color-bg);
 }
 
 .subscription-item {
