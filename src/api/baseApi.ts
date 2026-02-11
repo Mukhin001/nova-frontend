@@ -8,8 +8,8 @@ interface GreetingResponse {
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000",
-    //baseUrl: "/api",
+    //baseUrl: "http://localhost:3000",
+    baseUrl: "/api",
     credentials: "include", // <-- ДЛЯ COOKIE
   }),
   tagTypes: ["User", "Weather", "News", "Feed"],
