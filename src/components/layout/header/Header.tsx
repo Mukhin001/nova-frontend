@@ -40,17 +40,16 @@ const Header = () => {
           </Link>
 
           {/* Грейтинг */}
-          <div className={st.greeting}>{greet()}</div>
+          <div className={`${st.greeting} ${st.isMobile}`}>{greet()}</div>
 
           {/* Действия справа */}
           <div className={st.actions}>
             <ToggleTheme />
 
             {userIsLoggedIn ? (
-              <div className={st.userInfo}>
+              <div className={`${st.userInfo} ${st.isMobile}`}>
                 <span className={st.userName}>{user?.name}</span>
                 <Button
-                  // variant="closeButton"
                   onClick={() => setIsOpen(true)}
                   aria-label="Выйти из аккаунта"
                 >

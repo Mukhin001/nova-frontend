@@ -9,6 +9,7 @@ import { showToast } from "../toast/toastSlice";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
 import Button from "../button/Button";
+import { useState } from "react";
 
 interface AddLoginFormFields extends HTMLFormControlsCollection {
   email: HTMLInputElement;
@@ -24,6 +25,7 @@ const LoginForm = () => {
   const [loginUser, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   if (user) {
     return <p>Вы уже авторизованы</p>;
@@ -109,15 +111,25 @@ const LoginForm = () => {
         />
 
         <label htmlFor="password">Пароль</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="current-password"
-          maxLength={INPUT_LIMITS.PASSWORD_MAX}
-          minLength={INPUT_LIMITS.PASSWORD_MIN}
-          autoComplete="current-password"
-        />
+        <div className="passwordField">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            name="password"
+            placeholder="current-password"
+            maxLength={INPUT_LIMITS.PASSWORD_MAX}
+            minLength={INPUT_LIMITS.PASSWORD_MIN}
+            autoComplete="current-password"
+          />
+          <Button
+            type="button"
+            variant="togglePassword"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "🔓" : "🔒"}
+          </Button>
+        </div>
+
         <Button type="submit">{isLoading ? "Вход..." : "Войти"}</Button>
         <Button type="reset">Очистить</Button>
       </fieldset>

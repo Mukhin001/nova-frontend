@@ -18,7 +18,7 @@ select {
   padding: 10px 12px;
   border-radius: 8px;
   border: 2px solid var(--color-border);
-  font-size: 14px;
+  font-size: 16px;
   background: var(--color-bg);
   color: var(--color-text);
   margin: 3px;
@@ -108,6 +108,16 @@ select:disabled {
   border-color: var(--color-border);
   box-shadow: none;
   transform: none;
+}
+
+.passwordField {
+  position: relative;
+  width: 100%;
+}
+
+.passwordField input {
+  width: 100%;
+  padding-right: 40px;
 }
 
 @keyframes pulseBorder {

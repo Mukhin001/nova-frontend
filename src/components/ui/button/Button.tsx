@@ -1,7 +1,7 @@
 import st from "./button.module.css";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "toggleTheme" | "closeButton";
+  variant?: "toggleTheme" | "closeButton" | "togglePassword";
 };
 
 const Button = ({ children, variant, className, ...props }: ButtonProps) => {

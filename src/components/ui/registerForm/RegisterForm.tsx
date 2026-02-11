@@ -163,29 +163,44 @@ const RegisterForm = () => {
         />
 
         <label htmlFor="password">Пароль</label>
-        <input
-          type={showPassword ? "text" : "password"}
-          id="password"
-          name="password"
-          placeholder="password"
-          maxLength={INPUT_LIMITS.PASSWORD_MAX}
-          minLength={INPUT_LIMITS.PASSWORD_MIN}
-          autoComplete="new-password"
-        />
-
+        <div className="passwordField">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            name="password"
+            placeholder="password"
+            maxLength={INPUT_LIMITS.PASSWORD_MAX}
+            minLength={INPUT_LIMITS.PASSWORD_MIN}
+            autoComplete="new-password"
+          />
+          <Button
+            type="button"
+            variant="togglePassword"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "🔓" : "🔒"}
+          </Button>
+        </div>
         <label htmlFor="password_repeat">Повторите пароль</label>
-        <input
-          type={showPassword ? "text" : "password"}
-          id="password_repeat"
-          name="password_repeat"
-          placeholder="password_repeat"
-          maxLength={INPUT_LIMITS.PASSWORD_MAX}
-          minLength={INPUT_LIMITS.PASSWORD_MIN}
-          autoComplete="new-password"
-        />
-        <Button type="button" onClick={() => setShowPassword(!showPassword)}>
-          {showPassword ? "Скрыть" : "Показать"}
-        </Button>
+        <div className="passwordField">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password_repeat"
+            name="password_repeat"
+            placeholder="password_repeat"
+            maxLength={INPUT_LIMITS.PASSWORD_MAX}
+            minLength={INPUT_LIMITS.PASSWORD_MIN}
+            autoComplete="new-password"
+          />
+          <Button
+            type="button"
+            variant="togglePassword"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? "🔓" : "🔒"}
+          </Button>
+        </div>
+
         <Button type="submit">
           {isLoading ? "Регистрируем..." : "Зарегистрироваться"}
         </Button>

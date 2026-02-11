@@ -123,38 +123,51 @@ const UpdateProfileForm = ({
           <label htmlFor="profile_current_password">
             Введите текущий пароль
           </label>
-          <input
-            type={showPassword ? "text" : "password"}
-            id="profile_current_password"
-            name="profile_current_password"
-            placeholder="Введите текущий пароль"
-            maxLength={INPUT_LIMITS.PASSWORD_MAX}
-            minLength={INPUT_LIMITS.PASSWORD_MIN}
-            autoComplete="off"
-          />
+          <div className="passwordField">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="profile_current_password"
+              name="profile_current_password"
+              placeholder="Введите текущий пароль"
+              maxLength={INPUT_LIMITS.PASSWORD_MAX}
+              minLength={INPUT_LIMITS.PASSWORD_MIN}
+              autoComplete="off"
+            />
+            <Button
+              type="button"
+              variant="togglePassword"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🔓" : "🔒"}
+            </Button>
+          </div>
 
           <label htmlFor="profile_new_password">Введите новый пароль</label>
-          <input
-            type={showPassword ? "text" : "password"}
-            id="profile_new_password"
-            name="profile_new_password"
-            placeholder="Введите новый пароль"
-            maxLength={INPUT_LIMITS.PASSWORD_MAX}
-            minLength={INPUT_LIMITS.PASSWORD_MIN}
-            autoComplete="new-password"
-          />
+          <div className="passwordField">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="profile_new_password"
+              name="profile_new_password"
+              placeholder="Введите новый пароль"
+              maxLength={INPUT_LIMITS.PASSWORD_MAX}
+              minLength={INPUT_LIMITS.PASSWORD_MIN}
+              autoComplete="new-password"
+            />
+            <Button
+              type="button"
+              variant="togglePassword"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🔓" : "🔒"}
+            </Button>
+          </div>
           <Button type="submit">
             {isLoading ? "Сохраняем..." : "Сохранить"}
           </Button>
           <Button type="reset">Сбросить</Button>
         </fieldset>
       </form>
-      <Button
-        onClick={() => setShowPassword(!showPassword)}
-        disabled={isLoading}
-      >
-        {showPassword ? "Скрыть" : "Показать"}
-      </Button>
+
       <Button
         onClick={() => {
           setMode("view");

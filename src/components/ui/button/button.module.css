@@ -62,3 +62,16 @@
 .toggleTheme {
   padding: 6px;
 }
+
+.togglePassword {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  font-size: 25px;
+  padding: 0 6px;
+  border-radius: 50%;
+}
+
+.togglePassword:hover {
+  transform: translateY(0);
+}

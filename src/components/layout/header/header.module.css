@@ -14,12 +14,6 @@
   padding: 12px 0;
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .logo {
   font-weight: 700;
   font-size: 20px;
@@ -51,4 +45,19 @@
 .drawerList li a {
   display: block;
   width: 100%;
+}
+
+.isMobile {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .isMobile {
+    display: block;
+  }
 }
