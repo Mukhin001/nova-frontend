@@ -78,12 +78,16 @@ const FeedPage = () => {
                   </div>
 
                   <div className={st.serverIcon}>
-                    <Image
-                      src={`https://openweathermap.org/img/wn/${item.weather.icon}@2x.png`}
-                      alt={item.weather.description}
-                      width={40}
-                      height={40}
-                    />
+                    {item.weather.icon ? (
+                      <Image
+                        src={`https://openweathermap.org/img/wn/${item.weather.icon}@2x.png`}
+                        alt={item.weather.description}
+                        width={40}
+                        height={40}
+                      />
+                    ) : (
+                      <p>weather icon error</p>
+                    )}
                   </div>
                 </div>
               ) : (
