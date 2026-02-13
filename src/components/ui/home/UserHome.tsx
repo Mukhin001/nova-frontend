@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { User } from "@/types/apiUser";
-import { useGetAnalyticsQuery } from "@/api/analytics/analytics";
 
 interface UserHomeProps {
   user: User;
@@ -8,11 +7,6 @@ interface UserHomeProps {
 
 const UserHome = ({ user }: UserHomeProps) => {
   const subsCount = user.subscriptions?.length ?? 0;
-  const { data, isLoading, isError } = useGetAnalyticsQuery();
-  console.log("Analytics", data);
-  if (isLoading) {
-    console.log("loading...");
-  }
 
   return (
     <>

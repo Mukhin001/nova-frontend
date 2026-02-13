@@ -77,6 +77,11 @@ const Header = () => {
                     🏠 На главную
                   </Link>
                 </li>
+                <li>
+                  <Link href="/analytics" onClick={closeModal}>
+                    📊 Аналитика
+                  </Link>
+                </li>
                 {!userIsLoggedIn && (
                   <>
                     <li>
