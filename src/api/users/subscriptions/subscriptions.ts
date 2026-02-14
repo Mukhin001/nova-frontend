@@ -24,7 +24,7 @@ export const subscriptions = baseApi.injectEndpoints({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["Feed"],
+      invalidatesTags: ["Feed", "CityStats"],
     }),
   }),
 });

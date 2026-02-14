@@ -12,7 +12,7 @@ export const baseApi = createApi({
     //baseUrl: "/api",
     credentials: "include", // <-- ДЛЯ COOKIE
   }),
-  tagTypes: ["User", "Weather", "News", "Feed"],
+  tagTypes: ["User", "Weather", "News", "Feed", "CityStats"],
   endpoints: (builder) => ({
     getGreetingServer: builder.query<GreetingResponse, void>({
       query: () => "/greet",

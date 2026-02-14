@@ -12,6 +12,7 @@ export const cityStatsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getCityStats: builder.query<CityStatsResponse, void>({
       query: () => "/analytics/cities",
+      providesTags: ["CityStats"],
     }),
   }),
 });
