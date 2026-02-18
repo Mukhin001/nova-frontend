@@ -11,7 +11,7 @@ const AuthInitializer = () => {
   useEffect(() => {
     if (isSuccess && data?.user) {
       dispatch(setUser(data.user));
-      console.log("Updated user in Redux:", data.user);
+      //console.log("Updated user in Redux:", data.user);
     }
   }, [isSuccess, data, dispatch]);
 

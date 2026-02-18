@@ -7,7 +7,7 @@ export type FeedNewsItem = {
   pubDate: string;
 };
 
-export type FeedWeather = {
+export type FeedWeatherItem = {
   temp: number;
   feelsLike: number;
   humidity: number;
@@ -19,7 +19,7 @@ export type FeedWeather = {
 export type FeedItem = {
   city: string;
   category: string;
-  weather: FeedWeather | null;
+  weather: FeedWeatherItem | null;
   news: FeedNewsItem[] | [];
 };
 

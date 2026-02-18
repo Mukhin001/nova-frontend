@@ -2,13 +2,6 @@ import { User } from "@/types/apiUser";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-// export interface User {
-//   id: string;
-//   name: string;
-//   email: string;
-//   createdAt: string;
-// }
-
 interface UserState {
   user: User | null;
   isLoggedIn: boolean;
@@ -38,7 +31,6 @@ export const { setUser, logout } = userSlice.actions;
 
 export default userSlice.reducer;
 
-// Селекторы
 export const selectUser = (state: { user: UserState }) => state.user.user;
 export const selectIsLoggedIn = (state: { user: UserState }) =>
   state.user.isLoggedIn;

@@ -1,4 +1,4 @@
-import Loader from "../loader/Loader";
+import Loader from "../../ui/loader/Loader";
 
 interface LocationInfoProps {
   city: string;

@@ -7,9 +7,9 @@ import { selectIsLoggedIn, selectUser } from "@/store/slices/userSlice";
 import Drawer from "@/components/ui/drawer/Drawer";
 import Loader from "@/components/ui/loader/Loader";
 import { useGetGreetingServerQuery } from "@/api/baseApi";
-import Logout from "@/components/ui/logout/Logout";
+import Logout from "@/components/features/auth/logout/Logout";
 import Button from "@/components/ui/button/Button";
-import ToggleTheme from "@/components/ui/toggleTheme/ToggleTheme";
+import ToggleTheme from "@/components/features/toggleTheme/ToggleTheme";
 import st from "./header.module.css";
 
 const Header = () => {

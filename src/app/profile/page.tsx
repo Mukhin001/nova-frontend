@@ -1,4 +1,4 @@
-import ProfileClient from "@/components/ui/updateProfile/ProfileClient";
+import ProfileClient from "@/components/features/user/ProfileClient";
 
 const ProfilePage = () => {
   return (

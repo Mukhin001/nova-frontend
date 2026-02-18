@@ -1,7 +1,7 @@
 "use client";
 
 import { THEME_KEY } from "@/constants/theme";
-import Button from "../button/Button";
+import Button from "@/components/ui/button/Button";
 
 const ToggleTheme = () => {
   const toggleTheme = () => {

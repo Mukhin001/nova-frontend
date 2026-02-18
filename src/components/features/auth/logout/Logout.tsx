@@ -2,13 +2,12 @@
 
 import { useLogoutMutation } from "@/api/users/logout/logout";
 import { useAppDispatch } from "@/store/hooks";
-import { showToast } from "../toast/toastSlice";
+import { showToast } from "@/components/ui/toast/toastSlice";
 import { logout } from "@/store/slices/userSlice";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
-import Button from "../button/Button";
-import Modal from "../modal/Modal";
-import st from "./logout.module.css";
+import Button from "@/components/ui/button/Button";
+import Modal from "@/components/ui/modal/Modal";
 
 interface LogoutProps {
   isOpen: boolean;

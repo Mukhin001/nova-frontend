@@ -5,10 +5,10 @@ import { setUser } from "@/store/slices/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { showToast } from "../toast/toastSlice";
+import { showToast } from "@/components/ui/toast/toastSlice";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
-import Button from "../button/Button";
+import Button from "@/components/ui/button/Button";
 import { useState } from "react";
 
 interface AddLoginFormFields extends HTMLFormControlsCollection {

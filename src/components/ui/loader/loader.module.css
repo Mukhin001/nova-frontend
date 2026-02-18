@@ -7,10 +7,20 @@
 
 .fullScreen {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 9999;
   background: rgba(65, 60, 60, 0.731);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column; /* спиннер сверху, текст снизу */
+  align-items: center;
+  gap: 8px; /* отступ между спиннером и текстом */
 }

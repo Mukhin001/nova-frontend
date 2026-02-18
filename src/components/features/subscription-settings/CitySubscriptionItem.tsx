@@ -41,6 +41,7 @@ const CitySubscriptionItem = ({
             <>
               <label htmlFor={`category_${city}`}>Категория новостей:</label>
               <select
+                id={`category_${city}`}
                 name={`category_${city}`}
                 value={subscription.category}
                 onChange={(e) => onCategoryChange(city, e.target.value)}

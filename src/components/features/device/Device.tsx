@@ -1,10 +1,10 @@
 "use client";
 
 import { useGetDeviceQuery } from "@/api/device/deviceApi";
-import Loader from "../loader/Loader";
+import Loader from "@/components/ui/loader/Loader";
 import { Dispatch, SetStateAction } from "react";
-import { Mode } from "../updateProfile/ProfileClient";
-import Button from "../button/Button";
+import { Mode } from "../user/ProfileClient";
+import Button from "@/components/ui/button/Button";
 
 interface DeviceProps {
   setMode: Dispatch<SetStateAction<Mode>>;
@@ -14,7 +14,13 @@ const Device = ({ setMode }: DeviceProps) => {
   const { data, isLoading, isError } = useGetDeviceQuery();
 
   if (isLoading) return <Loader />;
-  if (isError) return <p>Failed to load device</p>;
+  if (isError)
+    return (
+      <>
+        <Button onClick={() => setMode("view")}>Вернуться к профилю</Button>
+        <p>Failed to load device</p>;
+      </>
+    );
 
   return (
     <section>

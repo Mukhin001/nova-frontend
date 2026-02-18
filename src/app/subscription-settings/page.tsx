@@ -1,4 +1,4 @@
-import SubscriptionSettings from "@/components/ui/subscription-settings/SubscriptionSettings";
+import SubscriptionSettings from "@/components/features/subscription-settings/SubscriptionSettings";
 
 const SubscriptionSettingsPage = () => {
   return (

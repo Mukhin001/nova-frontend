@@ -1,13 +1,14 @@
 "use client";
 
 import { useGetCityStatsQuery } from "@/api/analytics/cityStatsApi";
+import Loader from "@/components/ui/loader/Loader";
 
 const Analytics = () => {
   const { data, isLoading, isError } = useGetCityStatsQuery();
-  console.log(data);
+  //console.log(data);
 
   if (isLoading) {
-    return <p>Загружаем аналитику…</p>;
+    return <Loader variant="fullScreen" description="Загружаем аналитику…" />;
   }
 
   if (isError) {

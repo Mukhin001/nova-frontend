@@ -1,7 +1,7 @@
 import { User } from "@/types/apiUser";
 import { Dispatch, SetStateAction } from "react";
-import { Mode } from "./ProfileClient";
-import Button from "../button/Button";
+import { Mode } from "../../features/user/ProfileClient";
+import Button from "@/components/ui/button/Button";
 
 interface ProfileViewProps {
   user: User | null;
@@ -22,6 +22,7 @@ const ProfileView = ({ user, setMode }: ProfileViewProps) => {
       >
         редактировать
       </Button>
+      <Button onClick={() => setMode("delete")}>Удалить аккаунт</Button>
       <Button onClick={() => setMode("device")}>User Agent</Button>
       <dl>
         <dt>id:</dt>

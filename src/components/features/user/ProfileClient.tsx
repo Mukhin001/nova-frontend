@@ -7,8 +7,8 @@ import DeleteAccountForm from "./DeleteAccountForm";
 import UpdateProfileForm from "./UpdateProfileForm";
 
 import ProfileView from "./ProfileView";
-import Logout from "../logout/Logout";
-import Button from "../button/Button";
+import Logout from "../auth/logout/Logout";
+import Button from "@/components/ui/button/Button";
 import Device from "../device/Device";
 
 export type Mode = "view" | "edit" | "delete" | "device";
@@ -29,9 +29,7 @@ const ProfileClient = () => {
       {isOpen && <Logout isOpen={isOpen} setIsOpen={setIsOpen} />}
 
       <Button onClick={() => setIsOpen(true)}>Выйти</Button>
-      {/* {mode !== "device" && (
-        <Button onClick={() => setMode("device")}>User Agent</Button>
-      )} */}
+
       {mode === "view" && <ProfileView user={user} setMode={setMode} />}
       {mode === "edit" && (
         <UpdateProfileForm

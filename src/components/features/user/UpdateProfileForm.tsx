@@ -6,10 +6,10 @@ import { setUser } from "@/store/slices/userSlice";
 import { validateEmail } from "@/utils/validateEmail";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Dispatch, SetStateAction } from "react";
-import { showToast } from "../toast/toastSlice";
+import { showToast } from "@/components/ui/toast/toastSlice";
 import { Mode } from "./ProfileClient";
 import { User } from "@/types/apiUser";
-import Button from "../button/Button";
+import Button from "@/components/ui/button/Button";
 
 interface UpdateProfileFormProps {
   user: User | null;
@@ -141,7 +141,6 @@ const UpdateProfileForm = ({
               {showPassword ? "🔓" : "🔒"}
             </Button>
           </div>
-
           <label htmlFor="profile_new_password">Введите новый пароль</label>
           <div className="passwordField">
             <input
@@ -171,12 +170,12 @@ const UpdateProfileForm = ({
       <Button
         onClick={() => {
           setMode("view");
+          setShowPassword(false);
         }}
         disabled={isLoading}
       >
         отменить
       </Button>
-      <Button onClick={() => setMode("delete")}>удалить аккаунт</Button>
     </>
   );
 };

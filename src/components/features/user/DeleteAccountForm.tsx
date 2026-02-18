@@ -7,10 +7,10 @@ import { logout } from "@/store/slices/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
-import { showToast } from "../toast/toastSlice";
+import { showToast } from "@/components/ui/toast/toastSlice";
 import { Mode } from "./ProfileClient";
 import { User } from "@/types/apiUser";
-import Button from "../button/Button";
+import Button from "@/components/ui/button/Button";
 
 interface DeleteAccountFormProps {
   user: User | null;
@@ -102,32 +102,36 @@ const DeleteAccountForm = ({
           />
 
           <label htmlFor="delete_password">Введите текущий пароль</label>
-          <input
-            type={showPassword ? "text" : "password"}
-            id="delete_password"
-            name="delete_password"
-            placeholder="Введите текущий пароль"
-            maxLength={INPUT_LIMITS.PASSWORD_MAX}
-            minLength={INPUT_LIMITS.PASSWORD_MIN}
-            autoComplete="new-password"
-          />
-
+          <div className="passwordField">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="delete_password"
+              name="delete_password"
+              placeholder="Введите текущий пароль"
+              maxLength={INPUT_LIMITS.PASSWORD_MAX}
+              minLength={INPUT_LIMITS.PASSWORD_MIN}
+              autoComplete="new-password"
+            />
+            <Button
+              type="button"
+              variant="togglePassword"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🔓" : "🔒"}
+            </Button>
+          </div>
           <Button type="submit">
             {isLoading ? "Удаление..." : "Удалить аккаунт"}
           </Button>
           <Button type="reset">Сбросить</Button>
         </fieldset>
       </form>
-      <Button
-        onClick={() => setShowPassword(!showPassword)}
-        disabled={isLoading}
-      >
-        {showPassword ? "Скрыть" : "Показать"}
-      </Button>
+
       <Button
         disabled={isLoading}
         onClick={() => {
           setMode("view");
+          setShowPassword(false);
         }}
       >
         отменить

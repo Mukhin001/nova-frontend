@@ -2,12 +2,12 @@
 
 import { useGetLocationQuery } from "@/api/location/locationApi";
 import { useGetWeatherByCityQuery } from "@/api/weather/weatherApi";
-import LocationInfo from "../locationInfo/LocationInfo";
+import LocationInfo from "@/components/features/weather/LocationInfo";
 import News from "../news/News";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setCity } from "@/store/slices/uiSlice";
 import { useEffect } from "react";
-import Loader from "../loader/Loader";
+import Loader from "@/components/ui/loader/Loader";
 
 const Weather = () => {
   const {

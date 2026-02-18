@@ -1,9 +1,9 @@
-import LoginForm from "@/components/ui/loginForm/LoginForm";
+import LoginForm from "@/components/features/auth/loginForm/LoginForm";
 
 const LoginPage = () => {
   return (
     <main className="container">
-      <h1>войти</h1>
+      <h1>Войти</h1>
       <LoginForm></LoginForm>
     </main>
   );

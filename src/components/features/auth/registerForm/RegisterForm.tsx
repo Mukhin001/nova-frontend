@@ -5,11 +5,11 @@ import { setUser } from "@/store/slices/userSlice";
 import { useRegisterMutation } from "@/api/users/register/register";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { showToast } from "../toast/toastSlice";
+import { showToast } from "@/components/ui/toast/toastSlice";
 import { INPUT_LIMITS } from "@/constants/inputLimits";
 import { validateEmail } from "@/utils/validateEmail";
 import { useAppDispatch } from "@/store/hooks";
-import Button from "../button/Button";
+import Button from "@/components/ui/button/Button";
 
 interface AddRegisterFormFields extends HTMLFormControlsCollection {
   name: HTMLInputElement;

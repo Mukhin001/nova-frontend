@@ -1,7 +1,7 @@
 import { useGetNewsQuery } from "@/api/news/newsApi";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setNewsCategory } from "@/store/slices/uiSlice";
-import Loader from "../loader/Loader";
+import Loader from "@/components/ui/loader/Loader";
 
 const News = () => {
   const dispatch = useAppDispatch();
