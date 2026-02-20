@@ -2,8 +2,8 @@ import HomeClient from "@/app/components/HomeClient";
 
 export default function HomePage() {
   return (
-    <main className="container">
-      <section>
+    <main className="container stack stack-md">
+      <section className="stack">
         <h1>Персональная лента новостей</h1>
         <p>
           Full-stack веб-приложение для создания персональной новостной ленты

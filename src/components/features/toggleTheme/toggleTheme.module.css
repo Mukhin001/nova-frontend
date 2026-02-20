@@ -1,39 +1,10 @@
-:root {
-  /* colors */
-  --color-bg: #f9fafb;
-  --color-surface: #ffffff;
-  --color-text: #1f2933;
-  --color-muted: #6b7280;
-  --color-accent: #3b82f6;
-  --color-border: #e5e7eb;
-  --color-primary: #2563eb;
-  --color-bg-soft: #f3f4f6;
-  --color-loading: rgba(235, 37, 100, 0.6);
-
-  /* layout */
-  --container-width: 1100px;
-
-  /* radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-}
-
-[data-theme="dark"] {
-  --color-bg: #0f172a;
-  --color-surface: #020617;
-  --color-text: #e5e7eb;
-  --color-muted: #9ca3af;
-  --color-border: #1e293b;
-  --color-bg-soft: #020617;
-  --color-primary: #3b82f6;
-}
-
 .theme-toggle {
   position: relative;
   display: inline-grid;
   place-items: center;
   overflow: hidden;
   cursor: pointer;
+  padding: var(--space-2);
 }
 
 /* контейнер для измерения ширины */
@@ -41,7 +12,7 @@
 .theme-toggle::after {
   grid-area: 1 / 1;
   white-space: nowrap;
-  font-size: 20px;
+  font-size: var(--font-size-lg);
   transition: transform 0.3s ease;
 }
 

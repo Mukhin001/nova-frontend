@@ -10,7 +10,7 @@ const UserHome = ({ user }: UserHomeProps) => {
 
   return (
     <>
-      <section>
+      <section className="stack">
         <h2>Привет, {user.name} 👋</h2>
         <p>
           {subsCount > 0
@@ -19,10 +19,10 @@ const UserHome = ({ user }: UserHomeProps) => {
         </p>
       </section>
 
-      <section>
+      <section className="stack">
         <h2>Что нового</h2>
         <p>Свежие новости уже ждут тебя 👀</p>
-        <div>
+        <div className="cluster">
           <Link href="/feed">Перейти к ленте</Link>
           <Link href="/subscription-settings">Настроить подписки</Link>
         </div>

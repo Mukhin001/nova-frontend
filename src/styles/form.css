@@ -1,34 +1,26 @@
 fieldset {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  min-inline-size: 0;
   display: grid;
-  gap: 6px;
+  gap: var(--space-2);
 }
 
 label {
-  font-size: 13px;
-  color: var(--text-soft);
-  margin-right: 10px;
+  color: var(--color-muted);
 }
 
 input,
 select {
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
   border: 2px solid var(--color-border);
-  font-size: 16px;
   background: var(--color-bg);
   color: var(--color-text);
-  margin: 3px;
 
   transition:
     border-color 0.2s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+    box-shadow 0.25s ease;
 }
 
+/* mobile fixes */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -55,7 +47,6 @@ select:hover,
 select:focus {
   outline: none;
   border-color: var(--color-primary);
-  transform: translateY(-1px);
 
   box-shadow:
     0 4px 8px rgba(37, 99, 235, 0.3),
@@ -66,22 +57,17 @@ select:focus {
   background-color: var(--color-bg);
 }
 
-.subscription-item {
-  margin-bottom: 12px;
-}
-
 .checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .checkbox {
-  width: 16px;
-  height: 16px;
+  width: var(--font-size-input);
+  height: var(--font-size-input);
   accent-color: var(--color-primary);
   cursor: pointer;
-  transition: transform 0.2s ease;
 }
 
 .checkbox:hover,
@@ -94,8 +80,8 @@ select:focus {
 }
 
 .label-checkbox {
-  font-size: 13px;
-  color: var(--text-soft);
+  font-size: var(--font-size-sm);
+  color: var(--color-muted);
   cursor: pointer;
 }
 
@@ -106,8 +92,8 @@ select:focus {
 
 .form-loading {
   border: 2px solid var(--color-loading);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
   animation: pulseBorder 1.2s ease-in-out infinite;
 }
 
@@ -128,7 +114,6 @@ select:disabled {
 
 .passwordField input {
   width: 100%;
-  padding-right: 40px;
 }
 
 @keyframes pulseBorder {

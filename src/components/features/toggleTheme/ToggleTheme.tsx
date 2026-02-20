@@ -2,6 +2,7 @@
 
 import { THEME_KEY } from "@/constants/theme";
 import Button from "@/components/ui/button/Button";
+import st from "./toggleTheme.module.css";
 
 const ToggleTheme = () => {
   const toggleTheme = () => {
@@ -19,7 +20,7 @@ const ToggleTheme = () => {
   return (
     <Button
       onClick={toggleTheme}
-      className="theme-toggle"
+      className={st["theme-toggle"]}
       aria-label="Toggle theme"
       title="Toggle theme"
       variant="toggleTheme"

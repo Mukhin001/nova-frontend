@@ -1,8 +1,13 @@
+import Link from "next/link";
+
 const NotFoundPage = () => {
   return (
-    <main className="container">
-      <h1>404 - Route not found...</h1>
-      <p>Такой страницы не существует</p>
+    <main className="container center">
+      <section className="stack">
+        <h1>404 - Route not found...</h1>
+        <p>Такой страницы не существует</p>
+        <Link href="/">На главную</Link>
+      </section>
     </main>
   );
 };
