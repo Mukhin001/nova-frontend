@@ -21,7 +21,7 @@ select {
   border: 2px solid var(--color-border);
   background: var(--color-bg);
   color: var(--color-text);
-
+  font-size: var(--font-size-md);
   transition:
     border-color 0.2s ease,
     box-shadow 0.25s ease;

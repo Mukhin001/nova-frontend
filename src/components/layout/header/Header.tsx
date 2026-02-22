@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className={st.header}>
       <div className="container">
-        <nav className={st.nav}>
+        <nav className={`cluster ${st.nav}`}>
           <Logo />
 
           <Greeting />

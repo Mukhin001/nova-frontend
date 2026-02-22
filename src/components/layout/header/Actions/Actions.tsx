@@ -13,12 +13,12 @@ const Actions = () => {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div>
+    <>
       <AuthControls openModal={openModal} />
       {isModalOpen && (
         <MenuDrawer userIsLoggedIn={userIsLoggedIn} closeModal={closeModal} />
       )}
-    </div>
+    </>
   );
 };
 
