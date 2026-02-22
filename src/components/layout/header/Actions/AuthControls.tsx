@@ -6,7 +6,6 @@ import { selectIsLoggedIn, selectUser } from "@/store/slices/userSlice";
 import Link from "next/link";
 import Logout from "@/components/features/auth/logout/Logout";
 import Button from "@/components/ui/button/Button";
-import ToggleTheme from "@/components/features/toggleTheme/ToggleTheme";
 import st from "../header.module.css";
 
 interface AuthControlsProps {
@@ -19,17 +18,14 @@ const AuthControls = ({ openModal }: AuthControlsProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={st.actions}>
-      <ToggleTheme />
-
+    <div className="cluster">
       {userIsLoggedIn ? (
         <div className={`${st.userInfo} ${st.isMobile}`}>
-          <span className={st.userName}>{user?.name}</span>
           <Button
             onClick={() => setIsOpen(true)}
             aria-label="Выйти из аккаунта"
           >
-            Выйти
+            {user?.name} ▼
           </Button>
           <Logout isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
@@ -40,7 +36,7 @@ const AuthControls = ({ openModal }: AuthControlsProps) => {
       )}
 
       <Button onClick={openModal} aria-label="Открыть меню">
-        Меню
+        ☰
       </Button>
     </div>
   );

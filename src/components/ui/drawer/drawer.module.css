@@ -12,9 +12,13 @@
   left: 0;
   right: 0;
   bottom: 0;
+  /* max-width: var(--container-lg); */
   padding: var(--space-5);
   background-color: rgba(0, 1, 6, 0.856);
   z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   animation: drop-down 0.4s cubic-bezier(0.15, 0.75, 0.35, 1);
 }
 

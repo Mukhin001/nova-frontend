@@ -38,8 +38,8 @@
 
 .closeButton {
   position: absolute;
-  top: var(--space-3);
-  right: var(--space-3);
+  top: var(--space-4);
+  right: var(--space-4);
   z-index: 10;
 }
 

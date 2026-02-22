@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode } from "react";
 import st from "./drawer.module.css";
 import Button from "../button/Button";

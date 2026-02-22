@@ -1,37 +1,53 @@
 .theme-toggle {
-  position: relative;
   display: inline-grid;
   place-items: center;
-  overflow: hidden;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  box-shadow: 0 2px 5px var(--color-accent);
   cursor: pointer;
-  padding: var(--space-2);
+  overflow: hidden;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
 }
 
-/* контейнер для измерения ширины */
 .theme-toggle::before,
 .theme-toggle::after {
   grid-area: 1 / 1;
   white-space: nowrap;
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xxl);
   transition: transform 0.3s ease;
 }
 
-/* Light */
 .theme-toggle::before {
-  content: "🌙";
-  transform: translateX(-130%);
+  content: "🌞";
+  transform: translate(-8px, 140%);
 }
 
-/* Dark */
 .theme-toggle::after {
-  content: "☀️";
-  transform: translateX(130%);
+  content: "🌙";
+  transform: translate(-8px, -140%);
+}
+
+.themeLabel::after {
+  content: "Светлая";
+}
+
+:root[data-theme="dark"] .themeLabel::after {
+  content: "Тёмная";
 }
 
 :root[data-theme="light"] .theme-toggle::before {
-  transform: translateX(0);
+  transform: translate(-8px, 0);
 }
 
 :root[data-theme="dark"] .theme-toggle::after {
-  transform: translateX(0);
+  transform: translate(-8px, 0);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: var(--color-accent);
 }

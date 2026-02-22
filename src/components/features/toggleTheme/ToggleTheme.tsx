@@ -18,13 +18,18 @@ const ToggleTheme = () => {
   };
 
   return (
-    <Button
-      onClick={toggleTheme}
-      className={st["theme-toggle"]}
-      aria-label="Toggle theme"
-      title="Toggle theme"
-      variant="toggleTheme"
-    ></Button>
+    <>
+      <h2>
+        Тема: <span className={st.themeLabel} />
+      </h2>
+      <Button
+        onClick={toggleTheme}
+        className={st["theme-toggle"]}
+        aria-label="Toggle theme"
+        title="Toggle theme"
+        variant="toggleTheme"
+      ></Button>
+    </>
   );
 };
 

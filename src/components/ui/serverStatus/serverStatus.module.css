@@ -1,0 +1,17 @@
+.showAlways {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.isMobile {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .isMobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,16 +1,16 @@
 import st from "./header.module.css";
-import Greeting from "./Greeting";
 import Logo from "./Logo";
 import Actions from "./Actions/Actions";
+import ServerStatus from "@/components/ui/serverStatus/ServerStatus";
 
 const Header = () => {
   return (
     <header className={st.header}>
       <div className="container">
-        <nav className={`cluster ${st.nav}`}>
+        <nav className="space-between">
           <Logo />
 
-          <Greeting />
+          <ServerStatus className="isMobile" />
 
           <Actions />
         </nav>

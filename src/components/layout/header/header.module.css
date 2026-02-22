@@ -1,33 +1,6 @@
-/* .isDesktop {
-  height: 30px;
-  width: 100%;
-  background-color: blueviolet;
-}
-
-@media (min-width: 1024px) {
-  .isDesktop {
-    background-color: rgb(100, 237, 235);
-  }
-} */
-
-.header {
-  padding: 12px 0;
-}
-
 .logo {
   font-weight: 700;
   font-size: 20px;
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.greeting {
-  flex: 1;
-  text-align: center;
 }
 
 .drawerList {
@@ -45,19 +18,4 @@
 .drawerList li a {
   display: block;
   width: 100%;
-}
-
-.isMobile {
-  display: none;
-}
-
-@media (min-width: 1024px) {
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .isMobile {
-    display: block;
-  }
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Drawer from "@/components/ui/drawer/Drawer";
 import st from "../header.module.css";
+import ServerStatus from "@/components/ui/serverStatus/ServerStatus";
 
 interface MenuDrawerProps {
   userIsLoggedIn: boolean;
@@ -9,7 +10,7 @@ interface MenuDrawerProps {
 type NavLink = {
   href: string;
   label: string;
-  icon?: string;
+  icon: string;
 };
 
 export const guestLinks: NavLink[] = [
@@ -17,6 +18,7 @@ export const guestLinks: NavLink[] = [
   { href: "/analytics", label: "Аналитика", icon: "📊" },
   { href: "/register", label: "Регистрация", icon: "📝" },
   { href: "/login", label: "Войти", icon: "🔑" },
+  { href: "/settings", label: "Настройки", icon: "⚙️" },
 ];
 
 export const userLinks: NavLink[] = [
@@ -25,6 +27,7 @@ export const userLinks: NavLink[] = [
   { href: "/profile", label: "Аккаунт", icon: "🧑" },
   { href: "/subscription-settings", label: "Подписка", icon: "⭐" },
   { href: "/feed", label: "Лента", icon: "📰" },
+  { href: "/settings", label: "Настройки", icon: "⚙️" },
 ];
 
 const MenuDrawer = ({ userIsLoggedIn, closeModal }: MenuDrawerProps) => {
@@ -41,6 +44,7 @@ const MenuDrawer = ({ userIsLoggedIn, closeModal }: MenuDrawerProps) => {
           </li>
         ))}
       </ul>
+      <ServerStatus className="showAlways" />
     </Drawer>
   );
 };
