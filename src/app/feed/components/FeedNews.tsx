@@ -16,7 +16,7 @@ const FeedNews = ({ news }: FeedNewsProps) => {
   if (!news || news.length === 0) return <p>Новостей нет</p>;
 
   return (
-    <ul>
+    <ul className="stack">
       {news.map((n) => (
         <li key={n.link}>
           <a href={n.link} target="_blank" rel="noreferrer">

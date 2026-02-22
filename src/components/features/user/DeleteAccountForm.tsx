@@ -86,6 +86,7 @@ const DeleteAccountForm = ({
 
   return (
     <>
+      <h2>Удалить профиль</h2>
       <form onSubmit={handleDelete} autoComplete="off">
         <fieldset
           disabled={isLoading}

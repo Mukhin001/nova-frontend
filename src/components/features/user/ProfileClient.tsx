@@ -24,11 +24,8 @@ const ProfileClient = () => {
   }
 
   return (
-    <section>
-      <h3>Аккаунт</h3>
+    <section className="stack stack-md">
       {isOpen && <Logout isOpen={isOpen} setIsOpen={setIsOpen} />}
-
-      <Button onClick={() => setIsOpen(true)}>Выйти</Button>
 
       {mode === "view" && <ProfileView user={user} setMode={setMode} />}
       {mode === "edit" && (
@@ -48,6 +45,8 @@ const ProfileClient = () => {
         />
       )}
       {mode === "device" && <Device setMode={setMode} />}
+
+      <Button onClick={() => setIsOpen(true)}>Выйти</Button>
     </section>
   );
 };

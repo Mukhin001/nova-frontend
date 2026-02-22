@@ -2,7 +2,6 @@
 
 import { useGetFeedQuery } from "@/api/users/feed/feed";
 import { useAppSelector } from "@/store/hooks";
-import st from "./feed.module.css";
 import FeedCard from "./FeedCard";
 import Loader from "@/components/ui/loader/Loader";
 import FeedEmpty from "./FeedEmpty";
@@ -32,7 +31,7 @@ const Feed = () => {
 
   return (
     <>
-      <div className={st.feed}>
+      <div className="stack stack-lg">
         {feed.map((item) => (
           <FeedCard key={item.city} item={item} />
         ))}

@@ -2,6 +2,7 @@ import st from "./feed.module.css";
 import { FeedItem } from "@/api/users/feed/feed";
 import FeedWeather from "./FeedWeather";
 import FeedNews from "./FeedNews";
+import Card from "@/components/ui/card/Card";
 
 interface FeedCardProps {
   item: FeedItem;
@@ -9,18 +10,16 @@ interface FeedCardProps {
 
 const FeedCard = ({ item }: FeedCardProps) => {
   return (
-    <article key={item.city} className={`${st.card} ${st.fadeUp}`}>
+    <Card as="article" className="stack stack-md">
       <h2 className={st.city}>{item.city}</h2>
 
-      <section>
-        <FeedWeather weather={item.weather} />
-      </section>
+      <FeedWeather weather={item.weather} />
 
       <section>
         <h3>Новости</h3>
         <FeedNews news={item.news} />
       </section>
-    </article>
+    </Card>
   );
 };
 

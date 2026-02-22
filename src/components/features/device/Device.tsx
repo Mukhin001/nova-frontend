@@ -18,22 +18,50 @@ const Device = ({ setMode }: DeviceProps) => {
     return (
       <>
         <Button onClick={() => setMode("view")}>Вернуться к профилю</Button>
-        <p>Failed to load device</p>;
+        <p>Ошибка данных об устройстве</p>;
       </>
     );
 
   return (
-    <section>
+    <>
+      <h2>Данные устройства</h2>
+
+      <dl className="description-list">
+        <div>
+          <dt>Браузер</dt>
+          <dd>{data?.client.browser}</dd>
+        </div>
+
+        <div>
+          <dt>ОС</dt>
+          <dd>{data?.client.os}</dd>
+        </div>
+
+        <div>
+          <dt>Платформа</dt>
+          <dd>{data?.client.platform}</dd>
+        </div>
+      </dl>
+
+      <h3>Устройство</h3>
+
+      <dl className="description-list">
+        <div>
+          <dt>Тип</dt>
+          <dd>{data?.device.type}</dd>
+        </div>
+
+        <div>
+          <dt>Touch</dt>
+          <dd>{String(data?.device.isTouch)}</dd>
+        </div>
+      </dl>
+
+      <h3>Источник</h3>
+      <p>{data?.source}</p>
+
       <Button onClick={() => setMode("view")}>Вернуться к профилю</Button>
-      <h3>Client!</h3>
-      <p>browser: {data?.client.browser}</p>
-      <p>os: {data?.client.os}</p>
-      <p>platform: {data?.client.platform}</p>
-      <h3>Device!</h3>
-      <p>type: {data?.device.type}</p>
-      <p>isTouch: {data?.device.isTouch.toString()}</p>
-      <h3>Source! {data?.source}</h3>
-    </section>
+    </>
   );
 };
 

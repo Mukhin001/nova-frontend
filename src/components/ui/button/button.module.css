@@ -1,8 +1,8 @@
 .button {
   background: var(--color-bg);
   color: var(--color-text);
-  padding: 12px 20px;
-  border-radius: 14px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-lg);
   font-weight: 500;
   border: 2px solid transparent;
   cursor: pointer;
@@ -38,8 +38,8 @@
 
 .closeButton {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: var(--space-3);
+  right: var(--space-3);
   z-index: 10;
 }
 
@@ -61,10 +61,10 @@
 
 .togglePassword {
   position: absolute;
-  right: 0;
-  top: 5px;
-  font-size: 25px;
-  padding: 0 6px;
+  right: var(--space-1);
+  top: var(--space-1);
+  font-size: var(--font-size-xl);
+  padding: 0 var(--space-1);
   border-radius: 50%;
 }
 

@@ -15,6 +15,23 @@ const ProfileView = ({ user, setMode }: ProfileViewProps) => {
 
   return (
     <>
+      <h2>Данные профиля</h2>
+      <dl className="description-list">
+        <div>
+          <dt>Имя</dt>
+          <dd>{user?.name}</dd>
+        </div>
+
+        <div>
+          <dt>Email</dt>
+          <dd>{user?.email}</dd>
+        </div>
+
+        <div>
+          <dt>Создан</dt>
+          <dd>{user?.createdAt}</dd>
+        </div>
+      </dl>
       <Button
         onClick={() => {
           setMode("edit");
@@ -24,19 +41,6 @@ const ProfileView = ({ user, setMode }: ProfileViewProps) => {
       </Button>
       <Button onClick={() => setMode("delete")}>Удалить аккаунт</Button>
       <Button onClick={() => setMode("device")}>User Agent</Button>
-      <dl>
-        <dt>id:</dt>
-        <dd>{user?.id}</dd>
-
-        <dt>name:</dt>
-        <dd>{user?.name}</dd>
-
-        <dt>email:</dt>
-        <dd>{user?.email}</dd>
-
-        <dt>createdAt:</dt>
-        <dd>{user?.createdAt}</dd>
-      </dl>
     </>
   );
 };

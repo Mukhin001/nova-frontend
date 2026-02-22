@@ -122,21 +122,23 @@ const SubscriptionSettings = () => {
     <>
       {isLoading && <Loader variant="fullScreen" />}
 
-      {CITIES.map((city) => {
-        const subscription = userSubscriptions.find((s) => s.city === city);
-        const disabled =
-          !subscription && userSubscriptions.length >= MAX_CITIES;
-        return (
-          <CitySubscriptionItem
-            key={city}
-            city={city}
-            subscription={subscription}
-            disabled={disabled}
-            onToggle={toggleCity}
-            onCategoryChange={changeCategory}
-          />
-        );
-      })}
+      <div className="stack">
+        {CITIES.map((city) => {
+          const subscription = userSubscriptions.find((s) => s.city === city);
+          const disabled =
+            !subscription && userSubscriptions.length >= MAX_CITIES;
+          return (
+            <CitySubscriptionItem
+              key={city}
+              city={city}
+              subscription={subscription}
+              disabled={disabled}
+              onToggle={toggleCity}
+              onCategoryChange={changeCategory}
+            />
+          );
+        })}
+      </div>
 
       <Button onClick={handleSave} disabled={isLoading} className="button">
         {isLoading ? "Сохраняем..." : "Сохранить"}

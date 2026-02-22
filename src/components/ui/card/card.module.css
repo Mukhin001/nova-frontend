@@ -1,6 +1,6 @@
 .card {
   padding: var(--space-4);
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   background: var(--color-bg);
   color: var(--color-text);
   border: 2px solid transparent;
@@ -24,11 +24,4 @@
     0 8px 16px rgba(37, 99, 235, 0.25),
     0 12px 30px rgba(37, 99, 235, 0.2);
   border: 2px solid var(--color-primary);
-}
-
-.card:hover .serverIcon img,
-.card:focus-within .serverIcon img {
-  filter: drop-shadow(0 6px 12px rgba(37, 99, 235, 1))
-    drop-shadow(0 10px 20px rgba(37, 99, 235, 0.85))
-    drop-shadow(0 14px 36px rgba(37, 99, 235, 0.7));
 }

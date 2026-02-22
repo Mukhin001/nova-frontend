@@ -17,10 +17,10 @@ const weatherIcons: Record<string, string> = {
 };
 
 const FeedWeather = ({ weather }: FeedWeatherProps) => {
-  if (!weather) return <p className={st.empty}>Нет данных о погоде</p>;
+  if (!weather) return <p>Нет данных о погоде</p>;
 
   return (
-    <div className={st.tempWrapper}>
+    <div className="flex flex-y stack-md">
       <span className={st.weatherIcon} data-condition={weather.condition}>
         {weatherIcons[weather.condition] ?? "🌡️"}
       </span>

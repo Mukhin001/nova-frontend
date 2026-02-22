@@ -2,7 +2,7 @@ import SubscriptionSettings from "@/components/features/subscription-settings/Su
 
 const SubscriptionSettingsPage = () => {
   return (
-    <main className="container">
+    <main className="container stack stack-md center-y">
       <h1>Настройки подписок</h1>
       <p>Выберите города и категории — это определит вашу новостную ленту</p>
 

@@ -1,64 +1,24 @@
-.feed {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.card {
-  padding: 20px;
-  border-radius: 14px;
-  background: var(--color-bg);
-  color: var(--color-text);
-  border: 2px solid transparent;
-  position: relative;
-  box-shadow:
-    0 2px 6px rgba(37, 99, 235, 0.12),
-    0 6px 16px rgba(37, 99, 235, 0.08),
-    0 12px 32px rgba(37, 99, 235, 0.06);
-  transform: translateY(0);
-  transition:
-    border 0.2s,
-    transform 0.4s ease,
-    box-shadow 0.15s ease;
-}
-
-.card:hover,
-.card:focus-within {
-  transform: translateY(-1px);
-  box-shadow:
-    0 4px 8px rgba(37, 99, 235, 0.3),
-    0 8px 16px rgba(37, 99, 235, 0.25),
-    0 12px 30px rgba(37, 99, 235, 0.2);
-  border: 2px solid var(--color-primary);
-}
-
 .city {
-  font-size: 24px;
+  font-size: var(--font-size-xl);
   font-weight: 600;
 }
 
 .date {
-  font-size: 12px;
+  font-size: var(--font-size-xs);
   opacity: 0.6;
 }
 
 .weatherIcon {
-  font-size: 27px;
+  font-size: var(--font-size-xxl);
   display: inline-flex;
   align-items: center;
-  margin-right: 8px;
-}
-
-.tempWrapper {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  margin-right: var(--space-2);
 }
 
 .serverIcon {
   position: absolute;
-  top: 10px;
-  right: 12px;
+  top: var(--space-2);
+  right: var(--space-3);
   opacity: 0.8;
 }
 
@@ -67,11 +27,4 @@
     drop-shadow(0 8px 16px rgba(37, 99, 235, 0.25))
     drop-shadow(0 12px 30px rgba(37, 99, 235, 0.2));
   transition: filter 0.2s ease;
-}
-
-.card:hover .serverIcon img,
-.card:focus-within .serverIcon img {
-  filter: drop-shadow(0 6px 12px rgba(37, 99, 235, 1))
-    drop-shadow(0 10px 20px rgba(37, 99, 235, 0.85))
-    drop-shadow(0 14px 36px rgba(37, 99, 235, 0.7));
 }

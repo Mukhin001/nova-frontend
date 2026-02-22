@@ -16,7 +16,7 @@ const Modal = ({ children, isOpen, setIsOpen }: ModalProps) => {
 
   return (
     <div className={st.overlay} onClick={handleOverlayClick}>
-      <div className={st.modal}>{children}</div>
+      <div className={`stack stack-md center-y ${st.modal}`}>{children}</div>
     </div>
   );
 };

@@ -7,9 +7,16 @@ label {
   color: var(--color-muted);
 }
 
+input {
+  padding: var(--space-3) var(--space-6);
+}
+
+select {
+  padding: var(--space-2) var(--space-4);
+}
+
 input,
 select {
-  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
   border: 2px solid var(--color-border);
   background: var(--color-bg);
@@ -60,6 +67,7 @@ select:focus {
 .checkbox-wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-2);
 }
 
@@ -114,6 +122,19 @@ select:disabled {
 
 .passwordField input {
   width: 100%;
+}
+
+.category-block {
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+  transition: 0.2s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 @keyframes pulseBorder {

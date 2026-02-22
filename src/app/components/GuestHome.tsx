@@ -3,7 +3,7 @@ import Link from "next/link";
 const GuestHome = () => {
   return (
     <>
-      <div className="cluster">
+      <div className="cluster center-x">
         <Link href="/register">Создать свою ленту</Link>
         <Link href="/login">Войти</Link>
       </div>

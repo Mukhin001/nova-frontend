@@ -11,8 +11,8 @@ interface DrawerProps {
 
 const Drawer = ({ children, onClose }: DrawerProps) => {
   return (
-    <div className={`${st.container}`}>
-      <div className={st.wrapper}>
+    <div className={`${st.containerDrawer}`}>
+      <div className={st.wrapperDrawer}>
         <Button onClick={onClose} variant="closeButton">
           x
         </Button>

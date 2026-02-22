@@ -93,6 +93,7 @@ const UpdateProfileForm = ({
 
   return (
     <>
+      <h2>Редактировать профиль</h2>
       <form onSubmit={handleSubmitForm}>
         <fieldset
           disabled={isLoading}
