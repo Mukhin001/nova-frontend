@@ -48,8 +48,12 @@ input:-webkit-autofill:active {
   caret-color: var(--color-text);
 }
 
-input:hover,
-input:focus,
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="email"]:hover,
+input[type="email"]:focus,
+input[type="password"]:hover,
+input[type="password"]:focus,
 select:hover,
 select:focus {
   outline: none;
@@ -76,11 +80,6 @@ select:focus {
   height: var(--font-size-input);
   accent-color: var(--color-primary);
   cursor: pointer;
-}
-
-.checkbox:hover,
-.checkbox:focus {
-  transform: scale(1.1);
 }
 
 .checkbox:disabled {
